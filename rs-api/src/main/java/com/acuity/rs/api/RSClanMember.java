@@ -4,11 +4,11 @@ package com.acuity.rs.api;
 
 public interface RSClanMember extends RSNode {
 
-    java.lang.String getName();
+    String getName();
 
     byte getRank();
 
-    java.lang.String getUsername();
+    String getUsername();
 
     int getWorld();
 }

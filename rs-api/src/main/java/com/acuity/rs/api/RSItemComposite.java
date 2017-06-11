@@ -28,11 +28,11 @@ public interface RSItemComposite extends RSCacheableNode {
 
     int getFemaleOffset();
 
-    java.lang.String[] getGroundActions();
+    String[] getGroundActions();
 
     int getId();
 
-    java.lang.String[] getInventoryActions();
+    String[] getInventoryActions();
 
     int getInventoryModel();
 
@@ -50,7 +50,7 @@ public interface RSItemComposite extends RSCacheableNode {
 
     int getMaleOffset();
 
-    java.lang.String getName();
+    String getName();
 
     int getNote();
 

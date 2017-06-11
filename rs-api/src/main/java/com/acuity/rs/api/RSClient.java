@@ -8,7 +8,7 @@ public interface RSClient extends RSGameEngine {
     int getAudioEffectCount();
 
     //Static field.
-    com.acuity.rs.api.RSAudioEffect[] getAudioEffects();
+    RSAudioEffect[] getAudioEffects();
 
     //Static field.
     int getBaseScenceX();
@@ -41,13 +41,13 @@ public interface RSClient extends RSGameEngine {
     int getCanvasWidth();
 
     //Static field.
-    com.acuity.rs.api.RSChatMessages getChatMessages();
+    RSChatMessages getChatMessages();
 
     //Static field.
-    java.lang.String getClanChatName();
+    String getClanChatName();
 
     //Static field.
-    java.lang.String getClanChatOwner();
+    String getClanChatOwner();
 
     //Static field.
     byte getClanChatRank();
@@ -56,7 +56,7 @@ public interface RSClient extends RSGameEngine {
     int getClanMateCount();
 
     //Static field.
-    com.acuity.rs.api.RSClanMember[] getClanMates();
+    RSClanMember[] getClanMates();
 
     //Static field.
     int getClickX();
@@ -65,7 +65,7 @@ public interface RSClient extends RSGameEngine {
     int getClickY();
 
     //Static field.
-    com.acuity.rs.api.RSCollisionData[] getCollisionMaps();
+    RSCollisionData[] getCollisionMaps();
 
     //Static field.
     int getCurrentWorld();
@@ -104,7 +104,7 @@ public interface RSClient extends RSGameEngine {
     int getEngineCycle();
 
     //Static field.
-    com.acuity.rs.api.RSFont getFont_p12full();
+    RSFont getFont_p12full();
 
     //Static field.
     int getFps();
@@ -113,16 +113,16 @@ public interface RSClient extends RSGameEngine {
     int getFriendCount();
 
     //Static field.
-    com.acuity.rs.api.RSFriendsListMember[] getFriends();
+    RSFriendsListMember[] getFriends();
 
     //Static field.
     int getGameState();
 
     //Static field.
-    com.acuity.rs.api.RSGrandExchangeOffer[] getGrandExchangeOffers();
+    RSGrandExchangeOffer[] getGrandExchangeOffers();
 
     //Static field.
-    com.acuity.rs.api.RSNodeDeque[][][] getGroundItemDeque();
+    RSNodeDeque[][][] getGroundItemDeque();
 
     //Static field.
     int getHintArrowNpcIndex();
@@ -140,13 +140,13 @@ public interface RSClient extends RSGameEngine {
     int getIgnoreCount();
 
     //Static field.
-    com.acuity.rs.api.RSIgnoreListMember[] getIgnores();
+    RSIgnoreListMember[] getIgnores();
 
     //Static field.
-    com.acuity.rs.api.RSIndexData getIndexTextures();
+    RSIndexData getIndexTextures();
 
     //Static field.
-    com.acuity.rs.api.RSHashTable getInterfaceFlags();
+    RSHashTable getInterfaceFlags();
 
     //Static field.
     int[] getInterfaceHeights();
@@ -155,7 +155,7 @@ public interface RSClient extends RSGameEngine {
     int[] getInterfaceItemTriggers();
 
     //Static field.
-    com.acuity.rs.api.RSHashTable getInterfaceNodes();
+    RSHashTable getInterfaceNodes();
 
     //Static field.
     int[] getInterfacePositionX();
@@ -167,22 +167,22 @@ public interface RSClient extends RSGameEngine {
     int getInterfaceRoot();
 
     //Static field.
-    com.acuity.rs.api.RSInterfaceComponent[][] getInterfaces();
+    RSInterfaceComponent[][] getInterfaces();
 
     //Static field.
     int[] getInterfaceWidths();
 
     //Static field.
-    com.acuity.rs.api.RSHashTable getItemContainers();
+    RSHashTable getItemContainers();
 
     //Static field.
-    com.acuity.rs.api.RSNodeTable getItemModelCache();
+    RSNodeTable getItemModelCache();
 
     //Static field.
     int getItemSelectionState();
 
     //Static field.
-    com.acuity.rs.api.RSNodeTable getItemSpriteCache();
+    RSNodeTable getItemSpriteCache();
 
     //Static field.
     long getLastClickTime();
@@ -191,22 +191,22 @@ public interface RSClient extends RSGameEngine {
     int getLatestSelectedItemIndex();
 
     //Static field.
-    java.lang.String getLatestSelectedItemName();
+    String getLatestSelectedItemName();
 
     //Static field.
-    com.acuity.rs.api.RSPlayer getLocalPlayer();
+    RSPlayer getLocalPlayer();
 
     //Static field.
     int getLoginIndex();
 
     //Static field.
-    java.lang.String getLoginResponse1();
+    String getLoginResponse1();
 
     //Static field.
-    java.lang.String getLoginResponse2();
+    String getLoginResponse2();
 
     //Static field.
-    java.lang.String getLoginResponse3();
+    String getLoginResponse3();
 
     //Static field.
     int getLoginState();
@@ -218,7 +218,7 @@ public interface RSClient extends RSGameEngine {
     int getMapScale();
 
     //Static field.
-    java.lang.String[] getMenuActions();
+    String[] getMenuActions();
 
     //Static field.
     int getMenuHeight();
@@ -236,7 +236,7 @@ public interface RSClient extends RSGameEngine {
     int[] getMenuSecondaryArgs();
 
     //Static field.
-    java.lang.String[] getMenuTargets();
+    String[] getMenuTargets();
 
     //Static field.
     int[] getMenuTertiaryArgs();
@@ -254,13 +254,13 @@ public interface RSClient extends RSGameEngine {
     int getMinimapOffset();
 
     //Static field.
-    com.acuity.rs.api.RSModIcon[] getModIcons();
+    RSModIcon[] getModIcons();
 
     //Static field.
     int getMouseIdleTime();
 
     //Static field.
-    com.acuity.rs.api.RSMouseRecorder getMouseRecorder();
+    RSMouseRecorder getMouseRecorder();
 
     //Static field.
     int getMouseX();
@@ -272,10 +272,10 @@ public interface RSClient extends RSGameEngine {
     int[] getNpcIndices();
 
     //Static field.
-    com.acuity.rs.api.RSNodeTable getNpcModelCache();
+    RSNodeTable getNpcModelCache();
 
     //Static field.
-    com.acuity.rs.api.RSNPC[] getNpcs();
+    RSNPC[] getNpcs();
 
     //Static field.
     int getOnCursorCount();
@@ -284,10 +284,10 @@ public interface RSClient extends RSGameEngine {
     int[] getOnSursorUids();
 
     //Static field.
-    com.acuity.rs.api.RSPacketBuffer getPacket();
+    RSPacketBuffer getPacket();
 
     //Static field.
-    com.acuity.rs.api.RSPacketBuffer getPacket2();
+    RSPacketBuffer getPacket2();
 
     //Static field.
     int getPacketId();
@@ -296,7 +296,7 @@ public interface RSClient extends RSGameEngine {
     int getPacketLength();
 
     //Static field.
-    java.lang.String getPassword();
+    String getPassword();
 
     //Static field.
     int getPendingClickX();
@@ -308,13 +308,13 @@ public interface RSClient extends RSGameEngine {
     int getPendingMouseX();
 
     //Static field.
-    com.acuity.rs.api.RSNodeDeque getPendingSpawns();
+    RSNodeDeque getPendingSpawns();
 
     //Static field.
     int getPlane();
 
     //Static field.
-    java.lang.String[] getPlayerActions();
+    String[] getPlayerActions();
 
     //Static field.
     int getPlayerIndex();
@@ -323,10 +323,10 @@ public interface RSClient extends RSGameEngine {
     int[] getPlayerMenuTypes();
 
     //Static field.
-    com.acuity.rs.api.RSPlayer[] getPlayers();
+    RSPlayer[] getPlayers();
 
     //Static field.
-    com.acuity.rs.api.RSNodeDeque getProjectilesDeque();
+    RSNodeDeque getProjectilesDeque();
 
     //Static field.
     int[] getRealSkillLevels();
@@ -338,7 +338,7 @@ public interface RSClient extends RSGameEngine {
     int getRunEnergy();
 
     //Static field.
-    com.acuity.rs.api.RSScene getSceneGraph();
+    RSScene getSceneGraph();
 
     //Static field.
     byte[][][] getSceneRenderRules();
@@ -353,7 +353,7 @@ public interface RSClient extends RSGameEngine {
     int[] getSkillExperiences();
 
     //Static field.
-    com.acuity.rs.api.RSSocket getSocket();
+    RSSocket getSocket();
 
     //Static field.
     int getSocketState();
@@ -362,7 +362,7 @@ public interface RSClient extends RSGameEngine {
     int getSpellTargetFlags();
 
     //Static field.
-    com.acuity.rs.api.RSNodeTable getSpriteCache();
+    RSNodeTable getSpriteCache();
 
     //Static field.
     int[] getTempVarps();
@@ -371,7 +371,7 @@ public interface RSClient extends RSGameEngine {
     int[][][] getTileHeights();
 
     //Static field.
-    java.lang.String getUsername();
+    String getUsername();
 
     //Static field.
     int[] getVarps();
@@ -389,10 +389,10 @@ public interface RSClient extends RSGameEngine {
     int getWeight();
 
     //Static field.
-    java.lang.String getWorldDomain();
+    String getWorldDomain();
 
     //Static field.
-    com.acuity.rs.api.RSWorld[] getWorlds();
+    RSWorld[] getWorlds();
 
     //Static field.
     int[][] getXteaKeys();
@@ -443,17 +443,17 @@ public interface RSClient extends RSGameEngine {
     void setLoginIndex(int loginIndex);
 
     //Static field.
-    void setLoginResponse1(java.lang.String loginResponse1);
+    void setLoginResponse1(String loginResponse1);
 
     //Static field.
-    void setLoginResponse2(java.lang.String loginResponse2);
+    void setLoginResponse2(String loginResponse2);
 
     //Static field.
-    void setLoginResponse3(java.lang.String loginResponse3);
+    void setLoginResponse3(String loginResponse3);
 
     //Static field.
-    void setPassword(java.lang.String password);
+    void setPassword(String password);
 
     //Static field.
-    void setUsername(java.lang.String username);
+    void setUsername(String username);
 }

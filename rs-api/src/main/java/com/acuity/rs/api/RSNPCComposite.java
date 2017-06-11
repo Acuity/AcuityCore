@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSNPCComposite extends RSCacheableNode {
 
-    java.lang.String[] getActions();
+    String[] getActions();
 
     int getCombatLevel();
 
@@ -12,7 +12,7 @@ public interface RSNPCComposite extends RSCacheableNode {
 
     int[] getModels();
 
-    java.lang.String getName();
+    String getName();
 
     int[] getTransformIds();
 

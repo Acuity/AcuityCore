@@ -4,13 +4,13 @@ package com.acuity.rs.api;
 
 public interface RSHashTable {
 
-    com.acuity.rs.api.RSNode[] getBuckets();
+    RSNode[] getBuckets();
 
-    com.acuity.rs.api.RSNode getHead();
+    RSNode getHead();
 
     int getIndex();
 
     int getSize();
 
-    com.acuity.rs.api.RSNode getTail();
+    RSNode getTail();
 }

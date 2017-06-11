@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSFriendsListMember {
 
-    java.lang.String getName();
+    String getName();
 
-    java.lang.String getPreviousName();
+    String getPreviousName();
 
     int getRank();
 

@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSIgnoreListMember {
 
-    java.lang.String getName();
+    String getName();
 
-    java.lang.String getPreviousName();
+    String getPreviousName();
 }

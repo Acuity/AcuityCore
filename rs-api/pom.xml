@@ -12,10 +12,6 @@
     <artifactId>rs-api</artifactId>
     <name>Runescape API</name>
 
-    <dependencies>
-
-    </dependencies>
-
     <build>
         <plugins>
             <plugin>

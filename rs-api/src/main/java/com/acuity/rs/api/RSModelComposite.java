@@ -8,7 +8,7 @@ public interface RSModelComposite extends RSRenderable {
 
     short[] getFaceColor();
 
-    com.acuity.rs.api.RSNormalFace[] getFaceNormals();
+    RSNormalFace[] getFaceNormals();
 
     byte[] getFaceRenderPriorities();
 
@@ -16,7 +16,7 @@ public interface RSModelComposite extends RSRenderable {
 
     short[] getFaceTextures();
 
-    com.acuity.rs.api.RSNormalVertex[] getNormals();
+    RSNormalVertex[] getNormals();
 
     byte getPriority();
 

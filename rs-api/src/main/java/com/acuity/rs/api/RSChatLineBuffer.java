@@ -6,5 +6,5 @@ public interface RSChatLineBuffer {
 
     int getLength();
 
-    com.acuity.rs.api.RSMessageNode[] getLines();
+    RSMessageNode[] getLines();
 }

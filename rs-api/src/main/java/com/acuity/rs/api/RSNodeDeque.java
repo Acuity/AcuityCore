@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSNodeDeque {
 
-    com.acuity.rs.api.RSNode getCurrent();
+    RSNode getCurrent();
 
-    com.acuity.rs.api.RSNode getHead();
+    RSNode getHead();
 
     RSNode invokeCurrent();
 

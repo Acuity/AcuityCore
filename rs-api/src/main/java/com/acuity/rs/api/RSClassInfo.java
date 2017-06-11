@@ -2,11 +2,14 @@ package com.acuity.rs.api;
 
 //Generated
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public interface RSClassInfo extends RSNode {
 
-    java.lang.reflect.Field[] getFields();
+    Field[] getFields();
 
     byte[][][] getMethodArgs();
 
-    java.lang.reflect.Method[] getMethods();
+    Method[] getMethods();
 }

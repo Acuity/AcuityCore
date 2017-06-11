@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSWorld {
 
-    java.lang.String getActivity();
+    String getActivity();
 
-    java.lang.String getDomain();
+    String getDomain();
 
     int getId();
 

@@ -4,15 +4,15 @@ package com.acuity.rs.api;
 
 public interface RSPlayer extends RSActor {
 
-    java.lang.String[] getActions();
+    String[] getActions();
 
-    com.acuity.rs.api.RSPlayerComposite getAppearance();
+    RSPlayerComposite getAppearance();
 
     int getCombatLevel();
 
-    com.acuity.rs.api.RSModel getModel();
+    RSModel getModel();
 
-    java.lang.String getName();
+    String getName();
 
     int getPrayerIcon();
 

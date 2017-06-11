@@ -18,11 +18,11 @@ public interface RSIndexDataBase {
 
     int[] getArchiveRevisions();
 
-    java.lang.Object[][] getBuffer();
+    Object[][] getBuffer();
 
-    com.acuity.rs.api.RSIdentityTable[] getChildren();
+    RSIdentityTable[] getChildren();
 
-    com.acuity.rs.api.RSIdentityTable getEntry();
+    RSIdentityTable getEntry();
 
     int getValidArchivesCount();
 

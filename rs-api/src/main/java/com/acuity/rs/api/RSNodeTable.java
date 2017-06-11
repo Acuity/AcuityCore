@@ -4,9 +4,9 @@ package com.acuity.rs.api;
 
 public interface RSNodeTable {
 
-    com.acuity.rs.api.RSNodeQueue getQueue();
+    RSNodeQueue getQueue();
 
-    com.acuity.rs.api.RSHashTable getTable();
+    RSHashTable getTable();
 
     RSCacheableNode invokeGet(long var0);
 

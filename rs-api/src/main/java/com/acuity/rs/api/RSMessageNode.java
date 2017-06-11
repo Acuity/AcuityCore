@@ -6,13 +6,13 @@ public interface RSMessageNode extends RSCacheableNode {
 
     int getId();
 
-    java.lang.String getName();
+    String getName();
 
-    java.lang.String getSender();
+    String getSender();
 
     int getTick();
 
     int getType();
 
-    java.lang.String getValue();
+    String getValue();
 }

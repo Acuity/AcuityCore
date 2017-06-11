@@ -4,5 +4,5 @@ package com.acuity.rs.api;
 
 public interface RSCombatInfoList extends java.lang.Iterable {
 
-    com.acuity.rs.api.RSNode getNode();
+    RSNode getNode();
 }

@@ -4,11 +4,11 @@ package com.acuity.rs.api;
 
 public interface RSSceneBoundary {
 
-    com.acuity.rs.api.RSRenderable getEntity();
+    RSRenderable getEntity();
 
     int getLevel();
 
-    com.acuity.rs.api.RSRenderable getRenderable2();
+    RSRenderable getRenderable2();
 
     int getSceneX();
 

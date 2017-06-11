@@ -4,5 +4,5 @@ package com.acuity.rs.api;
 
 public interface RSNodeQueue {
 
-    com.acuity.rs.api.RSCacheableNode getRoot();
+    RSCacheableNode getRoot();
 }

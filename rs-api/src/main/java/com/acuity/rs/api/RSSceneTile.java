@@ -4,17 +4,17 @@ package com.acuity.rs.api;
 
 public interface RSSceneTile extends RSNode {
 
-    com.acuity.rs.api.RSSceneBoundaryDecor getBoundaryDecor();
+    RSSceneBoundaryDecor getBoundaryDecor();
 
-    com.acuity.rs.api.RSSceneTileDecor getGroundObject();
+    RSSceneTileDecor getGroundObject();
 
-    com.acuity.rs.api.RSItemLayer getItemLayer();
+    RSItemLayer getItemLayer();
 
-    com.acuity.rs.api.RSSceneElement[] getMarkers();
+    RSSceneElement[] getMarkers();
 
-    com.acuity.rs.api.RSSceneTileModel getModel();
+    RSSceneTileModel getModel();
 
-    com.acuity.rs.api.RSSceneTilePaint getPaint();
+    RSSceneTilePaint getPaint();
 
     int getPlane();
 
@@ -22,5 +22,5 @@ public interface RSSceneTile extends RSNode {
 
     int getSceneY();
 
-    com.acuity.rs.api.RSSceneBoundary getWallObject();
+    RSSceneBoundary getWallObject();
 }

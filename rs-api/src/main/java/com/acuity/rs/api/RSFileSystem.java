@@ -6,7 +6,7 @@ public interface RSFileSystem extends RSNode {
 
     byte[] getBuffer();
 
-    com.acuity.rs.api.RSIndexFile getIndex();
+    RSIndexFile getIndex();
 
-    com.acuity.rs.api.RSIndexData getTable();
+    RSIndexData getTable();
 }

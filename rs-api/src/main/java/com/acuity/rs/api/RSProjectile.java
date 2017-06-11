@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSProjectile extends RSRenderable {
 
-    com.acuity.rs.api.RSAnimationSequence getAnimationSequence();
+    RSAnimationSequence getAnimationSequence();
 
     double getCurrentY();
 

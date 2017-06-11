@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSHealthBar extends RSNode {
 
-    com.acuity.rs.api.RSHealthBarComposite getDefinition();
+    RSHealthBarComposite getDefinition();
 
-    com.acuity.rs.api.RSCombatInfoList getHitsplats();
+    RSCombatInfoList getHitsplats();
 }

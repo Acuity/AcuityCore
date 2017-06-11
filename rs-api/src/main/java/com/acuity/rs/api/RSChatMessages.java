@@ -4,5 +4,5 @@ package com.acuity.rs.api;
 
 public interface RSChatMessages {
 
-    java.lang.String[] getMessages();
+    String[] getMessages();
 }

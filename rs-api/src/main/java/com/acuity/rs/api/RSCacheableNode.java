@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSCacheableNode extends RSNode {
 
-    com.acuity.rs.api.RSCacheableNode getNext();
+    RSCacheableNode getNext();
 
-    com.acuity.rs.api.RSCacheableNode getPrevious();
+    RSCacheableNode getPrevious();
 }

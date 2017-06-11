@@ -6,5 +6,5 @@ public interface RSAudioInstrument {
 
     int[] getOscillatorPitch();
 
-    com.acuity.rs.api.RSAudioEnvelope getPitchEnvelope();
+    RSAudioEnvelope getPitchEnvelope();
 }

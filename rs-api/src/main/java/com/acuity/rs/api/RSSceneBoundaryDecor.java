@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSSceneBoundaryDecor {
 
-    com.acuity.rs.api.RSRenderable getEntity();
+    RSRenderable getEntity();
 
     int getLevel();
 
@@ -12,7 +12,7 @@ public interface RSSceneBoundaryDecor {
 
     int getOffsetY();
 
-    com.acuity.rs.api.RSRenderable getRenderable2();
+    RSRenderable getRenderable2();
 
     int getRenderFlag();
 

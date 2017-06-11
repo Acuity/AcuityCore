@@ -8,7 +8,7 @@ public interface RSSceneElement {
 
     int getEndSceneY();
 
-    com.acuity.rs.api.RSRenderable getEntity();
+    RSRenderable getEntity();
 
     int getFlags();
 

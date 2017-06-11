@@ -6,9 +6,9 @@ public interface RSNode {
 
     long getKey();
 
-    com.acuity.rs.api.RSNode getNext();
+    RSNode getNext();
 
-    com.acuity.rs.api.RSNode getPrevious();
+    RSNode getPrevious();
 
     boolean invokeLinked();
 

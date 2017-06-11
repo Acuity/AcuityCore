@@ -1,7 +1,6 @@
 package com.acuity.rs.api;
 
 //Generated
-
 public interface RSActor extends RSRenderable {
 
     int getActionAnimationDisable();
@@ -12,7 +11,7 @@ public interface RSActor extends RSRenderable {
 
     int getAnimation();
 
-    com.acuity.rs.api.RSCombatInfoList getHealthBars();
+    RSCombatInfoList getHealthBars();
 
     int[] getHitsplatCycles();
 
@@ -20,7 +19,7 @@ public interface RSActor extends RSRenderable {
 
     int getOrientation();
 
-    java.lang.String getOverhead();
+    String getOverhead();
 
     int[] getPathX();
 

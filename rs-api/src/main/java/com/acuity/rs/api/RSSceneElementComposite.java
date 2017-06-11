@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSSceneElementComposite extends RSCacheableNode {
 
-    java.lang.String[] getActions();
+    String[] getActions();
 
     int getAmbient();
 
@@ -30,7 +30,7 @@ public interface RSSceneElementComposite extends RSCacheableNode {
 
     int getModelSizeY();
 
-    java.lang.String getName();
+    String getName();
 
     short[] getNewColors();
 

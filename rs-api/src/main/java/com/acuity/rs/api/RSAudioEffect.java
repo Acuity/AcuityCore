@@ -6,7 +6,7 @@ public interface RSAudioEffect {
 
     int getEnd();
 
-    com.acuity.rs.api.RSAudioInstrument[] getInstruments();
+    RSAudioInstrument[] getInstruments();
 
     int getStart();
 }

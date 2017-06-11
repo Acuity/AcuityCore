@@ -4,5 +4,5 @@ package com.acuity.rs.api;
 
 public interface RSNPC extends RSActor {
 
-    com.acuity.rs.api.RSNPCComposite getDefinition();
+    RSNPCComposite getDefinition();
 }

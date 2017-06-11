@@ -2,9 +2,11 @@ package com.acuity.rs.api;
 
 //Generated
 
+import java.io.RandomAccessFile;
+
 public interface RSFileOnDisk {
 
-    java.io.RandomAccessFile getFile();
+    RandomAccessFile getFile();
 
     long getLength();
 

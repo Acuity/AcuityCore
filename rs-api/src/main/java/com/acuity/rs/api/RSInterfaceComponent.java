@@ -4,7 +4,7 @@ package com.acuity.rs.api;
 
 public interface RSInterfaceComponent extends RSNode {
 
-    java.lang.String[] getActions();
+    String[] getActions();
 
     int getBorderThickness();
 
@@ -12,7 +12,7 @@ public interface RSInterfaceComponent extends RSNode {
 
     int getComponentIndex();
 
-    com.acuity.rs.api.RSInterfaceComponent[] getComponents();
+    RSInterfaceComponent[] getComponents();
 
     int getContentType();
 
@@ -36,7 +36,7 @@ public interface RSInterfaceComponent extends RSNode {
 
     int getModelType();
 
-    java.lang.String getName();
+    String getName();
 
     int getOpacity();
 
@@ -46,7 +46,7 @@ public interface RSInterfaceComponent extends RSNode {
 
     int getOriginalY();
 
-    com.acuity.rs.api.RSInterfaceComponent getParent();
+    RSInterfaceComponent getParent();
 
     int getParentUid();
 
@@ -66,19 +66,19 @@ public interface RSInterfaceComponent extends RSNode {
 
     int getScrollX();
 
-    java.lang.String getSelectedAction();
+    String getSelectedAction();
 
     int getShadowColor();
 
     int getSpriteId();
 
-    java.lang.String[] getTableActions();
+    String[] getTableActions();
 
-    java.lang.String getText();
+    String getText();
 
     int getTextColor();
 
-    java.lang.String getTooltip();
+    String getTooltip();
 
     int getType();
 
