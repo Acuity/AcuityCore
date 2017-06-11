@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public interface RSSocket extends java.lang.Runnable {
+public interface RSSocket extends Runnable {
 
     InputStream getInputStream();
 
