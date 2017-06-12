@@ -448,17 +448,17 @@ public interface RSClient extends RSGameEngine {
     void setLoginIndex(int loginIndex);
 
     //Static field.
-    void setLoginResponse1(java.lang.String loginResponse1);
+    void setLoginResponse1(String loginResponse1);
 
     //Static field.
-    void setLoginResponse2(java.lang.String loginResponse2);
+    void setLoginResponse2(String loginResponse2);
 
     //Static field.
-    void setLoginResponse3(java.lang.String loginResponse3);
+    void setLoginResponse3(String loginResponse3);
 
     //Static field.
-    void setPassword(java.lang.String password);
+    void setPassword(String password);
 
     //Static field.
-    void setUsername(java.lang.String username);
+    void setUsername(String username);
 }
