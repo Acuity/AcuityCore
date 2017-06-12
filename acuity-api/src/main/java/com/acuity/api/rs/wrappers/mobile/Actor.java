@@ -1,9 +1,9 @@
-package com.acuity.api.rs.peers.mobile;
+package com.acuity.api.rs.wrappers.mobile;
 
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
-import com.acuity.api.rs.peers.Renderable;
+import com.acuity.api.rs.wrappers.Renderable;
 import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSCombatInfoList;
 import com.google.common.base.Preconditions;

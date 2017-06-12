@@ -1,10 +1,10 @@
 package com.acuity.rs.api;
 
-//Generated
-
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.io.InputStream;
+
+//Generated
 
 public interface RSSocket extends Runnable {
 

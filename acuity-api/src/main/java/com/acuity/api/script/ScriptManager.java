@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 public class ScriptManager {
 
     private static Logger logger = LoggerFactory.getLogger(ScriptManager.class);
+
     /**
      * The current script of the script manager
      * May be null if nothing is running.
@@ -40,10 +41,7 @@ public class ScriptManager {
     }
 
     public void runScript(String path) {
-        if (script != null) {
-            script.stop();
-            script = null;
-        }
+        stopScript();
         final ScriptLoader loader = new ScriptLoader();
         AcuityScript script;
         try {
@@ -66,10 +64,7 @@ public class ScriptManager {
             logger.warn("Tried to run a null script...");
             return;
         }
-        if (this.script != null) {
-            this.script.stop();
-            this.script = null;
-        }
+        stopScript();
         this.script = script;
         this.script.execute();
     }

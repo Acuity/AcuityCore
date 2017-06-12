@@ -4,9 +4,8 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.movement.SceneLocation;
 import com.acuity.api.rs.movement.WorldLocation;
-import com.acuity.api.rs.peers.mobile.Actor;
-import com.acuity.api.rs.peers.mobile.Player;
-import com.acuity.inject.callbacks.Hooks;
+import com.acuity.api.rs.wrappers.mobile.Actor;
+import com.acuity.api.rs.wrappers.mobile.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

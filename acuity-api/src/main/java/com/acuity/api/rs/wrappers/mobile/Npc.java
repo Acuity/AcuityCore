@@ -1,4 +1,4 @@
-package com.acuity.api.rs.peers.mobile;
+package com.acuity.api.rs.wrappers.mobile;
 
 import com.acuity.api.rs.interfaces.Identifiable;
 import com.acuity.rs.api.RSNPC;

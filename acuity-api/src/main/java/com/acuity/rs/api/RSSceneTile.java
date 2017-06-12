@@ -1,5 +1,7 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.scene.SceneTile;
+
 //Generated
 
 public interface RSSceneTile extends RSNode {
@@ -23,4 +25,6 @@ public interface RSSceneTile extends RSNode {
     int getSceneY();
 
     RSSceneBoundary getWallObject();
+
+    SceneTile getWrapper();
 }

@@ -1,5 +1,8 @@
 package com.acuity.api.script.impl;
 
+/**
+ * Created by MadDev on 6/11/17.
+ */
 public abstract class AcuityScript implements Loopable {
 
     private ScriptState state = ScriptState.NO_SCRIPT;

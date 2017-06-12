@@ -1,8 +1,8 @@
 package com.acuity.rs.api;
 
-//Generated
-
 import java.io.RandomAccessFile;
+
+//Generated
 
 public interface RSFileOnDisk {
 

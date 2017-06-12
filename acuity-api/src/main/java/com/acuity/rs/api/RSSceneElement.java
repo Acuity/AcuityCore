@@ -1,5 +1,7 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.scene.SceneElement;
+
 //Generated
 
 public interface RSSceneElement {
@@ -27,4 +29,6 @@ public interface RSSceneElement {
     int getSceneY();
 
     int getUid();
+
+    SceneElement getWrapper();
 }

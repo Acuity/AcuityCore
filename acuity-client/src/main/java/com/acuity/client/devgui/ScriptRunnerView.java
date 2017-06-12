@@ -7,19 +7,32 @@ package com.acuity.client.devgui;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.script.ScriptManager;
 import com.acuity.api.script.impl.AcuityScript;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.File;
 
 /**
  * @author unknown
  */
 public class ScriptRunnerView extends JFrame {
 
+    private Logger logger = LoggerFactory.getLogger(ScriptRunnerView.class);
+
     private AcuityScript last;
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - Mad Dev
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
+    private JButton resumeScript;
+    private JLabel scriptState;
+    private JButton button4;
+
 
     public ScriptRunnerView() {
         initComponents();
@@ -33,11 +46,11 @@ public class ScriptRunnerView extends JFrame {
         chooser.setFileFilter(filter);
 
         int returnVal = chooser.showOpenDialog(this);
-        if(returnVal != JFileChooser.APPROVE_OPTION) {
+        if (returnVal != JFileChooser.APPROVE_OPTION) {
             return;
         }
         File file = chooser.getSelectedFile();
-        if(file == null) {
+        if (file == null) {
             return;
         }
         AcuityInstance.getScriptManager().runScript(file.getPath());
@@ -48,7 +61,7 @@ public class ScriptRunnerView extends JFrame {
 
     private void onPauseScript(ActionEvent e) {
         final ScriptManager manager = AcuityInstance.getScriptManager();
-        if(manager.getScript() == null)
+        if (manager.getScript() == null)
             return;
         manager.pauseScript();
         scriptState.setText("State: " + manager.getScript().getState());
@@ -56,7 +69,7 @@ public class ScriptRunnerView extends JFrame {
 
     private void onStopScript(ActionEvent e) {
         final ScriptManager manager = AcuityInstance.getScriptManager();
-        if(manager.getScript() == null)
+        if (manager.getScript() == null)
             return;
         manager.stopScript();
         scriptState.setText("State: " + "NO_SCRIPT");
@@ -64,22 +77,21 @@ public class ScriptRunnerView extends JFrame {
 
     private void resumeScriptActionPerformed(ActionEvent e) {
         final ScriptManager manager = AcuityInstance.getScriptManager();
-        if(manager.getScript() == null)
+        if (manager.getScript() == null)
             return;
         manager.resumeScript();
         scriptState.setText("State: " + manager.getScript().getState());
     }
 
     private void onReRun(ActionEvent e) {
-       if(this.last == null) {
-           System.out.println("Last script is null can't rerun.");
-           return;
-       }
-       AcuityInstance.getScriptManager().runScript(this.last);
-       final AcuityScript script = AcuityInstance.getScriptManager().getScript();
-       scriptState.setText("State: " + script.getState());
+        if (this.last == null) {
+            logger.warn("Last script is null can't rerun.");
+            return;
+        }
+        AcuityInstance.getScriptManager().runScript(this.last);
+        final AcuityScript script = AcuityInstance.getScriptManager().getScript();
+        scriptState.setText("State: " + script.getState());
     }
-
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -137,14 +149,5 @@ public class ScriptRunnerView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mad Dev
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton resumeScript;
-    private JLabel scriptState;
-    private JButton button4;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

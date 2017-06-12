@@ -1,5 +1,6 @@
 package com.acuity.rs.api;
 
+
 //Generated
 
 public interface RSBuffer extends RSNode {
@@ -40,7 +41,7 @@ public interface RSBuffer extends RSNode {
 
     int invokeReadShortSmart();
 
-    String invokeReadString();
+    java.lang.String invokeReadString();
 
     int invokeReadUnsignedByte();
 

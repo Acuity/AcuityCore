@@ -1,8 +1,8 @@
 package com.acuity.rs.api;
 
-//Generated
-
 import java.awt.Component;
+
+//Generated
 
 public interface RSCanvas {
 

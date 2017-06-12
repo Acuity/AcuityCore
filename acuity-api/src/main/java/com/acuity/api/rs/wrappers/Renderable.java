@@ -1,6 +1,7 @@
-package com.acuity.api.rs.peers;
+package com.acuity.api.rs.wrappers;
 
 import com.acuity.api.rs.interfaces.Interactive;
+import com.acuity.api.rs.wrappers.structures.CacheableNode;
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSRenderable;
 import com.google.common.base.Preconditions;
@@ -12,14 +13,15 @@ import org.slf4j.LoggerFactory;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public abstract class Renderable implements Interactive {
+public abstract class Renderable extends CacheableNode implements Interactive {
 
     private static final Logger logger = LoggerFactory.getLogger(Renderable.class);
 
 	protected RSRenderable rsRenderable;
 
 	public Renderable(@NotNull final RSRenderable peer) {
-		this.rsRenderable = Preconditions.checkNotNull(peer);
+        super(peer);
+        this.rsRenderable = Preconditions.checkNotNull(peer);
 	}
 
 	public int getHeight() {

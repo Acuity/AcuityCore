@@ -1,5 +1,7 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.structures.NodeTable;
+
 //Generated
 
 public interface RSNodeTable {
@@ -7,6 +9,8 @@ public interface RSNodeTable {
     RSNodeQueue getQueue();
 
     RSHashTable getTable();
+
+    NodeTable getWrapper();
 
     RSCacheableNode invokeGet(long var0);
 

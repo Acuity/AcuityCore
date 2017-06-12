@@ -2,7 +2,7 @@ package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.movement.SceneLocation;
-import com.acuity.api.rs.peers.engine.Client;
+import com.acuity.api.rs.wrappers.engine.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

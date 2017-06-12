@@ -1,5 +1,8 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
+import java.lang.String;
+
 //Generated
 
 public interface RSInterfaceComponent extends RSNode {
@@ -85,6 +88,8 @@ public interface RSInterfaceComponent extends RSNode {
     int getUid();
 
     int getWidth();
+
+    InterfaceComponent getWrapper();
 
     int getXPadding();
 

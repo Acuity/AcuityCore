@@ -1,9 +1,11 @@
-package com.acuity.api.rs.peers.engine;
+package com.acuity.api.rs.wrappers.engine;
 
-import com.acuity.api.rs.peers.interfaces.InterfaceComponent;
-import com.acuity.api.rs.peers.mobile.Npc;
-import com.acuity.api.rs.peers.mobile.Player;
-import com.acuity.api.rs.peers.scene.Scene;
+import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
+import com.acuity.api.rs.wrappers.mobile.Npc;
+import com.acuity.api.rs.wrappers.mobile.Player;
+import com.acuity.api.rs.wrappers.scene.Scene;
+import com.acuity.api.rs.wrappers.structures.Node;
+import com.acuity.api.rs.wrappers.structures.NodeTable;
 import com.acuity.rs.api.RSClient;
 import com.acuity.rs.api.RSPlayer;
 import com.google.common.base.Preconditions;
@@ -17,13 +19,14 @@ import java.util.Optional;
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
-public class Client {
+public class Client extends GameEngine {
 
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
     private final RSClient rsClient;
 
     public Client(@NotNull RSClient peer) {
+        super(peer);
         this.rsClient = Preconditions.checkNotNull(peer);
     }
 
@@ -133,6 +136,10 @@ public class Client {
 
     public boolean isResized() {
         return rsClient.isResized();
+    }
+
+    public NodeTable<Node> getInterfaceNodeTable() {
+        return new NodeTable<>(rsClient.getInterfaceNodes());
     }
 
     public RSClient getRsClient(){

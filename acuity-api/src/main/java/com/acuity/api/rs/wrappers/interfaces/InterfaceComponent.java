@@ -1,6 +1,6 @@
-package com.acuity.api.rs.peers.interfaces;
+package com.acuity.api.rs.wrappers.interfaces;
 
-import com.acuity.api.rs.peers.structures.Node;
+import com.acuity.api.rs.wrappers.structures.Node;
 import com.acuity.rs.api.RSInterfaceComponent;
 import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
@@ -107,10 +107,6 @@ public class InterfaceComponent extends Node {
 
     public int getOriginalY() {
         return rsInterfaceComponent.getOriginalY();
-    }
-
-    public int getParentUid() {
-        return rsInterfaceComponent.getParentUid();
     }
 
     public int getRelativeX() {
@@ -220,4 +216,5 @@ public class InterfaceComponent extends Node {
     public RSInterfaceComponent getRsComponent() {
         return rsInterfaceComponent;
     }
+
 }

@@ -1,5 +1,7 @@
 package com.acuity.rs.api;
 
+import java.lang.Object;
+
 //Generated
 
 public interface RSIndexDataBase {

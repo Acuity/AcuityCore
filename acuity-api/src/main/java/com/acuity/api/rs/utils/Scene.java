@@ -1,8 +1,8 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.peers.scene.SceneElement;
-import com.acuity.api.rs.peers.scene.SceneTile;
+import com.acuity.api.rs.wrappers.scene.SceneElement;
+import com.acuity.api.rs.wrappers.scene.SceneTile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

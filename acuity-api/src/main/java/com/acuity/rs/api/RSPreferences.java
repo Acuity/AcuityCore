@@ -1,8 +1,10 @@
 package com.acuity.rs.api;
 
+import java.util.LinkedHashMap;
+
 //Generated
 
 public interface RSPreferences {
 
-    java.util.LinkedHashMap getPreferences();
+    LinkedHashMap getPreferences();
 }

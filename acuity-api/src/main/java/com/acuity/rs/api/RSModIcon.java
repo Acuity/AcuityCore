@@ -1,5 +1,6 @@
 package com.acuity.rs.api;
 
+
 //Generated
 
 public interface RSModIcon extends RSRasterizer2D {

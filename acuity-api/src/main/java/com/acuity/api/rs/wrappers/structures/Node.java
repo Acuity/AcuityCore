@@ -1,4 +1,4 @@
-package com.acuity.api.rs.peers.structures;
+package com.acuity.api.rs.wrappers.structures;
 
 import com.acuity.rs.api.RSNode;
 import com.google.common.base.Preconditions;

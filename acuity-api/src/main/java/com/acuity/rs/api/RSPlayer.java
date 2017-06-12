@@ -1,5 +1,8 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.mobile.Player;
+import java.lang.String;
+
 //Generated
 
 public interface RSPlayer extends RSActor {
@@ -21,4 +24,6 @@ public interface RSPlayer extends RSActor {
     int getTeam();
 
     int getTotalLevel();
+
+    Player getWrapper();
 }

@@ -2,8 +2,7 @@ package com.acuity.api.rs.query;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.interfaces.Locatable;
-import com.acuity.api.rs.peers.mobile.Npc;
-import com.google.common.base.Predicates;
+import com.acuity.api.rs.wrappers.mobile.Npc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

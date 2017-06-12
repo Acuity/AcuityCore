@@ -20,11 +20,10 @@ public class ScriptLoader {
     private static Logger logger = LoggerFactory.getLogger(ScriptLoader.class);
 
     /**
-     *
      * @param path, the path to the Jar file.
      * @return An AcuityScript instance of the jar file, if it contains a class extending AcuityScript.
      */
-    public AcuityScript loadScriptFromJar(String path)
+    AcuityScript loadScriptFromJar(String path)
             throws Exception {
 
         final File file = new File(path);
@@ -61,21 +60,5 @@ public class ScriptLoader {
 
         logger.warn("No scripts found.");
         return null;
-    }
-
-
-    public static void main(String[] args) {
-
-        String path = System.getProperty("user.dir") + "/script-testing/out/script-testing.jar";
-        try {
-            final AcuityScript script = new ScriptLoader().loadScriptFromJar(path);
-            if (script == null) {
-                logger.warn("No scripts found.");
-                return;
-            }
-            script.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

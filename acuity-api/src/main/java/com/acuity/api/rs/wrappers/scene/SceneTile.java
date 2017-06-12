@@ -1,6 +1,6 @@
-package com.acuity.api.rs.peers.scene;
+package com.acuity.api.rs.wrappers.scene;
 
-import com.acuity.api.rs.peers.structures.Node;
+import com.acuity.api.rs.wrappers.structures.Node;
 import com.acuity.rs.api.RSSceneTile;
 import com.google.common.base.Preconditions;
 import com.sun.istack.internal.NotNull;

@@ -1,7 +1,7 @@
 package com.acuity.api.rs.query;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.peers.interfaces.InterfaceComponent;
+import com.acuity.api.rs.wrappers.interfaces.InterfaceComponent;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

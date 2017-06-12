@@ -1,5 +1,7 @@
 package com.acuity.rs.api;
 
+import java.lang.String;
+
 //Generated
 
 public interface RSSceneElementComposite extends RSCacheableNode {

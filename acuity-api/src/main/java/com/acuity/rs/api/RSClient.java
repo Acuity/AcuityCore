@@ -1,5 +1,8 @@
 package com.acuity.rs.api;
 
+import com.acuity.api.rs.wrappers.engine.Client;
+import java.lang.String;
+
 //Generated
 
 public interface RSClient extends RSGameEngine {
@@ -394,6 +397,8 @@ public interface RSClient extends RSGameEngine {
     //Static field.
     RSWorld[] getWorlds();
 
+    Client getWrapper();
+
     //Static field.
     int[][] getXteaKeys();
 
@@ -443,17 +448,17 @@ public interface RSClient extends RSGameEngine {
     void setLoginIndex(int loginIndex);
 
     //Static field.
-    void setLoginResponse1(String loginResponse1);
+    void setLoginResponse1(java.lang.String loginResponse1);
 
     //Static field.
-    void setLoginResponse2(String loginResponse2);
+    void setLoginResponse2(java.lang.String loginResponse2);
 
     //Static field.
-    void setLoginResponse3(String loginResponse3);
+    void setLoginResponse3(java.lang.String loginResponse3);
 
     //Static field.
-    void setPassword(String password);
+    void setPassword(java.lang.String password);
 
     //Static field.
-    void setUsername(String username);
+    void setUsername(java.lang.String username);
 }

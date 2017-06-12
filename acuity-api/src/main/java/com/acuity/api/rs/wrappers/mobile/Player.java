@@ -1,4 +1,4 @@
-package com.acuity.api.rs.peers.mobile;
+package com.acuity.api.rs.wrappers.mobile;
 
 import com.acuity.rs.api.RSModel;
 import com.acuity.rs.api.RSPlayer;
