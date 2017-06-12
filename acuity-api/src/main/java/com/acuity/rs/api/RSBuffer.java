@@ -41,7 +41,7 @@ public interface RSBuffer extends RSNode {
 
     int invokeReadShortSmart();
 
-    java.lang.String invokeReadString();
+    String invokeReadString();
 
     int invokeReadUnsignedByte();
 
