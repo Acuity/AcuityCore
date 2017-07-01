@@ -18,16 +18,16 @@ public class SceneLocation implements Locatable {
 	private int sceneY;
 	private int plane;
 
-	public SceneLocation(int x, int y, int plane) {
-		this.sceneX = x;
-		this.sceneY = y;
-		this.plane = plane;
-		this.baseX = Scene.getBaseX();
-		this.baseY = Scene.getBaseY();
+	public SceneLocation(int sceneX, int sceneY, int plane) {
+		this(sceneX, sceneY, plane, Scene.getBaseX(), Scene.getBaseX());
 	}
 
-	public SceneLocation(int x, int y) {
-		this(x, y, 0);
+	public SceneLocation(int sceneX, int sceneY, int plane, int baseX, int baseY) {
+		this.sceneX = sceneX;
+		this.sceneY = sceneY;
+		this.plane = plane;
+		this.baseX = baseX;
+		this.baseY = baseY;
 	}
 
 	public boolean isLoaded() {
@@ -54,6 +54,10 @@ public class SceneLocation implements Locatable {
 	public int getPlane() {
 		return plane;
 	}
+
+	public StrictLocation getStrictLocation(){
+        return new StrictLocation(getSceneX() * 128, getSceneY() * 128, getPlane(), getBaseX(), getBaseY());
+    }
 
 	@Override
 	public WorldLocation getWorldLocation() {

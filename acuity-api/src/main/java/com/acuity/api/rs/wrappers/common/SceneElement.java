@@ -12,15 +12,15 @@ import java.util.Optional;
  */
 public interface SceneElement extends Locatable {
 
-    static Optional<Model> getModel(RSRenderable rsRenderable, int sceneX, int sceneY, Integer orientation) {
+    static Optional<Model> getModel(RSRenderable rsRenderable, StrictLocation location, Integer orientation) {
         if (rsRenderable == null) return Optional.empty();
 
         Model lastModel;
         if (rsRenderable instanceof RSModel) lastModel = new Model((RSModel) rsRenderable);
         else lastModel = rsRenderable.getCachedModel();
 
-        return Optional.of(lastModel)
-                .map(model -> model.place(sceneX * 128, sceneY * 128))
+        return Optional.ofNullable(lastModel)
+                .map(model -> model.place(location.getX() , location.getY()))
                 .map(model -> {
                     if (orientation != null) model.rotateTo(orientation);
                     return model;

@@ -12,6 +12,7 @@ public class Memory {
     public static GarbageCollectorMXBean gcBean;
 
     public static List<GarbageCollectorMXBean> getBeans(){
+        System.out.println("gg");
         return new ArrayList<>();
     }
 }

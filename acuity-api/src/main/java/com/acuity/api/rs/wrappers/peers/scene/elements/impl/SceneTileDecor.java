@@ -3,6 +3,7 @@ package com.acuity.api.rs.wrappers.peers.scene.elements.impl;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.common.SceneLocation;
+import com.acuity.api.rs.wrappers.common.StrictLocation;
 import com.acuity.api.rs.wrappers.common.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.common.SceneElement;
@@ -24,8 +25,12 @@ public class SceneTileDecor implements SceneElement {
         this.rsSceneTileDecor = Preconditions.checkNotNull(peer);
     }
 
+    public StrictLocation getStrictLocation(){
+        return new StrictLocation(rsSceneTileDecor.getSceneX(), rsSceneTileDecor.getSceneY(), rsSceneTileDecor.getPlane());// TODO: 7/1/2017 Rename
+    }
+
     public SceneLocation getSceneLocation(){
-        return new SceneLocation(rsSceneTileDecor.getSceneX(), rsSceneTileDecor.getSceneY(), rsSceneTileDecor.getPlane());
+        return getStrictLocation().getSceneLocation();
     }
 
     @Override
@@ -45,8 +50,7 @@ public class SceneTileDecor implements SceneElement {
     public Optional<Model> getModel() {
         return com.acuity.api.rs.wrappers.common.SceneElement.getModel(
                 rsSceneTileDecor.getEntity(),
-                rsSceneTileDecor.getSceneX(),
-                rsSceneTileDecor.getSceneY(),
+                getStrictLocation(),
                 null);
     }
 

@@ -37,8 +37,8 @@ public class SceneTile extends Node {
             if (rsSceneElement != null) builder.accept(rsSceneElement.getWrapper());
         }
         getBoundary().ifPresent(builder::accept);
-        getTileDecor().ifPresent(builder::accept);
         getBoundaryDecor().ifPresent(builder::accept);
+        getTileDecor().ifPresent(builder::accept);
         return builder.build();
     }
 

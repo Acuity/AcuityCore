@@ -5,6 +5,7 @@ import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.common.SceneLocation;
+import com.acuity.api.rs.wrappers.common.StrictLocation;
 import com.acuity.api.rs.wrappers.common.WorldLocation;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.rs.api.RSSceneElement;
@@ -32,8 +33,7 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
     public Optional<Model> getModel() {
         return com.acuity.api.rs.wrappers.common.SceneElement.getModel(
                 rsSceneElement.getEntity(),
-                rsSceneElement.getSceneX(),
-                rsSceneElement.getSceneY(),
+                getStrictLocation(),
                 getOrientation());
     }
 
@@ -47,6 +47,10 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
 
     public int getOrientation() {
         return rsSceneElement.getOrientation();
+    }
+
+    public StrictLocation getStrictLocation(){
+        return new StrictLocation(rsSceneElement.getEndSceneX(), rsSceneElement.getEndSceneY(), rsSceneElement.getPlane()); // TODO: 7/1/2017 Rename
     }
 
     public SceneLocation getSceneLocation() {

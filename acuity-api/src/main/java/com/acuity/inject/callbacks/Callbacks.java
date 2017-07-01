@@ -5,13 +5,20 @@ import com.acuity.api.Events;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.events.impl.GameStateChangeEvent;
 import com.acuity.api.rs.events.impl.OverheadPrayerChangeEvent;
+import com.acuity.api.rs.interfaces.Locatable;
+import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.Game;
+import com.acuity.api.rs.utils.LocalPlayer;
+import com.acuity.api.rs.utils.Scene;
+import com.acuity.api.rs.wrappers.peers.scene.SceneTile;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSRenderable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
+import java.util.Comparator;
+import java.util.Optional;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.
@@ -35,7 +42,6 @@ public class Callbacks {
 
     @ClientInvoked
     public static void cachedModelUpdated(RSRenderable rsRenderable){
-
     }
 
     @ClientInvoked
@@ -45,8 +51,20 @@ public class Callbacks {
 
     @ClientInvoked
     public static void drawCallback(Image image) {
-        if (Game.getGameState() == Game.IN_GAME) {
+/*        try {
+            if (Game.getGameState() == Game.IN_GAME) {
+                SceneElements.streamLoaded().sorted(Comparator.comparingInt(Locatable::distance)).forEach(sceneElement -> {
+                    sceneElement.getModel().ifPresent(model -> {
+                        model.streamPolygons().forEach(polygon -> {
+                            image.getGraphics().drawPolygon(polygon);
+                        });
 
+                    });
+                });
+            }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }*/
     }
 }

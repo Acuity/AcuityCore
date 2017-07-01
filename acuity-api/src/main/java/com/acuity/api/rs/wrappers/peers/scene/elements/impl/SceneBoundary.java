@@ -34,8 +34,7 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
     public Optional<Model> getModel() {
         return SceneElement.getModel(
                 Optional.ofNullable(rsSceneBoundary.getEntity()).orElseGet(() -> rsSceneBoundary.getRenderable2()),
-                rsSceneBoundary.getSceneX(),
-                rsSceneBoundary.getSceneY(),
+                getStrictLocation(),
                 null);
     }
 
@@ -47,8 +46,12 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
         return getUID().getEntityID();
     }
 
+    public StrictLocation getStrictLocation(){
+        return new StrictLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getPlane()); // TODO: 7/1/2017 Rename
+    }
+
     public SceneLocation getSceneLocation(){
-        return new SceneLocation(rsSceneBoundary.getSceneX(), rsSceneBoundary.getSceneY(), rsSceneBoundary.getPlane());
+        return getStrictLocation().getSceneLocation();
     }
 
     @Override

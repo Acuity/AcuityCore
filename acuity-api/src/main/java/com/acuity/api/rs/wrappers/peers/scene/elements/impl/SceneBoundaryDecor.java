@@ -4,6 +4,7 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.interfaces.Locatable;
 import com.acuity.api.rs.wrappers.common.SceneLocation;
+import com.acuity.api.rs.wrappers.common.StrictLocation;
 import com.acuity.api.rs.wrappers.common.WorldLocation;
 import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
@@ -40,8 +41,12 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
         return new UIDs.UID(rsSceneBoundaryDecor.getUID());
     }
 
+    public StrictLocation getStrictLocation(){
+        return new StrictLocation(rsSceneBoundaryDecor.getSceneX(), rsSceneBoundaryDecor.getSceneY(), rsSceneBoundaryDecor.getPlane()); // TODO: 7/1/2017 Rename
+    }
+
     public SceneLocation getSceneLocation(){
-        return new SceneLocation(rsSceneBoundaryDecor.getSceneX(), rsSceneBoundaryDecor.getSceneY(), rsSceneBoundaryDecor.getPlane());
+        return getStrictLocation().getSceneLocation();
     }
 
     @Override
@@ -58,8 +63,7 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
     public Optional<Model> getModel() {
         return SceneElement.getModel(
                 Optional.ofNullable(rsSceneBoundaryDecor.getEntity()).orElseGet(() -> rsSceneBoundaryDecor.getRenderable2()),
-                rsSceneBoundaryDecor.getSceneX(),
-                rsSceneBoundaryDecor.getSceneY(),
+                getStrictLocation(),
                 getOrientation());
     }
 }
