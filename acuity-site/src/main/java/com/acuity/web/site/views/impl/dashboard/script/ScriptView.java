@@ -5,8 +5,9 @@ import com.acuity.db.domain.vertex.impl.scripts.Script;
 import com.acuity.db.services.impl.ScriptService;
 import com.acuity.dropbox.AcuityRepo;
 import com.acuity.web.site.components.InlineLabel;
-import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.files.WriteMode;
+import com.dropbox.core.v2.sharing.SharedLinkMetadata;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -14,6 +15,7 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 
 import java.io.*;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -47,7 +49,7 @@ public class ScriptView extends VerticalLayout implements View {
         upload.addFinishedListener(scriptUploader);
         upload.addFailedListener(scriptUploader);
 
-        Panel uploadPanel = new Panel();
+        Panel uploadPanel = new Panel("Developer Controls");
         uploadPanel.setContent(upload);
         return uploadPanel;
     }
@@ -69,7 +71,7 @@ public class ScriptView extends VerticalLayout implements View {
         return panel;
     }
 
-    class ScriptUploader implements Upload.Receiver, Upload.FailedListener, Upload.FinishedListener {
+    class ScriptUploader implements Upload.Receiver, Upload.StartedListener, Upload.FailedListener, Upload.FinishedListener {
 
         private static final long serialVersionUID = 2215337036540966711L;
         private OutputStream outputFile = null;
@@ -90,6 +92,7 @@ public class ScriptView extends VerticalLayout implements View {
         }
 
 
+
         @Override
         public void uploadFailed(Upload.FailedEvent failedEvent) {
             System.out.println();
@@ -103,13 +106,33 @@ public class ScriptView extends VerticalLayout implements View {
                     Notification.show("Upload Complete", Notification.Type.TRAY_NOTIFICATION);
                 }
 
-                FileMetadata fileMetadata = AcuityRepo.getClient().files().uploadBuilder("/" + script.getKey() + "/Script.jar").withMode(WriteMode.OVERWRITE).uploadAndFinish(new FileInputStream(file));
-                ScriptService.getInstance().setLink(script.getKey(), AcuityRepo.getClient().sharing().createSharedLinkWithSettings("/" + script.getKey() + "/Script.jar").getUrl());
+
+                AcuityRepo.getClient().files().uploadBuilder("/" + script.getKey() + "/Script.jar").withMode(WriteMode.OVERWRITE).uploadAndFinish(new FileInputStream(file));
                 Notification.show("Dropbox upload Complete", Notification.Type.TRAY_NOTIFICATION);
 
+
+                List<SharedLinkMetadata> links = AcuityRepo.getClient().sharing().listSharedLinksBuilder().withPath("/" + script.getKey() + "/Script.jar").withDirectOnly(true).start().getLinks();
+                String link = links.stream().findAny().map(SharedLinkMetadata::getUrl).orElseGet(() -> {
+                    try {
+                        return AcuityRepo.getClient().sharing().createSharedLinkWithSettings("/" + script.getKey() + "/Script.jar").getUrl();
+                    } catch (DbxException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                });
+
+                if (link != null){
+                    ScriptService.getInstance().setLink(script.getKey(), link);
+                    Notification.show("Update link complete.", Notification.Type.TRAY_NOTIFICATION);
+                }
             } catch (Throwable exception) {
                 exception.printStackTrace();
             }
+        }
+
+        @Override
+        public void uploadStarted(Upload.StartedEvent startedEvent) {
+            Notification.show("Starting Upload", Notification.Type.TRAY_NOTIFICATION);
         }
     }
 }
