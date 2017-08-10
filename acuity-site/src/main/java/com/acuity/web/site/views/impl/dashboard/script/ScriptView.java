@@ -104,6 +104,7 @@ public class ScriptView extends VerticalLayout implements View {
                 }
 
                 FileMetadata fileMetadata = AcuityRepo.getClient().files().uploadBuilder("/" + script.getKey() + "/Script.jar").withMode(WriteMode.OVERWRITE).uploadAndFinish(new FileInputStream(file));
+                ScriptService.getInstance().setLink(script.getKey(), AcuityRepo.getClient().sharing().createSharedLinkWithSettings("/" + script.getKey() + "/Script.jar").getUrl());
                 Notification.show("Dropbox upload Complete", Notification.Type.TRAY_NOTIFICATION);
 
             } catch (Throwable exception) {

@@ -4,6 +4,8 @@ import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.scripts.Script;
 import com.acuity.db.services.DBCollectionService;
+import com.arangodb.entity.BaseDocument;
+import com.arangodb.model.DocumentUpdateOptions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,5 +43,11 @@ public class ScriptService extends DBCollectionService<Script> {
         args.put("accessLevel", accessLevel);
         args.put("rankAccess", rank == AcuityAccount.Rank.ADMIN);
         return getDB().query(query, args, null, Script.class).asListRemaining();
+    }
+
+    public void setLink(String scriptKey, String url) {
+        BaseDocument value = new BaseDocument();
+        value.addAttribute("jarURL", url);
+        getCollection().updateDocument(scriptKey, value, new DocumentUpdateOptions().keepNull(true));
     }
 }
