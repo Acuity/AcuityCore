@@ -3,6 +3,7 @@ package com.acuity.web.site.views.impl;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.vaadin.event.ShortcutAction;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
@@ -32,7 +33,11 @@ public class LoginView extends VerticalLayout implements View {
 
         loginPanel.addComponent(buildLabels());
         loginPanel.addComponent(buildFields());
-        loginPanel.addComponent(new CheckBox("Remember me", true));
+
+        Button register = new Button("Register", VaadinIcons.SIGN_IN);
+        register.addStyleName(ValoTheme.BUTTON_LINK);
+        register.addClickListener(clickEvent -> getUI().getNavigator().navigateTo(com.acuity.web.site.views.View.REGISTER.getName()));
+        loginPanel.addComponent(register);
         return loginPanel;
     }
 

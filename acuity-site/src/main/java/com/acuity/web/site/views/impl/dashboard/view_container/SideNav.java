@@ -1,6 +1,10 @@
 package com.acuity.web.site.views.impl.dashboard.view_container;
 
+import com.acuity.web.site.events.DashboardEvent;
+import com.acuity.web.site.events.Events;
+import com.acuity.web.site.utils.AcuitySession;
 import com.acuity.web.site.views.View;
+import com.google.common.eventbus.Subscribe;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -8,18 +12,19 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class SideNav extends VerticalLayout{
 
+    private VerticalLayout buttons = new VerticalLayout();
+
     public SideNav() {
+        Events.register(this);
         buildComponent();
     }
-
-    private VerticalLayout buttons = new VerticalLayout();
 
     private void buildComponent(){
         setMargin(false);
         setSpacing(false);
         setPrimaryStyleName("acuity-menu");
         setHeight(100, Unit.PERCENTAGE);
-        setWidthUndefined();
+        setWidth(140, Unit.PIXELS);
 
         buttons.setMargin(false);
         buttons.setSpacing(false);
@@ -29,10 +34,20 @@ public class SideNav extends VerticalLayout{
         buildButtons();
     }
 
+    @Subscribe
+    public void onLogin(DashboardEvent.UserLoginRequestedEvent event){
+        buildButtons();
+    }
+
+    @Subscribe
+    public void onLogout(DashboardEvent.UserLoggedOutEvent event){
+        buildButtons();
+    }
+
     private void buildButtons(){
         buttons.removeAllComponents();
         for (View view : View.values()) {
-            if (view.isNavBar()){
+            if (view.isNavBar() && view.isAccessible(AcuitySession.getAccount().orElse(null))){
                 buttons.addComponent(view.createMenuItem());
             }
         }

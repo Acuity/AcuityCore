@@ -26,7 +26,6 @@ public class TopBar extends HorizontalLayout  {
         setComponentAlignment(leftGrid, Alignment.MIDDLE_LEFT);
         setExpandRatio(leftGrid, 0f);
 
-
         Image logo = new Image(null, new ThemeResource("img/logo_white.png"));
         logo.setWidth(40, Unit.PIXELS);
         logo.setHeight(40, Unit.PIXELS);

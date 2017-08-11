@@ -16,6 +16,8 @@ import com.acuity.web.site.views.impl.dashboard.script.ScriptView;
 import com.acuity.web.site.views.impl.dashboard.script.ScriptsListView;
 import com.vaadin.icons.VaadinIcons;
 
+import java.util.Optional;
+
 /**
  * Created by Zach on 8/5/2017.
  */
@@ -38,6 +40,13 @@ public enum View {
     ;
 
     public static String ERROR = "ERROR VIEW";
+
+    public static Optional<View> getWithURL(String url){
+        for (View view : values()) {
+            if (view.getName().equals(url)) return Optional.of(view);
+        }
+        return Optional.empty();
+    }
 
     private Class<? extends com.vaadin.navigator.View> viewClass;
     private String name;

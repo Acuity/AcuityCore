@@ -51,7 +51,16 @@ public class DashboardUI extends UI {
             getNavigator().navigateTo(getNavigator().getState());
         }
         else {
-            getNavigator().navigateTo(View.LOGIN.getName());
+            View view = View.getWithURL(getUI().getNavigator().getState()).orElse(null);
+            if (view != null){
+                if (view.isAccessible(null)){
+                    getNavigator().navigateTo(getNavigator().getState());
+                }
+                else {
+                    getNavigator().navigateTo(View.LOGIN.getName());
+                }
+            }
+            else getNavigator().navigateTo(View.LANDING.getName());
         }
     }
 

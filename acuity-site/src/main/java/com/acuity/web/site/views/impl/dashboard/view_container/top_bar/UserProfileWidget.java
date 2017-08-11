@@ -50,10 +50,7 @@ public class UserProfileWidget extends HorizontalLayout {
         Button logout = new Button("Logout");
         logout.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         logout.addStyleName(ValoTheme.BUTTON_SMALL);
-        logout.addClickListener(clickEvent -> {
-            getUI().getNavigator().navigateTo(View.LOGIN.getName());
-            Events.post(new DashboardEvent.UserLoggedOutEvent());
-        });
+        logout.addClickListener(clickEvent -> Events.post(new DashboardEvent.UserLoggedOutEvent()));
         addComponent(logout);
     }
 
