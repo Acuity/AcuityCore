@@ -4,12 +4,12 @@ import com.acuity.db.AcuityDB;
 import com.arangodb.ArangoCollection;
 import com.arangodb.ArangoCursor;
 import com.arangodb.ArangoDatabase;
+import com.arangodb.entity.BaseDocument;
 import com.arangodb.entity.DocumentCreateEntity;
+import com.arangodb.model.DocumentUpdateOptions;
+import javafx.util.Pair;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by Zachary Herridge on 8/4/2017.
@@ -65,5 +65,17 @@ public class DBCollectionService<T> {
     public DocumentCreateEntity<T> insert(T entity) {
         if (entity == null) return null;
         return getCollection().insertDocument(entity);
+    }
+
+    public void setField(String key, String field, Object value) {
+        final BaseDocument document = new BaseDocument();
+        document.addAttribute(field, value);
+        getCollection().updateDocument(key, document, new DocumentUpdateOptions().keepNull(true));
+    }
+
+    public void setFields(String key, Pair... pairs) {
+        final BaseDocument document = new BaseDocument();
+        Arrays.stream(pairs).forEach(stringObjectPair -> document.addAttribute(String.valueOf(stringObjectPair.getKey()), stringObjectPair.getValue()));
+        getCollection().updateDocument(key, document, new DocumentUpdateOptions().keepNull(true));
     }
 }

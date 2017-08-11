@@ -10,6 +10,11 @@
   color:#3bafda !important;
 }
 
+.valo-menu-title{
+  color: white !important;
+  background: #3bafda none !important;
+}
+
 .v-csslayout-smallMargin{
   margin-top: 10px;
   margin-left: 10px;
@@ -27,9 +32,10 @@
   padding-bottom: 10px !important;
 }
 
-.v-menubar {
-  background-color: #2a3142 !important;
-  color: #2a3142 !important;
+.valo-menu {
+  background: #2a3142 none !important;
+  color: white !important;
+  border-right: none !important;
 }
 
 .view-top{

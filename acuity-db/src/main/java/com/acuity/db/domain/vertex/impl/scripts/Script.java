@@ -19,6 +19,7 @@ public class Script extends Vertex {
     private LocalDateTime creationTimestamp = LocalDateTime.now();
     private LocalDateTime lastUpdateTimestamp;
 
+    private int scriptRev = 1;
     private int accessLevel = Access.PUBLIC.getCode();
 
     private AcuityAccount author;
@@ -79,6 +80,10 @@ public class Script extends Vertex {
 
     public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
+    }
+
+    public int getScriptRev() {
+        return scriptRev;
     }
 
     public AcuityAccount getAuthor() {

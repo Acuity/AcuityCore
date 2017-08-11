@@ -3,10 +3,8 @@ package com.acuity.db.services.impl;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClientConfig;
 import com.acuity.db.services.DBCollectionService;
-import com.arangodb.entity.BaseDocument;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
-import com.arangodb.model.DocumentUpdateOptions;
 
 import java.util.Optional;
 
@@ -32,15 +30,11 @@ public class BotClientConfigService extends DBCollectionService<BotClientConfig>
     }
 
     public void assignScript(String configKey, String scriptID){
-        BaseDocument value = new BaseDocument();
-        value.addAttribute("assignedScriptID", scriptID);
-        getCollection().updateDocument(configKey, value, new DocumentUpdateOptions().keepNull(true));
+        setField(configKey, "assignedScriptID", scriptID);
     }
 
     public void assignProxy(String configKey, String proxyID){
-        BaseDocument value = new BaseDocument();
-        value.addAttribute("assignedProxyID", proxyID);
-        getCollection().updateDocument(configKey, value, new DocumentUpdateOptions().keepNull(true));
+        setField(configKey, "assignedProxyID", proxyID);
     }
 
     public void removeConfig(String configKey) {

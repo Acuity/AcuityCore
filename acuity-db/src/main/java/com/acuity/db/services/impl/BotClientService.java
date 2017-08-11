@@ -3,10 +3,8 @@ package com.acuity.db.services.impl;
 import com.acuity.db.AcuityDB;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClient;
 import com.acuity.db.services.DBCollectionService;
-import com.arangodb.entity.BaseDocument;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
-import com.arangodb.model.DocumentUpdateOptions;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,12 +25,6 @@ public class BotClientService extends DBCollectionService<BotClient> {
 
     public BotClientService() {
         super(AcuityDB.DB_NAME, "BotClient", BotClient.class);
-    }
-
-    public void setMachine(String botClientKey, String machineID) {
-        BaseDocument value = new BaseDocument();
-        value.addAttribute("machineID", machineID);
-        getCollection().updateDocument(botClientKey, value, new DocumentUpdateOptions().keepNull(true));
     }
 
     public List<BotClient> getJoinedByOwnerID(String ownerID){

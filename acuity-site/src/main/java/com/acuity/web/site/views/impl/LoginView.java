@@ -3,8 +3,8 @@ package com.acuity.web.site.views.impl;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.vaadin.event.ShortcutAction;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -42,15 +42,14 @@ public class LoginView extends VerticalLayout implements View {
         fields.addStyleName("fields");
 
         final TextField username = new TextField("Email");
-        username.setIcon(FontAwesome.USER);
+        username.setIcon(VaadinIcons.USER);
         username.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
         final PasswordField password = new PasswordField("Password");
-        password.setIcon(FontAwesome.LOCK);
+        password.setIcon(VaadinIcons.LOCK);
         password.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
         final Button signin = new Button("Sign In");
-        signin.addStyleName(ValoTheme.BUTTON_PRIMARY);
         signin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         signin.focus();
 
