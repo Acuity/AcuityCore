@@ -24,6 +24,7 @@ public class MenuItem extends Button {
         setCaption(view.getName());
         setIcon(icon);
         addStyleName("acuity-menu-item");
+        addStyleName(ValoTheme.BUTTON_SMALL);
         addStyleName(ValoTheme.BUTTON_BORDERLESS);
         Events.register(this);
         addClickListener(clickEvent ->  {

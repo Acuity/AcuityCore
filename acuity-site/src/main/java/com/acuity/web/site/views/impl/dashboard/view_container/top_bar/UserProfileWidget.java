@@ -41,6 +41,7 @@ public class UserProfileWidget extends HorizontalLayout {
     private void addLogin(){
         Button login = new Button("Login");
         login.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        login.addStyleName(ValoTheme.BUTTON_SMALL);
         login.addClickListener(clickEvent -> getUI().getNavigator().navigateTo(View.LOGIN.getName()));
         addComponent(login);
     }
@@ -48,6 +49,7 @@ public class UserProfileWidget extends HorizontalLayout {
     private void addLogout(){
         Button logout = new Button("Logout");
         logout.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        logout.addStyleName(ValoTheme.BUTTON_SMALL);
         logout.addClickListener(clickEvent -> {
             getUI().getNavigator().navigateTo(View.LOGIN.getName());
             Events.post(new DashboardEvent.UserLoggedOutEvent());
