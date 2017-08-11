@@ -122,7 +122,9 @@ public class ScriptView extends VerticalLayout implements View {
                 });
 
                 if (link != null){
-                    ScriptService.getInstance().setLink(script.getKey(), link);
+                    ScriptService.getInstance().setAttribute(script.getKey(), "jarURL", link);
+                    ScriptService.getInstance().setAttribute(script.getKey(), "lastUpdateTimestamp", link);
+
                     Notification.show("Update link complete.", Notification.Type.TRAY_NOTIFICATION);
                 }
             } catch (Throwable exception) {

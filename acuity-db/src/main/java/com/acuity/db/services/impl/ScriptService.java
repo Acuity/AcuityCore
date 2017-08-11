@@ -45,9 +45,9 @@ public class ScriptService extends DBCollectionService<Script> {
         return getDB().query(query, args, null, Script.class).asListRemaining();
     }
 
-    public void setLink(String scriptKey, String url) {
-        BaseDocument value = new BaseDocument();
-        value.addAttribute("jarURL", url);
-        getCollection().updateDocument(scriptKey, value, new DocumentUpdateOptions().keepNull(true));
+    public void setAttribute(String scriptKey, String attributeName, Object value) {
+        final BaseDocument document = new BaseDocument();
+        document.addAttribute(attributeName, value);
+        getCollection().updateDocument(scriptKey, document, new DocumentUpdateOptions().keepNull(true));
     }
 }
