@@ -2,6 +2,7 @@ package com.acuity.db.domain.vertex.impl.bot_clients;
 
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.services.impl.BotClientService;
+import com.google.common.base.MoreObjects;
 
 /**
  * Created by Zach on 8/5/2017.
@@ -37,5 +38,15 @@ public class BotClientConfig extends Vertex {
 
     public String getOwnerID() {
         return ownerID;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("ownerID", ownerID)
+                .add("botClientID", botClientID)
+                .add("assignedScriptID", assignedScriptID)
+                .add("assignedProxyID", assignedProxyID)
+                .toString();
     }
 }

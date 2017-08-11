@@ -4,7 +4,8 @@ import com.acuity.control.client.AcuityWSClient;
 import com.acuity.control.client.websockets.WClientEvent;
 import com.acuity.db.domain.common.message_data.LoginData;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
-import com.acuity.db.util.Json;
+import com.acuity.db.domain.vertex.impl.RSAccount;
+import com.acuity.db.domain.vertex.impl.bot_clients.BotClientConfig;
 import com.acuity.security.DBAccess;
 import com.google.common.eventbus.Subscribe;
 
@@ -48,14 +49,21 @@ public class BotControl {
             sendMachineInfo();
         }
 
-        try {
-            Object o = Json.GSON.fromJson(messagePackage.getBodyJSON(), getClass().getClassLoader().loadClass(messagePackage.getBodyType()));
+        if (messagePackage.getMessageType() == MessagePackage.Type.CONFIG_UPDATE){
+            BotClientConfig config = messagePackage.getBodyAs(BotClientConfig.class);
+            System.out.println(config);
+        }
 
+        if (messagePackage.getMessageType() == MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE){
+            RSAccount account = messagePackage.getBodyAs(RSAccount.class);
+            System.out.println(account);
+        }
+
+        Object o = messagePackage.getBodyAsType();
+        if (o != null){
             if ("kill-bot".equals(o)){
                 System.exit(0);
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 

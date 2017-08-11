@@ -2,6 +2,7 @@ package com.acuity.db.domain.vertex.impl;
 
 import com.acuity.db.domain.common.EncryptedString;
 import com.acuity.db.domain.vertex.Vertex;
+import com.google.common.base.MoreObjects;
 
 import java.time.LocalDateTime;
 
@@ -64,11 +65,15 @@ public class RSAccount extends Vertex {
 
     @Override
     public String toString() {
-        return "RSAccount{" +
-                "_key='" + _key + '\'' +
-                ", email='" + email + '\'' +
-                ", ign='" + ign + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("ownerID", ownerID)
+                .add("email", email)
+                .add("ign", ign)
+                .add("banned", banned)
+                .add("locked", locked)
+                .add("wrongLogin", wrongLogin)
+                .add("creationTime", creationTime)
+                .add("password", password)
+                .toString();
     }
 }
