@@ -46,6 +46,10 @@ public class ViewContainer extends VerticalLayout implements View {
         dashboardNavigator = new DashboardNavigator(container);
     }
 
+    public ComponentContainer getContainer() {
+        return container;
+    }
+
     public DashboardNavigator getDashboardNavigator() {
         return dashboardNavigator;
     }

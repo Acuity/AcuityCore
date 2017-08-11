@@ -5,6 +5,7 @@ import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.views.View;
 import com.acuity.web.site.views.impl.ErrorView;
+import com.vaadin.navigator.NavigationStateManager;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewProvider;
 import com.vaadin.ui.ComponentContainer;
@@ -36,6 +37,11 @@ public class DashboardNavigator extends Navigator {
                 return new ErrorView();
             }
         });
+    }
+
+    @Override
+    protected NavigationStateManager getStateManager() {
+        return super.getStateManager();
     }
 
     public void initViewProviders(AcuityAccount acuityAccount) {

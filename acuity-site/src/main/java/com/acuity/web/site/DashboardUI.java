@@ -48,15 +48,19 @@ public class DashboardUI extends UI {
         mainView.getDashboardNavigator().initViewProviders(acuityAccount);
         setContent(mainView);
         if (acuityAccount != null){
-            getNavigator().navigateTo(getNavigator().getState());
+            String preLogin = (String) getSession().getAttribute("preLogin");
+            getSession().setAttribute("preLogin", null);
+            if (preLogin == null) preLogin = getNavigator().getState();
+            getNavigator().navigateTo(preLogin);
         }
         else {
-            View view = View.getWithURL(getUI().getNavigator().getState()).orElse(null);
+            View view = View.getWithURL(getNavigator().getState()).orElse(null);
             if (view != null){
                 if (view.isAccessible(null)){
                     getNavigator().navigateTo(getNavigator().getState());
                 }
                 else {
+                    getSession().setAttribute("preLogin", getNavigator().getState());
                     getNavigator().navigateTo(View.LOGIN.getName());
                 }
             }
