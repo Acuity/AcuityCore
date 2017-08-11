@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class Json {
 
     public static final Gson GSON = new GsonBuilder()
+            .serializeNulls()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeConverter())
             .create();
 

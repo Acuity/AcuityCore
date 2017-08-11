@@ -4,6 +4,7 @@ import com.acuity.control.client.AcuityWSClient;
 import com.acuity.control.client.websockets.WClientEvent;
 import com.acuity.db.domain.common.message_data.LoginData;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
+import com.acuity.db.util.Json;
 import com.acuity.security.DBAccess;
 import com.google.common.eventbus.Subscribe;
 
@@ -43,17 +44,19 @@ public class BotControl {
 
     @Subscribe
     public void onMessage(MessagePackage messagePackage){
-        System.out.println(messagePackage);
-        System.out.println();
- /*       if (messagePackage.getType() == MessagePackage.Type.GOOD_LOGIN){
+        if (messagePackage.getMessageType() == MessagePackage.Type.GOOD_LOGIN){
             sendMachineInfo();
         }
 
+        try {
+            Object o = Json.GSON.fromJson(messagePackage.getBodyJSON(), getClass().getClassLoader().loadClass(messagePackage.getBodyType()));
 
-
-        if ("kill-bot".equals(messagePackage.getBody("command", null))){
-            System.exit(0);
-        }*/
+            if ("kill-bot".equals(o)){
+                System.exit(0);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendMachineInfo(){

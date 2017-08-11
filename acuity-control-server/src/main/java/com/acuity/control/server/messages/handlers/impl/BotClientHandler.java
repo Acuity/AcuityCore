@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -77,11 +78,11 @@ public class BotClientHandler extends MessageHandler {
         String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getEdge().getKey();
         if (clientID.equals(botClient.getID())){
             if (event.getType() == ArangoEvent.DELETE){
-                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE, botClient.getKey()).setBody(Collections.singletonMap("setRSAccount", null)));
+                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE, botClient.getKey()).setBody(Collections.singletonMap("setRSAccount", null), Map.class));
             }
             else {
                 RSAccount rsAccount = RSAccountService.getInstance().getByID(event.getEdge().getFrom()).orElse(null);
-                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE, botClient.getKey()).setBody(Collections.singletonMap("setRSAccount", rsAccount)));
+                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE, botClient.getKey()).setBody(Collections.singletonMap("setRSAccount", rsAccount), Map.class));
             }
         }
     }

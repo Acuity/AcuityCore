@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
+import java.util.Map;
 
 /**
  * Created by Zachary Herridge on 8/3/2017.
@@ -56,7 +57,7 @@ public class LoginHandler extends MessageHandler {
                     }
                     session.setAttribute(AcuityAccount.class, acuityAccount);
                     destroy();
-                    getSocket().send(new MessagePackage(MessagePackage.Type.GOOD_LOGIN, null).setBody(Collections.singletonMap("setAcuityAccount", acuityAccount)));
+                    getSocket().send(new MessagePackage(MessagePackage.Type.GOOD_LOGIN, null).setBody(Collections.singletonMap("setAcuityAccount", acuityAccount), Map.class));
                     getSocket().getEventBus().post(new WSocketEvent.LoginComplete(messagePackage));
                 }
                 else {

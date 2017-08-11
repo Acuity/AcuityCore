@@ -37,10 +37,23 @@ public class MessagePackage extends Vertex {
         return Json.GSON.fromJson(bodyJSON, tClass);
     }
 
+
     public MessagePackage setBody(Object object){
-        this.bodyType = "class:" + object.getClass().getName();
+        return setBody(object, object.getClass());
+    }
+
+    public MessagePackage setBody(Object object, Class type){
+        this.bodyType = type.getTypeName();
         this.bodyJSON = Json.GSON.toJson(object);
         return this;
+    }
+
+    public String getBodyJSON() {
+        return bodyJSON;
+    }
+
+    public String getBodyType() {
+        return bodyType;
     }
 
     public int getMessageType() {
