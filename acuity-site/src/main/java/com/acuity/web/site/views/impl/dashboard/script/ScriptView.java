@@ -40,7 +40,7 @@ public class ScriptView extends VerticalLayout implements View {
 
         addComponent(createInfoPanel());
 
-        if (script.getOwnerID().equals(acuityAccount.getID())) {
+        if (acuityAccount != null && script.getOwnerID().equals(acuityAccount.getID())) {
             addComponent(createUploadPanel());
         }
     }

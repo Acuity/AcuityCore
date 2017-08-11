@@ -10,9 +10,15 @@
   color:#3bafda !important;
 }
 
-.valo-menu-title{
-  color: white !important;
-  background: #3bafda none !important;
+
+.acuity-menu-item{
+  user-focus: 0 0 0px 0px;
+  margin-right: 7px;
+  cursor: hand;
+}
+
+.acuity-selected{
+  color:#3bafda !important;
 }
 
 .valo-menu-responsive[width-range~="0-800px"]{
