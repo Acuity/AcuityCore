@@ -10,6 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <packaging>war</packaging>
     <artifactId>acuity-site</artifactId>
     <name>Acuity Website</name>
 
@@ -70,75 +71,4 @@
             <version>1.0.00-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>src/main/webapp/VAADIN/widgetsets</directory>
-                        </fileset>
-                        <fileset>
-                            <directory>src/main/webapp/VAADIN/gwt-unitCache</directory>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <version>8.1.0</version>
-                <configuration>
-                    <extraJvmArgs>-Xmx1G -Xss1024k</extraJvmArgs>
-                    <webappDirectory>${basedir}/src/main/webapp/</webappDirectory>
-                    <hostedWebapp>${basedir}/src/main/webapp/</hostedWebapp>
-                    <noServer>true</noServer>
-                    <draftCompile>false</draftCompile>
-                    <style>OBF</style>
-                    <compileReport>true</compileReport>
-                    <runTarget>http://localhost:8080/</runTarget>
-                </configuration>
-                <executions>
-                    <execution>
-                        <configuration>
-                        </configuration>
-                        <goals>
-                            <goal>resources</goal>
-                            <goal>update-theme</goal>
-                            <goal>update-widgetset</goal>
-                            <goal>compile-theme</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webResources>
-                        <webResource>
-                            <directory>${basedir}/src/main/webapp/WEB-INF</directory>
-                            <includes>
-                                <include>*.xml</include>
-                            </includes>
-                            <targetPath>WEB-INF</targetPath>
-                            <filtering>true</filtering>
-                        </webResource>
-                    </webResources>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

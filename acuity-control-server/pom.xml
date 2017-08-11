@@ -9,10 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <packaging>war</packaging>
     <name>Acuity Control Server</name>
     <artifactId>acuity-control-server</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
