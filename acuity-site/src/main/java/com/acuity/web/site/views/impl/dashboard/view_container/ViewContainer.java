@@ -1,6 +1,7 @@
 package com.acuity.web.site.views.impl.dashboard.view_container;
 
 import com.acuity.web.site.DashboardNavigator;
+import com.acuity.web.site.views.impl.dashboard.view_container.top_bar.TopBar;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;

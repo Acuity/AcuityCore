@@ -1,4 +1,4 @@
-package com.acuity.web.site.views.impl.dashboard.view_container;
+package com.acuity.web.site.views.impl.dashboard.view_container.top_bar;
 
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.shared.ui.ContentMode;
@@ -20,7 +20,6 @@ public class TopBar extends HorizontalLayout  {
         setSpacing(false);
         setWidth(100, Unit.PERCENTAGE);
 
-
         GridLayout leftGrid = new GridLayout(2, 1);
         addComponent(leftGrid);
         setComponentAlignment(leftGrid, Alignment.MIDDLE_LEFT);
@@ -35,6 +34,9 @@ public class TopBar extends HorizontalLayout  {
         toggleSideMenu.setIcon(VaadinIcons.MENU);
         toggleSideMenu.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         leftGrid.addComponent(toggleSideMenu);
-    }
 
+        UserProfileWidget userProfileWidget = new UserProfileWidget();
+        addComponent(userProfileWidget);
+        setComponentAlignment(userProfileWidget, Alignment.MIDDLE_RIGHT);
+    }
 }
