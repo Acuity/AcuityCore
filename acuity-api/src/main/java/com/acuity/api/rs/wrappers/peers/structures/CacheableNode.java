@@ -3,7 +3,7 @@ package com.acuity.api.rs.wrappers.peers.structures;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSCacheableNode;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,7 @@ public class CacheableNode extends Node {
     private RSCacheableNode rsCacheableNode;
 
     @ClientInvoked
-    public CacheableNode(@NotNull RSCacheableNode peer) {
+    public CacheableNode(RSCacheableNode peer) {
         super(peer);
         this.rsCacheableNode = Preconditions.checkNotNull(peer);
     }
@@ -32,7 +32,7 @@ public class CacheableNode extends Node {
         return Optional.ofNullable(rsCacheableNode.getNext()).map(RSCacheableNode::getWrapper);
     }
 
-    @NotNull
+
     public RSCacheableNode getRsCacheableNode() {
         return rsCacheableNode;
     }

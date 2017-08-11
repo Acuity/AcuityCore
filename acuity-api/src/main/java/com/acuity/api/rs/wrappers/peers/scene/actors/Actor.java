@@ -12,19 +12,16 @@ import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.Renderable;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
-import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HealthBar;
 import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HitUpdate;
 import com.acuity.api.rs.wrappers.peers.structures.NodeLinkedList;
-import com.acuity.rs.api.*;
+import com.acuity.rs.api.RSActor;
+import com.acuity.rs.api.RSHealthBar;
+import com.acuity.rs.api.RSHitUpdate;
+import com.acuity.rs.api.RSNodeLinkedList;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -39,7 +36,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     private RSActor rsActor;
 
     @ClientInvoked
-    public Actor(@NotNull final RSActor peer) {
+    public Actor(final RSActor peer) {
         super(peer);
         this.rsActor = Preconditions.checkNotNull(peer);
     }
@@ -74,7 +71,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     //null when no overhead text
-    @Nullable
+
     public String getOverhead() {
         //// TODO: 7/12/2017  return rsActor.getOverhead();
         return null;
@@ -150,7 +147,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return getSceneLocation().getWorldLocation();
     }
 
-    @NotNull
+
     public RSActor getRsActor() {
         return rsActor;
     }

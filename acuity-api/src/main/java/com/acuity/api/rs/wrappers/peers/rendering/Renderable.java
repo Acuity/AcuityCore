@@ -7,7 +7,7 @@ import com.acuity.api.rs.wrappers.peers.structures.CacheableNode;
 import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 import com.acuity.rs.api.RSRenderable;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public abstract class Renderable extends CacheableNode implements Interactive {
     protected RSRenderable rsRenderable;
 
     @ClientInvoked
-    public Renderable(@NotNull final RSRenderable peer) {
+    public Renderable(final RSRenderable peer) {
         super(peer);
         this.rsRenderable = Preconditions.checkNotNull(peer);
     }
@@ -41,7 +41,7 @@ public abstract class Renderable extends CacheableNode implements Interactive {
         return Optional.ofNullable(rsRenderable.getBoundingBox()).map(RSAxisAlignedBoundingBox::getWrapper);
     }
 
-    @NotNull
+
     public RSRenderable getRsRenderable() {
         return rsRenderable;
     }

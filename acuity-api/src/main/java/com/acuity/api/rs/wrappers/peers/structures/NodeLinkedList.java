@@ -5,7 +5,7 @@ import com.acuity.rs.api.RSNode;
 import com.acuity.rs.api.RSNodeLinkedList;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Streams;
-import com.sun.istack.internal.NotNull;
+
 
 import java.util.Iterator;
 import java.util.List;
@@ -46,7 +46,7 @@ public class NodeLinkedList {
         };
     }
 
-    @NotNull
+
     public RSNodeLinkedList getRsNodeLinkedList() {
         return rsNodeLinkedList;
     }

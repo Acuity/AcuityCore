@@ -6,7 +6,7 @@ import com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneElement;
 import com.acuity.rs.api.RSScene;
 import com.acuity.rs.api.RSSceneTile;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +38,7 @@ public class Scene {
         return Optional.ofNullable(rsScene.getTiles()).map(rsSceneTiles -> rsSceneTiles[plane][x][y]).map(RSSceneTile::getWrapper);
     }
 
-    @NotNull
+
     public RSScene getRsScene() {
         return rsScene;
     }

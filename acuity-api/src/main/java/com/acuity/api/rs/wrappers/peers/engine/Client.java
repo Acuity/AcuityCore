@@ -9,7 +9,7 @@ import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
 import com.acuity.api.rs.wrappers.peers.structures.HashTable;
 import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ public class Client extends GameEngine {
     private final TaskManager taskManager;
 
     @ClientInvoked
-    public Client(@NotNull RSClient peer) {
+    public Client(RSClient peer) {
         super(peer);
         this.rsClient = Preconditions.checkNotNull(peer);
         this.taskManager = new TaskManager();
@@ -217,7 +217,7 @@ public class Client extends GameEngine {
 	    return rsClient.getOnCursorCount();
     }
 
-    @NotNull
+
     public RSClient getRsClient(){
         return rsClient;
     }

@@ -7,8 +7,8 @@ import com.acuity.api.rs.wrappers.peers.types.PlayerType;
 import com.acuity.rs.api.RSPlayer;
 import com.acuity.rs.api.RSPlayerType;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ public class Player extends Actor {
 	private RSPlayer rsPlayer;
 
 	@ClientInvoked
-	public Player(@NotNull final RSPlayer peer) {
+	public Player(final RSPlayer peer) {
 		super(peer);
 		this.rsPlayer = Preconditions.checkNotNull(peer);
 	}
@@ -71,13 +71,13 @@ public class Player extends Actor {
 		return Arrays.asList(rsPlayer.getActions());
 	}
 
-	@Nullable
+
 	@Override
 	public String getName() {
 		return rsPlayer.getName();
 	}
 
-	@NotNull
+
     public RSPlayer getRsPlayer() {
         return rsPlayer;
     }

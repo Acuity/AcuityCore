@@ -9,7 +9,7 @@ import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.rs.api.RSModel;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -207,7 +207,7 @@ public class Model extends Renderable{
     }
 
 
-    @NotNull
+
     public RSModel getRsModel() {
         return rsModel;
     }

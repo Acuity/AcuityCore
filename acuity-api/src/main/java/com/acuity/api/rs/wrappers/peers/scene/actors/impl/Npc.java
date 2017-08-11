@@ -9,8 +9,8 @@ import com.acuity.api.rs.wrappers.peers.types.NpcType;
 import com.acuity.rs.api.RSNPCType;
 import com.acuity.rs.api.RSNpc;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,12 +30,12 @@ public class Npc extends Actor implements Identifiable {
 	private RSNpc rsNpc;
 
 	@ClientInvoked
-	public Npc(@NotNull RSNpc peer) {
+	public Npc(RSNpc peer) {
 		super(peer);
         this.rsNpc = Preconditions.checkNotNull(peer);
 	}
 
-	@Nullable
+
 	@Override
 	public String getName() {
 	    return getType().map(NpcType::getName).orElse(null);
@@ -47,7 +47,7 @@ public class Npc extends Actor implements Identifiable {
 		return new FineLocation(getRsNpc().getFineX() - scale * 64, getRsNpc().getFineY() - scale * 64, Scene.getPlane());
 	}
 
-	@Nullable
+
 	@Override
 	public Integer getID() {
         return getType().map(NpcType::getID).orElse(null);
@@ -62,7 +62,7 @@ public class Npc extends Actor implements Identifiable {
 		return Optional.ofNullable(rsNpc.getType()).map(RSNPCType::getWrapper);
 	}
 
-	@NotNull
+
     public RSNpc getRsNpc() {
         return rsNpc;
     }

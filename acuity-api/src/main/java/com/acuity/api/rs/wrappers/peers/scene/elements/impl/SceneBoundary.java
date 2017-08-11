@@ -12,7 +12,7 @@ import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneBoundary;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 
 import java.util.Optional;
 
@@ -28,7 +28,7 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
         this.rsSceneBoundary = Preconditions.checkNotNull(peer);
     }
 
-    @NotNull
+
     public RSSceneBoundary getRsSceneBoundary() {
         return rsSceneBoundary;
     }

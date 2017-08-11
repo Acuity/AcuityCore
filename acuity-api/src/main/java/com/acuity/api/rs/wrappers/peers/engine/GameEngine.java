@@ -3,7 +3,7 @@ package com.acuity.api.rs.wrappers.peers.engine;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSGameEngine;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ public class GameEngine {
     private RSGameEngine rsGameEngine;
 
     @ClientInvoked
-    public GameEngine(@NotNull RSGameEngine peer) {
+    public GameEngine(RSGameEngine peer) {
         this.rsGameEngine = Preconditions.checkNotNull(peer);
     }
 
@@ -32,7 +32,7 @@ public class GameEngine {
         return (Applet) getRsGameEngine();
     }
 
-    @NotNull
+
     public RSGameEngine getRsGameEngine() {
         return rsGameEngine;
     }

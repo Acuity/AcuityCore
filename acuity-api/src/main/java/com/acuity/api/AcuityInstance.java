@@ -6,7 +6,7 @@ import com.acuity.api.rs.utils.task.login.Account;
 import com.acuity.api.rs.wrappers.peers.engine.Client;
 import com.acuity.api.script.ScriptManager;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +58,7 @@ public class AcuityInstance {
     }
 
 
-    @NotNull
+
     public static Client getClient(){
         return getAppletManager().getClient();
     }

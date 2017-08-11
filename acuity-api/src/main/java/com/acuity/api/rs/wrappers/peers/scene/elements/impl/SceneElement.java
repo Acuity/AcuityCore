@@ -13,7 +13,7 @@ import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneElement;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +80,7 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
         return new UIDs.UID(rsSceneElement.getUID());
     }
 
-    @NotNull
+
     public RSSceneElement getRsSceneElement() {
         return rsSceneElement;
     }

@@ -12,7 +12,7 @@ import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 import com.acuity.rs.api.RSRenderable;
 import com.acuity.rs.api.RSSceneTileDecor;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 
 import java.util.Optional;
 
@@ -72,7 +72,7 @@ public class SceneTileDecor implements SceneElement {
         return 0;
     }
 
-    @NotNull
+
     public RSSceneTileDecor getRsSceneTileDecor() {
         return rsSceneTileDecor;
     }

@@ -4,7 +4,7 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.common.PlayerEquipment;
 import com.acuity.rs.api.RSPlayerType;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 
 /**
  * Created by Zachary Herridge on 6/27/2017.
@@ -30,7 +30,7 @@ public class PlayerType {
         return !rsPlayerType.isFemale();
     }
 
-    @NotNull
+
     public RSPlayerType getRsPlayerType() {
         return rsPlayerType;
     }

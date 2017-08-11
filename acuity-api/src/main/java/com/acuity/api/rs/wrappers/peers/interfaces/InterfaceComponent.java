@@ -3,7 +3,7 @@ package com.acuity.api.rs.wrappers.peers.interfaces;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.wrappers.peers.structures.Node;
 import com.acuity.rs.api.RSInterfaceComponent;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ public class InterfaceComponent extends Node {
     private final RSInterfaceComponent rsInterfaceComponent;
 
     @ClientInvoked
-    public InterfaceComponent(@NotNull RSInterfaceComponent peer) {
+    public InterfaceComponent(RSInterfaceComponent peer) {
         super(peer);
         this.rsInterfaceComponent = peer;
     }
@@ -185,7 +185,7 @@ public class InterfaceComponent extends Node {
         return !rsInterfaceComponent.isHidden();
     }
 
-    @NotNull
+
     public RSInterfaceComponent getRsComponent() {
         return rsInterfaceComponent;
     }

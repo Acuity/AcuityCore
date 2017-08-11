@@ -8,7 +8,7 @@ import com.acuity.api.rs.wrappers.peers.structures.Node;
 import com.acuity.api.rs.wrappers.peers.scene.elements.impl.SceneBoundary;
 import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class SceneTile extends Node {
     private RSSceneTile rsSceneTile;
 
     @ClientInvoked
-    public SceneTile(@NotNull RSSceneTile peer) {
+    public SceneTile(RSSceneTile peer) {
         super(peer);
         this.rsSceneTile = Preconditions.checkNotNull(peer);
     }
@@ -60,7 +60,7 @@ public class SceneTile extends Node {
         return Optional.ofNullable(rsSceneTile.getBoundary()).map(RSSceneBoundary::getWrapper);
     }
 
-    @NotNull
+
     public RSSceneTile getRsSceneTile() {
         return rsSceneTile;
     }

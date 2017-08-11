@@ -3,7 +3,7 @@ package com.acuity.api.rs.wrappers.peers.structures;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.rs.api.RSNode;
 import com.google.common.base.Preconditions;
-import com.sun.istack.internal.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,7 @@ public class Node {
     private RSNode rsNode;
 
     @ClientInvoked
-    public Node(@NotNull RSNode peer) {
+    public Node(RSNode peer) {
         this.rsNode = Preconditions.checkNotNull(peer);
     }
 
@@ -35,7 +35,7 @@ public class Node {
         return rsNode.getKey();
     }
 
-    @NotNull
+
     public RSNode getRsNode() {
         return rsNode;
     }
