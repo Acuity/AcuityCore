@@ -6,7 +6,10 @@ import com.acuity.db.services.DBCollectionService;
 import com.arangodb.entity.DocumentCreateEntity;
 import com.arangodb.model.DocumentCreateOptions;
 
+import java.util.Collections;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Created by Zach on 8/5/2017.
@@ -27,6 +30,16 @@ public class BotClientConfigService extends DBCollectionService<BotClientConfig>
         BotClientConfig botClientConfig = new BotClientConfig(acuityID, botClientKey);
         DocumentCreateEntity<BotClientConfig> entity = getCollection().insertDocument(botClientConfig, new DocumentCreateOptions().returnNew(true));
         return Optional.ofNullable(entity.getNew());
+    }
+
+    public Optional<BotClientConfig> getJoinedConfig(String configID){
+        String query = "let config = document(@configID)\n" +
+                "return merge(config, {\n" +
+                "    \"script\" : document(config.assignedScriptID),\n" +
+                "    \"proxy\" : document(config.assignedProxyID)\n" +
+                "})";
+        Stream<BotClientConfig> clientID1 = getDB().query(query, Collections.singletonMap("configID", configID), null, BotClientConfig.class).asListRemaining().stream();
+        return clientID1.filter(Objects::nonNull).findAny();
     }
 
     public void assignScript(String configKey, String scriptID){

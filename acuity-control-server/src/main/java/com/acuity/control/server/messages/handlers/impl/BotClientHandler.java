@@ -13,6 +13,7 @@ import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.domain.vertex.impl.RSAccount;
+import com.acuity.db.domain.vertex.impl.bot_clients.BotClientConfig;
 import com.acuity.db.services.impl.BotClientConfigService;
 import com.acuity.db.services.impl.BotClientService;
 import com.acuity.db.services.impl.RSAccountService;
@@ -78,7 +79,8 @@ public class BotClientHandler extends MessageHandler {
         if (botClient.getID().equals(event.getBotClientID())){
             if (event instanceof BotClientConfigEvent){
                 if (event.getType() == ArangoEvent.CREATE_OR_UPDATE){
-                    getSocket().send(new MessagePackage(MessagePackage.Type.CONFIG_UPDATE, botClient.getKey()).setBody(((BotClientConfigEvent) event).getBotClientConfig()));
+                    BotClientConfig config = BotClientConfigService.getInstance().getJoinedConfig(BotClientConfigService.getInstance().getCollectionName() + "/" + botClient.getKey()).orElse(null);
+                    getSocket().send(new MessagePackage(MessagePackage.Type.CONFIG_UPDATE, botClient.getKey()).setBody(config));
                 }
             }
 

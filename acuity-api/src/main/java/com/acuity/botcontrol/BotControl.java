@@ -9,6 +9,10 @@ import com.acuity.db.domain.vertex.impl.bot_clients.BotClientConfig;
 import com.acuity.security.DBAccess;
 import com.google.common.eventbus.Subscribe;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+
 /**
  * Created by Zachary Herridge on 8/9/2017.
  */
@@ -52,6 +56,23 @@ public class BotControl {
         if (messagePackage.getMessageType() == MessagePackage.Type.CONFIG_UPDATE){
             BotClientConfig config = messagePackage.getBodyAs(BotClientConfig.class);
             System.out.println(config);
+            if (config != null && config.getScript() != null){
+                String jarURL = config.getScript().getJarURL();
+                System.out.println("Got Script(" + config.getScript().getScriptRev() + "): " + jarURL);
+
+                if (jarURL != null){
+                    try {
+                        URLClassLoader child = new URLClassLoader (new URL[] {new URL(jarURL)}, this.getClass().getClassLoader());
+                        Class<?> client = Class.forName("client", true, child);
+                        System.out.println(child);
+                        System.out.println();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
         if (messagePackage.getMessageType() == MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE){
@@ -59,9 +80,9 @@ public class BotControl {
             System.out.println(account);
         }
 
-        Object o = messagePackage.getBodyAsType();
-        if (o != null){
-            if ("kill-bot".equals(o)){
+        Object result = messagePackage.getBodyAsType();
+        if (result != null){
+            if ("kill-bot".equals(result)){
                 System.exit(0);
             }
         }

@@ -3,6 +3,7 @@ package com.acuity.db.domain.vertex.impl.scripts;
 import com.acuity.db.domain.edge.impl.AddedScript;
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
+import com.google.common.base.MoreObjects;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -22,6 +23,9 @@ public class Script extends Vertex {
     private int scriptRev = 1;
     private int accessLevel = Access.PUBLIC.getCode();
 
+    private String jarURL;
+
+    //Joins
     private AcuityAccount author;
     private AddedScript added;
 
@@ -100,6 +104,28 @@ public class Script extends Vertex {
 
     public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
         this.lastUpdateTimestamp = lastUpdateTimestamp;
+    }
+
+    public String getJarURL() {
+        return jarURL;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("ownerID", ownerID)
+                .add("title", title)
+                .add("category", category)
+                .add("desc", desc)
+                .add("creationTimestamp", creationTimestamp)
+                .add("lastUpdateTimestamp", lastUpdateTimestamp)
+                .add("scriptRev", scriptRev)
+                .add("accessLevel", accessLevel)
+                .add("jarURL", jarURL)
+                .add("author", author)
+                .add("added", added)
+                .add("localPaths", localPaths)
+                .toString();
     }
 
     public enum  Access {
