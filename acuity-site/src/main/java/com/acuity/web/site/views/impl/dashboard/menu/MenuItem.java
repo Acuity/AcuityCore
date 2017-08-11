@@ -19,6 +19,7 @@ public class MenuItem extends Button {
 
     public MenuItem(View view, VaadinIcons icon) {
         this.view = view;
+        setWidthUndefined();
         setPrimaryStyleName("valo-menu-item");
         setCaption(view.getName());
         setIcon(icon);

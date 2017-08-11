@@ -5,7 +5,7 @@ import com.acuity.db.services.impl.AcuityAccountService;
 import com.acuity.web.site.events.DashboardEvent;
 import com.acuity.web.site.events.Events;
 import com.acuity.web.site.views.View;
-import com.acuity.web.site.views.impl.MainView;
+import com.acuity.web.site.views.impl.dashboard.view_container.ViewContainer;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
@@ -30,7 +30,7 @@ import java.util.Locale;
 public class DashboardUI extends UI {
 
     private Events events = new Events();
-    private MainView mainView;
+    private ViewContainer mainView;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -43,7 +43,7 @@ public class DashboardUI extends UI {
     }
 
     private void updateContent(){
-        mainView = new MainView();
+        mainView = new ViewContainer();
         AcuityAccount acuityAccount = VaadinSession.getCurrent().getAttribute(AcuityAccount.class);
         mainView.getDashboardNavigator().initViewProviders(acuityAccount);
         setContent(mainView);

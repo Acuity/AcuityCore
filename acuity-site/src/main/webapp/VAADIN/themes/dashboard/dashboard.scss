@@ -1,9 +1,9 @@
 @import "../valo/valo";
 
-
-.v-slot-acuity-primary-bar{
+.acuity-top-bar{
   background-color:#3bafda !important;
-  color:#3bafda !important;
+  color:white !important;
+  padding-left: 7px;
 }
 
 .acuity-primary{
@@ -13,6 +13,15 @@
 .valo-menu-title{
   color: white !important;
   background: #3bafda none !important;
+}
+
+.valo-menu-responsive[width-range~="0-800px"]{
+  padding-top: 0 !important;
+}
+
+.acuity-footer{
+  color: white !important;
+  background: #2c3345 none !important;
 }
 
 .v-csslayout-smallMargin{
@@ -32,10 +41,10 @@
   padding-bottom: 10px !important;
 }
 
-.valo-menu {
-  background: #2a3142 none !important;
-  color: white !important;
-  border-right: none !important;
+.acuity-menu {
+  background: #2a3142 none;
+  color: white;
+
 }
 
 .view-top{
