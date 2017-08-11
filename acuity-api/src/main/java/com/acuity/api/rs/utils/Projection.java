@@ -21,6 +21,7 @@ public class Projection {
 
     private static final Logger logger = LoggerFactory.getLogger(Projection.class);
     public static final Rectangle GAMESCREEN = new Rectangle(4, 4, 512, 334);
+    public static final Dimension APPLET_SIZE = new Dimension(765, 503);
 
     public static final int TILE_PIXEL_SIZE = 128;
     public static final int[] SINE = new int[2048];

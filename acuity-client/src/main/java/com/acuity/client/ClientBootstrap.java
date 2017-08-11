@@ -10,9 +10,9 @@ import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.botcontrol.BotControl;
 import com.acuity.client.devgui.ScriptRunnerView;
+import com.acuity.client.gui.MainFrame;
 import com.google.common.eventbus.Subscribe;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.function.Function;
@@ -59,17 +59,13 @@ public class ClientBootstrap {
             try {
                 BotControl.getInstance().start();
 
-                JFrame frame = new JFrame();
-                frame.setSize(new Dimension(800, 600));
-                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                frame.setVisible(true);
-
                 AcuityInstance.init();
-                frame.getContentPane().add(AcuityInstance.getAppletManager().getClient().getApplet());
+                final MainFrame mainFrame = new MainFrame(AcuityInstance.getAppletManager().getClient().getApplet());
+                mainFrame.setVisible(true);
                 AcuityInstance.boot();
 
-           //     MouseDataCollector.INSTANCE.start();
-           //     SmartActions.INSTANCE.start();
+                //     MouseDataCollector.INSTANCE.start();
+                //     SmartActions.INSTANCE.start();
 
                 new ScriptRunnerView().setVisible(true);
             } catch (Exception e) {
