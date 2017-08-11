@@ -3,6 +3,6 @@
 @import "../valo/valo";
 
 .dashboard {
-  @include dashboard;
   @include valo;
+  @include dashboard;
 }

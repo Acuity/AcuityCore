@@ -44,10 +44,10 @@ public class AcuityAccountService extends DBCollectionService<AcuityAccount> {
 
     public Optional<AcuityAccount> getAccountByEmail(String email){
         String query = "FOR user IN AcuityAccount " +
-                "FILTER user.email == @email " +
+                "FILTER LOWER(user.email) == @email " +
                 "LIMIT 1 " +
                 "RETURN user";
-        ArangoCursor<AcuityAccount> system = getDB().query(query, Collections.singletonMap("email", email), null, AcuityAccount.class);
+        ArangoCursor<AcuityAccount> system = getDB().query(query, Collections.singletonMap("email", email.toLowerCase()), null, AcuityAccount.class);
         return system.asListRemaining().stream().findFirst();
     }
 

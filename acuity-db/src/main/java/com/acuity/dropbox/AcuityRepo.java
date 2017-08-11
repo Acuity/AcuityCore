@@ -13,10 +13,11 @@ import java.io.File;
  */
 public class AcuityRepo {
 
-    private static File workingDir = Files.createTempDir();
+    private static File workingDir;
     private static DbxClientV2 client;
 
     public static void init(){
+        workingDir = new File(System.getProperty("java.io.tmpdir"));
         DbxRequestConfig config = DbxRequestConfig.newBuilder("AcuityRepo").withUserLocale("en_US").build();
         client = new DbxClientV2(config, DBAccess.getRepoKey());
     }
