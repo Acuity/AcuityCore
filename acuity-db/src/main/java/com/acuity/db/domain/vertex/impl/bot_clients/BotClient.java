@@ -19,15 +19,18 @@ public class BotClient extends Vertex {
 
     private String machineID;
 
+    private String ip;
 
+    //Joins
     private RSAccount assignedAccount;
     private Script assignedScript;
     private BotClientConfig clientConfig;
     private Proxy assignedProxy;
     private Machine machine;
 
-    public BotClient(String key, String ownerKey, String machineID) {
+    public BotClient(String key, String ownerKey, String machineID, String ip) {
         this._key = key;
+        this.ip = ip;
         this.ownerID = AcuityAccountService.getInstance().getCollectionName() + "/" + ownerKey;
         this.machineID = machineID;
     }
@@ -53,6 +56,10 @@ public class BotClient extends Vertex {
 
     public Machine getMachine() {
         return machine;
+    }
+
+    public String getIP() {
+        return ip;
     }
 
     public String getMachineID() {

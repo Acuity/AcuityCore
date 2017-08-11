@@ -1,64 +1,72 @@
 package com.acuity.db.domain.vertex.impl;
 
 import com.acuity.db.domain.vertex.Vertex;
+import com.acuity.db.util.Json;
+import com.google.common.base.MoreObjects;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDateTime;
 
 /**
  * Created by Zachary Herridge on 8/3/2017.
  */
 public class MessagePackage extends Vertex {
 
-    private Map<String, Object> headers = new HashMap<>();
-    private Map<String, Object> body = new HashMap<>();
+    private LocalDateTime creationTimestamp = LocalDateTime.now();
+    private LocalDateTime insertTimestamp;
+    private String destinationKey;
+
+    private int messageType = Type.UNKNOWN;
+
+    private String bodyType;
+    private String bodyJSON;
 
     public MessagePackage() {
 
     }
 
-    public MessagePackage(int type) {
-        putHeader("messageType", type);
+    public MessagePackage(int messageType, String destinationKey) {
+        this.destinationKey = destinationKey;
+        this.messageType = messageType;
     }
 
-    public double getType(){
-        return getHeader("messageType", (double) MessagePackage.Type.UNKNOWN);
+    public String getDestinationKey() {
+        return destinationKey;
     }
 
-    public Map<String, Object> getHeaders() {
-        return headers;
+    public <T> T getBodyAs(Class<T> tClass){
+        return Json.GSON.fromJson(bodyJSON, tClass);
     }
 
-    public Map<String, Object> getBody() {
-        return body;
+    public MessagePackage setBody(Object object){
+        this.bodyType = "class:" + object.getClass().getName();
+        this.bodyJSON = Json.GSON.toJson(object);
+        return this;
+    }
+
+    public int getMessageType() {
+        return messageType;
+    }
+
+    public MessagePackage setBody(String bodyType, String bodyJSON) {
+        this.bodyType = bodyType;
+        this.bodyJSON = bodyJSON;
+        return this;
+    }
+
+    public void setInsertTimestamp(LocalDateTime insertTimestamp) {
+        this.insertTimestamp = insertTimestamp;
     }
 
     @Override
     public String toString() {
-        return "MessagePackage{" +
-                "headers=" + headers +
-                ", body=" + body +
-                '}';
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T> T getBody(String key, T defaultValue) {
-        return (T) body.getOrDefault(key, defaultValue);
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T> T getHeader(String key, T defaultValue) {
-        return (T) headers.getOrDefault(key, defaultValue);
-    }
-
-    public MessagePackage putHeader(String key, Object value) {
-        getHeaders().put(key, value);
-        return this;
-    }
-
-    public MessagePackage putBody(String key, Object value) {
-        getBody().put(key, value);
-        return this;
+        return MoreObjects.toStringHelper(this)
+                .add("creationTimestamp", creationTimestamp)
+                .add("insertTimestamp", insertTimestamp)
+                .add("destinationKey", destinationKey)
+                .add("messageType", messageType)
+                .add("bodyType", bodyType)
+                .add("bodyJSON", bodyJSON)
+                .toString();
     }
 
     public interface Type {

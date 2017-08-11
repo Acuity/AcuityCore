@@ -9,15 +9,16 @@ import com.acuity.db.arango.monitor.events.wrapped.impl.MessagePackageEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.RSAccountAssignedToEvent;
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
-import com.acuity.db.domain.vertex.impl.Machine;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.domain.vertex.impl.RSAccount;
-import com.acuity.db.services.impl.*;
-import com.arangodb.model.DocumentUpdateOptions;
+import com.acuity.db.services.impl.BotClientConfigService;
+import com.acuity.db.services.impl.BotClientService;
+import com.acuity.db.services.impl.RSAccountService;
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -40,13 +41,13 @@ public class BotClientHandler extends MessageHandler {
 
     @Override
     public void handle(MessagePackage messagePackage) {
-        if (messagePackage.getType() == MessagePackage.Type.MACHINE_INFO){
-            String name = messagePackage.getBody("user.name", null);
+        if (messagePackage.getMessageType() == MessagePackage.Type.MACHINE_INFO){
+     /*       String name = messagePackage.getBody("user.name", null);
             if (name != null){
                 Machine machine = new Machine(ownerID, machineKey);
                 machine.getProperties().putAll(messagePackage.getBody());
                 MachineService.getInstance().getCollection().updateDocument(machineKey, machine, new DocumentUpdateOptions().mergeObjects(true));
-            }
+            }*/
         }
     }
 
@@ -55,10 +56,10 @@ public class BotClientHandler extends MessageHandler {
         if (botClient == null) return;
 
         if (event.getType() == ArangoEvent.CREATE_OR_UPDATE){
-            String destination = event.getMessagePackage().getHeader("destinationKey", null);
-            if (botClient.getKey().equals(destination)){
+            String destinationKey = event.getMessagePackage().getDestinationKey();
+            if (botClient.getKey().equals(destinationKey)){
                 getSocket().send(event.getMessagePackage());
-                MessagePackageService.getInstance().delete(event.getMessagePackage());
+                //MessagePackageService.getInstance().delete(event.getMessagePackage());
             }
         }
     }
@@ -76,11 +77,11 @@ public class BotClientHandler extends MessageHandler {
         String clientID = BotClientService.getInstance().getCollectionName() + "/" + event.getEdge().getKey();
         if (clientID.equals(botClient.getID())){
             if (event.getType() == ArangoEvent.DELETE){
-                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", null));
+                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE, botClient.getKey()).setBody(Collections.singletonMap("setRSAccount", null)));
             }
             else {
                 RSAccount rsAccount = RSAccountService.getInstance().getByID(event.getEdge().getFrom()).orElse(null);
-                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE).putBody("account", rsAccount));
+                getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE, botClient.getKey()).setBody(Collections.singletonMap("setRSAccount", rsAccount)));
             }
         }
     }
@@ -92,12 +93,12 @@ public class BotClientHandler extends MessageHandler {
         if (acuityAccount != null){
             ownerID = acuityAccount.getID();
 
-            machineKey = MachineService.getInstance().getKey(acuityAccount.getKey(), loginComplete.getLoginPackage().getBody("machineUsername", null));
+     /*       machineKey = MachineService.getInstance().getKey(acuityAccount.getKey(), loginComplete.getLoginPackage().getBody("machineUsername", null));
             machineID = MachineService.getInstance().getCollectionName() + "/" + machineKey;
             if (!MachineService.getInstance().getCollection().documentExists(machineKey)){
                 machineID = MachineService.getInstance().insert(new Machine(ownerID, machineKey)).getId();
-            }
-            BotClientService.getInstance().registerClient(UUID.randomUUID().toString(), acuityAccount.getKey(), machineID).ifPresent(botClient -> {
+            }*/
+            BotClientService.getInstance().registerClient(UUID.randomUUID().toString(), acuityAccount.getKey(), "TEMP", getSocket().getSocket().getRemoteSocketAddress().getAddress().toString()).ifPresent(botClient -> {
                 this.botClient = botClient;
                 BotClientConfigService.getInstance().registerConfig(acuityAccount.getID(), botClient.getKey()).ifPresent(botClientConfig -> {
                     this.config = botClientConfig;

@@ -29,6 +29,7 @@ public class WSocket implements SubscriberExceptionHandler{
     }
 
     public void onMessage(String message){
+        System.out.println(message);
         MessagePackage messagePackage = Json.GSON.fromJson(message, MessagePackage.class);
         if (messagePackage != null) eventBus.post(messagePackage);
     }

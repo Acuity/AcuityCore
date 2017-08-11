@@ -68,8 +68,8 @@ public class BotClientService extends DBCollectionService<BotClient> {
         return clientID1.filter(Objects::nonNull).findAny();
     }
 
-    public Optional<BotClient> registerClient(String key, String ownerID, String machineID){
-        DocumentCreateEntity<BotClient> createEntity = getCollection().insertDocument(new BotClient(key, ownerID, machineID), new DocumentCreateOptions().returnNew(true));
+    public Optional<BotClient> registerClient(String key, String ownerID, String machineID, String ip){
+        DocumentCreateEntity<BotClient> createEntity = getCollection().insertDocument(new BotClient(key, ownerID, machineID, ip), new DocumentCreateOptions().returnNew(true));
         return Optional.ofNullable(createEntity.getNew());
     }
 

@@ -2,9 +2,9 @@ package com.acuity.botcontrol;
 
 import com.acuity.control.client.AcuityWSClient;
 import com.acuity.control.client.websockets.WClientEvent;
+import com.acuity.db.domain.common.message_data.LoginData;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.security.DBAccess;
-import com.google.common.base.Strings;
 import com.google.common.eventbus.Subscribe;
 
 /**
@@ -32,11 +32,9 @@ public class BotControl {
 
     @Subscribe
     public void onConnect(WClientEvent.Opened opened){
-        AcuityWSClient.getInstance().send(new MessagePackage(MessagePackage.Type.LOGIN)
-                .putBody("username", "zgherridge@gmail.com")
-                .putBody("password", DBAccess.getPassword2())
-                .putBody("machineUsername", Strings.nullToEmpty(System.getProperty("user.name")).replaceAll("/", "-"))
-                .putBody("sessionType", 1));
+        AcuityWSClient.getInstance().send(new MessagePackage(MessagePackage.Type.LOGIN, null).setBody(
+                new LoginData("zgherridge@gmail.com", DBAccess.getPassword2(), 1)
+        ));
     }
 
     public void send(MessagePackage messagePackage){
@@ -45,7 +43,9 @@ public class BotControl {
 
     @Subscribe
     public void onMessage(MessagePackage messagePackage){
-        if (messagePackage.getType() == MessagePackage.Type.GOOD_LOGIN){
+        System.out.println(messagePackage);
+        System.out.println();
+ /*       if (messagePackage.getType() == MessagePackage.Type.GOOD_LOGIN){
             sendMachineInfo();
         }
 
@@ -53,15 +53,15 @@ public class BotControl {
 
         if ("kill-bot".equals(messagePackage.getBody("command", null))){
             System.exit(0);
-        }
+        }*/
     }
 
     private void sendMachineInfo(){
-        MessagePackage machineInfo = new MessagePackage(MessagePackage.Type.MACHINE_INFO);
+     /*   MessagePackage machineInfo = new MessagePackage(MessagePackage.Type.MACHINE_INFO);
         for (String prop : System.getProperties().stringPropertyNames()) {
             machineInfo.putBody(prop, System.getProperty(prop));
         }
-        send(machineInfo);
+        send(machineInfo);*/
     }
 
     public static void main(String[] args) {

@@ -44,9 +44,9 @@ public class BotClientView extends VerticalLayout implements View {
         addInformationPanel();
 
         Button killBot = new Button("Kill Bot", clickEvent -> {
-            MessagePackageService.getInstance().insert(new MessagePackage(MessagePackage.Type.DIRECT)
-                    .putHeader("destinationKey", botClient.getKey())
-                    .putBody("command", "kill-bot"));
+            MessagePackageService.getInstance().insert(
+                    new MessagePackage(MessagePackage.Type.DIRECT, botClient.getKey()).setBody("kill-bot")
+            );
         });
         killBot.setIcon(VaadinIcons.CLOSE_CIRCLE_O);
         addComponent(killBot);

@@ -5,6 +5,8 @@ import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.services.DBCollectionService;
 import com.arangodb.entity.DocumentCreateEntity;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by Zachary Herridge on 8/4/2017.
  */
@@ -20,9 +22,11 @@ public class MessagePackageService extends DBCollectionService<MessagePackage> {
         super(AcuityDB.DB_NAME, "MessagePackage", MessagePackage.class);
     }
 
+    @Override
     public DocumentCreateEntity<MessagePackage> insert(MessagePackage messagePackage){
-        getCollection().insertDocument(messagePackage);
-        return null;
+        if (messagePackage.getDestinationKey() == null) return null;
+        messagePackage.setInsertTimestamp(LocalDateTime.now());
+        return getCollection().insertDocument(messagePackage);
     }
 
     public void delete(MessagePackage message){
