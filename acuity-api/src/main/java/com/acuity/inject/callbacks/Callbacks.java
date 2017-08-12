@@ -7,7 +7,6 @@ import com.acuity.api.rs.events.impl.*;
 import com.acuity.api.rs.events.impl.drawing.GameDrawEvent;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.utils.Game;
-import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
 import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 import com.acuity.rs.api.RSPlayer;
@@ -41,13 +40,12 @@ public class Callbacks {
             switch (name) {
                 //836 death anim
                 case "actorAnimationChange":
-                    if (instance == null || (!(instance instanceof RSPlayer)))
+                    if (instance == null || (!(instance instanceof RSPlayer))) {
                         break;
-                    RSPlayer player = (RSPlayer) instance;
-                    if(player.getWrapper() == null || (!(player.getWrapper() instanceof Player)))
-                        break;
-                    Player p = ((RSPlayer) instance).getWrapper();
-                    Events.getRsEventBus().post(new PlayerAnimationChangeEvent(p, p.getAnimation()));
+                    }
+
+                    final RSActor actor = (RSActor) instance;
+                    Events.getRsEventBus().post(new ActorAnimationChangeEvent(actor, actor.getAnimation()));
                     break;
                 case "gameState":
                     Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
