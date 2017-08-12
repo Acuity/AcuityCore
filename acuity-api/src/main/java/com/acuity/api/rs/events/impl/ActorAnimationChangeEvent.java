@@ -1,34 +1,15 @@
 package com.acuity.api.rs.events.impl;
 
-import com.acuity.rs.api.RSActor;
+import com.acuity.api.rs.events.RSEvent;
+import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
 
 /**
  * Created by Eclipseop.
  * Date: 8/12/2017.
  */
-public class ActorAnimationChangeEvent {
+public interface ActorAnimationChangeEvent<T extends Actor> extends RSEvent {
 
-	private RSActor actor;
-	private int animation;
+	int getAnimation();
 
-	public ActorAnimationChangeEvent(RSActor actor, int animation) {
-		this.actor = actor;
-		this.animation = animation;
-	}
-
-	public int getAnimation() {
-		return animation;
-	}
-
-	public RSActor getActor() {
-		return actor;
-	}
-
-	@Override
-	public String toString() {
-		return "ActorAnimationChangeEvent{" +
-				"actor=" + actor +
-				", animation=" + animation +
-				'}';
-	}
+	T getActor();
 }

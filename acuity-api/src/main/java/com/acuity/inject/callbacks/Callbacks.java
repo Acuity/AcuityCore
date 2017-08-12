@@ -7,10 +7,10 @@ import com.acuity.api.rs.events.impl.*;
 import com.acuity.api.rs.events.impl.drawing.GameDrawEvent;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.utils.Game;
-import com.acuity.rs.api.RSActor;
-import com.acuity.rs.api.RSAxisAlignedBoundingBox;
-import com.acuity.rs.api.RSPlayer;
-import com.acuity.rs.api.RSRenderable;
+import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
+import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc;
+import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
+import com.acuity.rs.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,12 +40,28 @@ public class Callbacks {
             switch (name) {
                 //836 death anim
                 case "actorAnimationChange":
-                    if (instance == null || (!(instance instanceof RSPlayer))) {
+                    if (instance == null || (!(instance instanceof RSActor))) {
                         break;
                     }
+					final RSActor actor = (RSActor) instance;
+					Actor wrapper;
 
-                    final RSActor actor = (RSActor) instance;
-                    Events.getRsEventBus().post(new ActorAnimationChangeEvent(actor, actor.getAnimation()));
+					if (actor instanceof RSPlayer) {
+						wrapper = ((RSPlayer) actor).getWrapper();
+					} else {
+						wrapper = ((RSNpc) actor).getWrapper();
+					}
+
+					if (wrapper == null) {
+						break;
+					}
+
+					if (actor instanceof Player) {
+						Events.getRsEventBus().post(new PlayerAnimationChangeEvent((Player) wrapper, wrapper.getAnimation()));
+					} else {
+						Events.getRsEventBus().post(new NpcAnimationChangeEvent((Npc) wrapper, wrapper.getAnimation()));
+					}
+
                     break;
                 case "gameState":
                     Events.getRsEventBus().post(new GameStateChangeEvent(AcuityInstance.getClient().getGameState()));
