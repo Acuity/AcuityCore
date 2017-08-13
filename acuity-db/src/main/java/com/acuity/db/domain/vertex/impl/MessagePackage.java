@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
  */
 public class MessagePackage extends Vertex {
 
+    public static final String SERVER = "SERVER";
+
     private static final Logger logger = LoggerFactory.getLogger(MessagePackage.class);
 
     private LocalDateTime creationTimestamp = LocalDateTime.now();
@@ -107,5 +109,6 @@ public class MessagePackage extends Vertex {
         int ACCOUNT_ASSIGNMENT_CHANGE = 5;
         int MACHINE_INFO = 6;
         int CONFIG_UPDATE = 7;
+        int ACCOUNT_STATE_UPDATE = 8;
     }
 }

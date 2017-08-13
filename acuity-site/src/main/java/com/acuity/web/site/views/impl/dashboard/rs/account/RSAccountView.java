@@ -1,6 +1,7 @@
 package com.acuity.web.site.views.impl.dashboard.rs.account;
 
 import com.acuity.db.arango.monitor.events.wrapped.impl.RSAccountEvent;
+import com.acuity.db.domain.common.tracking.RSAccountState;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.services.impl.RSAccountService;
@@ -47,6 +48,41 @@ public class RSAccountView extends VerticalLayout implements View{
         addStyleName("view");
         Events.getDBEventBus().register(this);
         addInformationPanel();
+        addStatePanel();
+        addSkillsPanel();
+    }
+
+    private void addStatePanel(){
+        GridLayout content = new GridLayout(2, 3);
+        content.setResponsive(true);
+        content.setSpacing(true);
+        content.addStyleName("view-top");
+
+        content.addComponent(new InlineLabel("Health:", VaadinIcons.DOCTOR_BRIEFCASE));
+        content.addComponent(new Label(rsAccount.getState().map(RSAccountState::getHpPercent).orElse(-1) + "%"));
+
+        content.addComponent(new InlineLabel("Prayer Points:", VaadinIcons.MAGIC));
+        content.addComponent(new Label(String.valueOf(rsAccount.getState().map(RSAccountState::getPrayerPoints).orElse(-1))));
+
+        content.addComponent(new InlineLabel("Run Energy:", VaadinIcons.EXIT));
+        content.addComponent(new Label(String.valueOf(rsAccount.getState().map(RSAccountState::getRunEnergy).orElse(-1))));
+
+
+        Panel panel = new Panel("<strong>State</strong>");
+        panel.setResponsive(true);
+        panel.setCaptionAsHtml(true);
+        panel.setContent(content);
+        addComponent(panel);
+    }
+
+    private void addSkillsPanel(){
+        RSAccountStatsGrid statsGrid = new RSAccountStatsGrid(rsAccount);
+        statsGrid.setSizeFull();
+        Panel panel = new Panel("<strong>Stats</strong>");
+        panel.setResponsive(true);
+        panel.setCaptionAsHtml(true);
+        panel.setContent(statsGrid);
+        addComponent(panel);
     }
 
     private void addInformationPanel() {

@@ -20,7 +20,7 @@ public abstract class AbstractBotControl {
 
     public void start() throws Exception {
         AcuityWSClient.getInstance().getEventBus().register(this);
-        AcuityWSClient.getInstance().start("ws://acuitybotting.com:8015");
+        AcuityWSClient.getInstance().start("ws://localhost:8015");
     }
 
     public void stop(){

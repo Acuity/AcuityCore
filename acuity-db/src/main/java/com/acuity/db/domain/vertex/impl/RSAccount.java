@@ -1,10 +1,12 @@
 package com.acuity.db.domain.vertex.impl;
 
 import com.acuity.db.domain.common.EncryptedString;
+import com.acuity.db.domain.common.tracking.RSAccountState;
 import com.acuity.db.domain.vertex.Vertex;
 import com.google.common.base.MoreObjects;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * Created by Zachary Herridge on 8/3/2017.
@@ -19,6 +21,7 @@ public class RSAccount extends Vertex {
     private boolean wrongLogin;
     private LocalDateTime creationTime = LocalDateTime.now();
 
+    private RSAccountState state;
     private EncryptedString password;
 
     public RSAccount(String ownerID, String email, String ign, EncryptedString password) {
@@ -49,6 +52,10 @@ public class RSAccount extends Vertex {
 
     public boolean isBanned() {
         return banned;
+    }
+
+    public Optional<RSAccountState> getState() {
+        return Optional.ofNullable(state);
     }
 
     public boolean isLocked() {

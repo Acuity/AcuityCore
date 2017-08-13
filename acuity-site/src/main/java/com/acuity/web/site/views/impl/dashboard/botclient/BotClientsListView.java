@@ -14,6 +14,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.MultiSelectionModel;
 import com.vaadin.ui.renderers.LocalDateTimeRenderer;
@@ -50,13 +51,12 @@ public class BotClientsListView extends VerticalLayout implements View {
         clientGrid.addColumn(BotClient::getKey).setCaption("Key").setHidden(true);
         clientGrid.addColumn(BotClient::getConnectionTime, new LocalDateTimeRenderer()).setCaption("Connected").setHidden(true);
         Grid.Column<BotClient, String> account = clientGrid.addColumn(botClient -> botClient.getAssignedAccount() != null ? botClient.getAssignedAccount().getEmail() : "None").setCaption("Account");
+        clientGrid.sort(account);
         clientGrid.addColumn(botClient -> botClient.getAssignedScript() == null ? "None" : botClient.getAssignedScript().getTitle()).setCaption("Script");
         clientGrid.addColumn(botClient -> botClient.getAssignedProxy() == null ? "None" : botClient.getAssignedProxy().getHost() + ":" + botClient.getAssignedProxy().getPort()).setCaption("Proxy");
         clientGrid.addColumn(botClient -> botClient.getMachine() == null ? "None" : botClient.getMachine().getProperties().getOrDefault("user.name", "")).setCaption("Machine").setHidden(true);
         clientGrid.addColumn(BotClient::getIP).setCaption("IP").setHidden(true);
-        clientGrid.setSizeFull();
-        clientGrid.setColumnReorderingAllowed(true);
-        clientGrid.sort(account);
+
 
         clientGrid.addComponentColumn(client -> {
             HorizontalLayout content = new HorizontalLayout();
@@ -66,9 +66,10 @@ public class BotClientsListView extends VerticalLayout implements View {
 
             return content;
         }).setCaption("Actions").setSortable(false);
-
+        clientGrid.setSizeFull();
+        clientGrid.setColumnReorderingAllowed(true);
         clientGrid.getColumns().forEach(column -> column.setHidable(true));
-        addComponent(clientGrid);
+        addComponent(new Panel("Clients", clientGrid));
     }
 
     @Override

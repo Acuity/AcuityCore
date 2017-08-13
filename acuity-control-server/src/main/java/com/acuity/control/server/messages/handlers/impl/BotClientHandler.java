@@ -9,6 +9,7 @@ import com.acuity.db.arango.monitor.events.wrapped.impl.MessagePackageEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.BotClientIDEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.BotClientConfigEvent;
 import com.acuity.db.arango.monitor.events.wrapped.impl.bot.client.id_events.impl.RSAccountAssignedToEvent;
+import com.acuity.db.domain.common.tracking.RSAccountState;
 import com.acuity.db.domain.vertex.Vertex;
 import com.acuity.db.domain.vertex.impl.AcuityAccount;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
@@ -32,9 +33,10 @@ public class BotClientHandler extends MessageHandler {
 
     private String ownerID;
     private Vertex botClient;
-    private Vertex config;
+    private BotClientConfig config;
     private String machineID;
     private String machineKey;
+    private RSAccount rsAccount;
 
     public BotClientHandler(WSocket wSocket) {
         super(wSocket);
@@ -51,6 +53,14 @@ public class BotClientHandler extends MessageHandler {
                 MachineService.getInstance().getCollection().updateDocument(machineKey, machine, new DocumentUpdateOptions().mergeObjects(true));
             }*/
         }
+        if (messagePackage.getMessageType() == MessagePackage.Type.ACCOUNT_STATE_UPDATE){
+            String key = rsAccount != null ? rsAccount.getKey() : null;
+            if (key != null){
+                RSAccountState update = messagePackage.getBodyAs(RSAccountState.class);
+                RSAccountService.getInstance().setField(rsAccount.getKey(), "state", update);
+            }
+        }
+
     }
 
     @Subscribe
@@ -79,17 +89,19 @@ public class BotClientHandler extends MessageHandler {
         if (botClient.getID().equals(event.getBotClientID())){
             if (event instanceof BotClientConfigEvent){
                 if (event.getType() == ArangoEvent.CREATE_OR_UPDATE){
-                    BotClientConfig config = BotClientConfigService.getInstance().getJoinedConfig(BotClientConfigService.getInstance().getCollectionName() + "/" + botClient.getKey()).orElse(null);
+                    config = BotClientConfigService.getInstance().getJoinedConfig(BotClientConfigService.getInstance().getCollectionName() + "/" + botClient.getKey()).orElse(null);
                     getSocket().send(new MessagePackage(MessagePackage.Type.CONFIG_UPDATE, botClient.getKey()).setBody(config));
                 }
             }
 
             if (event instanceof RSAccountAssignedToEvent){
                 if (event.getType() == ArangoEvent.DELETE){
+                    rsAccount = null;
                     getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE, botClient.getKey()).setBody(null));
                 }
                 else {
                     RSAccount rsAccount = RSAccountService.getInstance().getByID(((RSAccountAssignedToEvent) event).getEdge().getFrom()).orElse(null);
+                    this.rsAccount = rsAccount;
                     getSocket().send(new MessagePackage(MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE, botClient.getKey()).setBody(rsAccount));
                 }
             }
