@@ -81,4 +81,12 @@ public class Player extends Actor {
     public RSPlayer getRsPlayer() {
         return rsPlayer;
     }
+
+    public Optional<Player> getInteractingPlayer()
+	{
+		return getInteractingEntity()
+				.filter(s -> s instanceof Player)
+				.map(s -> (Player) s);
+	}
+
 }

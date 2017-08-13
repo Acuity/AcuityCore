@@ -24,6 +24,7 @@ public class Tabs {
         MUSIC_PLAYER(KeyEvent.VK_F12, 34),
         COMBAT(KeyEvent.VK_F1, 45),
         STATS(KeyEvent.VK_F2, 46),
+
         QUEST_LIST(KeyEvent.VK_F3, 47),
         INVENTORY(KeyEvent.VK_ESCAPE, 48),
         EQUIPMENT(KeyEvent.VK_F4, 49),

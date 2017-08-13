@@ -36,7 +36,7 @@ public class AppletManager {
     private FocusMiddleMan focusMiddleMan = new FocusMiddleMan();
     private MouseMiddleMan mouseMiddleMan = new MouseMiddleMan();
     private KeyboardMiddleMan keyboardMiddleMan = new KeyboardMiddleMan();
-    private int initalWorld = 1;
+    private int initalWorld = 2;
 
     public AppletManager() throws Exception {
         Events.getRsEventBus().register(this);

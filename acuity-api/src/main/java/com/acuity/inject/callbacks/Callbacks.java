@@ -115,7 +115,9 @@ public class Callbacks {
         try {
             if (actor != null && actor instanceof RSPlayer) {
                 final RSPlayer player = (RSPlayer) actor;
-                Events.getRsEventBus().post(new PlayerHealthChangeEvent(player.getWrapper(), player.getWrapper().getHealthPercent()));
+                //System.out.println("Dispatching hit update: "+ player.getName());
+                Events.getRsEventBus().post(
+                        new PlayerHealthChangeEvent(player.getWrapper(), player.getWrapper().getHealthPercent()));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -39,7 +39,7 @@ public class LoginTask extends Task {
 		}
 
 		final Account account = AcuityInstance.getRsAccount();
-		if (account != null && account.isValid()) {
+		if (account != null && account.getUsername() != null && account.isValid()) {
 			switch (Login.getLoginState()) {
 				case ENTER_CREDENTIALS:
 					final String loginMessage = Login.getLoginMessage();

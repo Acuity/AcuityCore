@@ -9,10 +9,13 @@ import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+import com.acuity.api.rs.wrappers.peers.engine.Client;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.Renderable;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
 import com.acuity.api.rs.wrappers.peers.scene.actors.accessories.HitUpdate;
+import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Npc;
+import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
 import com.acuity.api.rs.wrappers.peers.structures.NodeLinkedList;
 import com.acuity.rs.api.RSActor;
 import com.acuity.rs.api.RSHealthBar;
@@ -158,5 +161,32 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
             return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
         }
         return () -> getCachedModel().map(Model::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
+    }
+
+    public  Optional<Actor> getInteractingEntity() {
+        try {
+            int index = getTargetIndex();
+            if (index == -1)
+                Optional.empty();
+            //npc.
+            final Client client = AcuityInstance.getClient();
+            if (index < 32768) {
+                final Npc[] npcs = AcuityInstance.getClient().getNpcs();
+                final Npc npc = npcs[index];
+                return npc == null ? Optional.empty() : Optional.of(npc);
+            }
+
+            //player
+            index -= 32768;
+
+            final Player[] players = client.getPlayers();
+            if (index > players.length)
+                return Optional.empty();
+
+            Player player = players[index];
+            return player == null ? Optional.empty() : Optional.of(player);
+        } catch (IndexOutOfBoundsException e) {
+            return Optional.empty();
+        }
     }
 }

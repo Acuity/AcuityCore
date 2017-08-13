@@ -11,8 +11,10 @@ import java.util.concurrent.Executors;
 public class Events {
 
     private static Executor executor = Executors.newSingleThreadExecutor();
+
     private static EventBus rsEventBus = new EventBus();
     private static EventBus acuityEventBus = new EventBus();
+    private static EventBus scriptEventBus = new EventBus();
 
     public static EventBus getRsEventBus(){
         return rsEventBus;
@@ -20,6 +22,10 @@ public class Events {
 
     public static EventBus getAcuityEventBus() {
         return acuityEventBus;
+    }
+
+    public static EventBus getScriptEventBus() {
+        return scriptEventBus;
     }
 
     public static void queuePost(EventBus eventBus, Object post){
