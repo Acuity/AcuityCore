@@ -1,34 +1,34 @@
 package com.acuity.api.rs.events.impl;
 
-import com.acuity.api.rs.events.RSEvent;
 import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
-import com.acuity.rs.api.RSPlayer;
 
 /**
  * Created by MadDev on 7/27/17.
  */
-public class PlayerAnimationChangeEvent implements RSEvent {
+public class PlayerAnimationChangeEvent implements ActorAnimationChangeEvent<Player> {
 
     private Player player;
-    private long animation;
+    private int animation;
 
-    public PlayerAnimationChangeEvent(Player player, long animation) {
+    public PlayerAnimationChangeEvent(Player player, int animation) {
         this.player = player;
         this.animation = animation;
     }
 
-    public Player getPlayer() {
+    @Override
+    public Player getActor() {
         return player;
     }
 
-    public long getAnimation() {
+    @Override
+    public int getAnimation() {
         return animation;
     }
 
     @Override
     public String toString() {
         return "PlayerAnimationChangeEvent{" +
-                "player=" + player.getName() +
+                "player=" + player.getNullSafeName() +
                 ", animation=" + animation +
                 '}';
     }
