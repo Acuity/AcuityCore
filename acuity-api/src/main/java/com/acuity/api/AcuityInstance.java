@@ -21,10 +21,14 @@ public class AcuityInstance {
     private AcuitySettings acuitySettings;
     private AppletManager appletManager;
 
-    private static Account rsAccount = new Account("chromatosph@yahoo.org", "123123"); // TODO: 7/8/2017 change
+    private static Account rsAccount = new Account(null, null); // TODO: 7/8/2017 change
 
     public static Account getRsAccount() {
         return rsAccount;
+    }
+
+    public static void setRsAccount(Account rsAccount) {
+        AcuityInstance.rsAccount = rsAccount;
     }
 
     private AcuityInstance() throws Exception {
