@@ -1,11 +1,11 @@
-package com.acuity.botcontrol;
+package com.acuity.control.client;
 
-import com.acuity.control.client.AcuityWSClient;
 import com.acuity.control.client.websockets.WClientEvent;
 import com.acuity.db.domain.common.message_data.LoginData;
 import com.acuity.db.domain.vertex.impl.MessagePackage;
 import com.acuity.db.domain.vertex.impl.RSAccount;
 import com.acuity.db.domain.vertex.impl.bot_clients.BotClientConfig;
+import com.acuity.db.domain.vertex.impl.scripts.Script;
 import com.acuity.security.DBAccess;
 import com.google.common.eventbus.Subscribe;
 
@@ -16,30 +16,22 @@ import java.net.URLClassLoader;
 /**
  * Created by Zachary Herridge on 8/9/2017.
  */
-public class BotControl {
-
-    private static BotControl INSTANCE = new BotControl();
-
-    public static BotControl getInstance() {
-        return INSTANCE;
-    }
-
-    public BotControl() {
-        AcuityWSClient.getInstance().getEventBus().register(this);
-    }
+public abstract class AbstractBotControl {
 
     public void start() throws Exception {
+        AcuityWSClient.getInstance().getEventBus().register(this);
         AcuityWSClient.getInstance().start("ws://acuitybotting.com:8015");
     }
 
     public void stop(){
+        AcuityWSClient.getInstance().getEventBus().unregister(this);
         AcuityWSClient.getInstance().stop();
     }
 
     @Subscribe
     public void onConnect(WClientEvent.Opened opened){
         AcuityWSClient.getInstance().send(new MessagePackage(MessagePackage.Type.LOGIN, null).setBody(
-                new LoginData("zgherridge@gmail.com", DBAccess.getPassword2(), 1)
+                new LoginData("zgherridge@gmail.com", "VaadinLife!0!", 1)
         ));
     }
 
@@ -55,38 +47,23 @@ public class BotControl {
 
         if (messagePackage.getMessageType() == MessagePackage.Type.CONFIG_UPDATE){
             BotClientConfig config = messagePackage.getBodyAs(BotClientConfig.class);
-            System.out.println(config);
-            if (config != null && config.getScript() != null){
-                String jarURL = config.getScript().getJarURL();
-                System.out.println("Got Script(" + config.getScript().getScriptRev() + "): " + jarURL);
-
-                if (jarURL != null){
-                    try {
-                        URLClassLoader child = new URLClassLoader (new URL[] {new URL(jarURL)}, this.getClass().getClassLoader());
-                        Class<?> client = Class.forName("client", true, child);
-                        System.out.println(child);
-                        System.out.println();
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            updateConfig(config);
         }
 
         if (messagePackage.getMessageType() == MessagePackage.Type.ACCOUNT_ASSIGNMENT_CHANGE){
             RSAccount account = messagePackage.getBodyAs(RSAccount.class);
-            System.out.println(account);
+            updateAccount(account);
         }
 
-        Object result = messagePackage.getBodyAsType();
-        if (result != null){
-            if ("kill-bot".equals(result)){
-                System.exit(0);
-            }
-        }
+        handleMessage(messagePackage);
     }
+
+    public abstract void updateAccount(RSAccount rsAccount);
+
+    public abstract void updateConfig(BotClientConfig config);
+
+    public abstract void handleMessage(MessagePackage messagePackage);
+
 
     private void sendMachineInfo(){
      /*   MessagePackage machineInfo = new MessagePackage(MessagePackage.Type.MACHINE_INFO);
@@ -98,7 +75,29 @@ public class BotControl {
 
     public static void main(String[] args) {
         try {
-            getInstance().start();
+            AbstractBotControl abstractBotControl = new AbstractBotControl() {
+
+                @Override
+                public void updateAccount(RSAccount rsAccount) {
+
+                }
+
+                @Override
+                public void updateConfig(BotClientConfig config) {
+
+                }
+
+                @Override
+                public void handleMessage(MessagePackage messagePackage) {
+                    Object result = messagePackage.getBodyAsType();
+                    if (result != null){
+                        if ("kill-bot".equals(result)){
+                            System.exit(0);
+                        }
+                    }
+                }
+            };
+            abstractBotControl.start();
         } catch (Exception e) {
             e.printStackTrace();
         }

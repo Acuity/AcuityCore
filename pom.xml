@@ -20,5 +20,7 @@
         <module>acuity-control-server</module>
         <module>acuity-db</module>
         <module>acuity-control-client</module>
+        <module>Dreambot</module>
+        <module>acuity-bot-control</module>
     </modules>
 </project>

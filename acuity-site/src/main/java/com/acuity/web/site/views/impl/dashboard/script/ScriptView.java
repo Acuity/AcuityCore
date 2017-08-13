@@ -19,6 +19,9 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.JarInputStream;
 
 /**
  * Created by Zachary Herridge on 8/7/2017.
@@ -86,6 +89,7 @@ public class ScriptView extends VerticalLayout implements View {
                 if (!file.exists()) {
                     file.createNewFile();
                 }
+                file.deleteOnExit();
                 outputFile = new FileOutputStream(file);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -108,6 +112,7 @@ public class ScriptView extends VerticalLayout implements View {
                     Notification.show("Upload Complete", Notification.Type.TRAY_NOTIFICATION);
                 }
 
+
                 AcuityRepo.getClient().files().uploadBuilder("/" + script.getKey() + "/Script.jar").withMode(WriteMode.OVERWRITE).uploadAndFinish(new FileInputStream(file));
                 Notification.show("Dropbox upload Complete", Notification.Type.TRAY_NOTIFICATION);
 
@@ -123,12 +128,14 @@ public class ScriptView extends VerticalLayout implements View {
 
                 if (link != null){
                     ScriptService.getInstance().setFields(script.getKey(),
-                            new Pair<>("jarUrl", link),
+                            new Pair<>("jarURL", link),
                             new Pair<>("lastUpdateTimestamp", LocalDateTime.now()),
                             new Pair<>("scriptRev", script.getScriptRev() + 1)
                     );
                     Notification.show("Update link complete.", Notification.Type.TRAY_NOTIFICATION);
                 }
+
+                file.delete();
             } catch (Throwable exception) {
                 exception.printStackTrace();
             }

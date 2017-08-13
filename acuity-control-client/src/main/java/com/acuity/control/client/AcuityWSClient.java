@@ -47,6 +47,7 @@ public class AcuityWSClient {
     }
 
     public void stop(){
+        reconnect = false;
         wClient.close();
     }
 
