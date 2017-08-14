@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,15 +19,14 @@ import java.net.URISyntaxException;
  * Created by Eclipseop.
  * Date: 8/10/2017.
  */
-public class MainFrame extends JFrame implements MouseListener, MouseMotionListener {
+public class AcuityFrame extends JFrame implements MouseListener, MouseMotionListener {
 
-	private static final Logger logger = LoggerFactory.getLogger(MainFrame.class);
+	private static final Logger logger = LoggerFactory.getLogger(AcuityFrame.class);
 
 	private Point mouseCords = null;
 
-	public MainFrame(final Applet applet) {
+	public AcuityFrame() {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(Projection.APPLET_SIZE.width, Projection.APPLET_SIZE.height + 31);
 		setIconImage(getImage("icon2.png"));
 		setLocationRelativeTo(null);
 		setTitle("AcuityBotting");
@@ -36,8 +34,6 @@ public class MainFrame extends JFrame implements MouseListener, MouseMotionListe
 		setLayout(new BorderLayout());
 
 		add(createTopPanel(), BorderLayout.NORTH);
-		add(applet, BorderLayout.CENTER);
-
 	}
 
 	private Panel createTopPanel() {
@@ -49,11 +45,6 @@ public class MainFrame extends JFrame implements MouseListener, MouseMotionListe
 		panel.addMouseListener(this);
 		panel.addMouseMotionListener(this);
 		leftPanel.add(new JLabel(new ImageIcon(getIconImage())));
-
-		//final JLabel acuityBottingLabel = new JLabel("AcuityBotting");
-		//acuityBottingLabel.setForeground(Color.WHITE);
-
-		//leftPanel.add(acuityBottingLabel);
 
 		final Panel rightPanel = new Panel(new FlowLayout(FlowLayout.RIGHT));
 

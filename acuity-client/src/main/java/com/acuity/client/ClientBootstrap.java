@@ -3,14 +3,12 @@ package com.acuity.client;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
 import com.acuity.api.input.SmartActions;
-import com.acuity.control.client.scripts.AcuityDir;
 import com.acuity.api.meta.tile_dumper.TileDumper;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
-import com.acuity.client.gui.MainFrame;
-import com.acuity.control.client.AbstractBotControl;
+import com.acuity.client.gui.AcuityBotFrame;
 import com.google.common.eventbus.Subscribe;
 
 import java.awt.*;
@@ -58,8 +56,8 @@ public class ClientBootstrap {
         EventQueue.invokeLater(() -> {
             try {
                 AcuityInstance.init();
-                final MainFrame mainFrame = new MainFrame(AcuityInstance.getAppletManager().getClient().getApplet());
-                mainFrame.setVisible(true);
+                final AcuityBotFrame botFrame = new AcuityBotFrame(AcuityInstance.getAppletManager().getClient().getApplet());
+                botFrame.setVisible(true);
                 AcuityInstance.boot();
 
                 //     MouseDataCollector.INSTANCE.start();
