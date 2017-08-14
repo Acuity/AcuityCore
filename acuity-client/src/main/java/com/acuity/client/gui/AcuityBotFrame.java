@@ -1,7 +1,7 @@
 package com.acuity.client.gui;
 
 import com.acuity.api.rs.utils.Projection;
-import com.acuity.db.domain.common.AcuityFrame;
+import com.acuity.ui.AcuityFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +18,6 @@ public class AcuityBotFrame extends AcuityFrame {
 
 	public AcuityBotFrame(final Applet applet) {
 		setSize(Projection.APPLET_SIZE.width, Projection.APPLET_SIZE.height + 31);
-
 		add(applet, BorderLayout.CENTER);
 	}
 }

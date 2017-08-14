@@ -1,8 +1,0 @@
-@import "variables";
-@import "dashboard";
-@import "../valo/valo";
-
-.dashboard {
-  @include valo;
-  @include dashboard;
-}
