@@ -36,6 +36,7 @@ public class AcuityWSClient {
 
     public void start(String host) throws URISyntaxException {
         this.lastHost = host;
+        this.reconnect = true;
         wClient = new WClient(this.lastHost, new Draft_6455());
         wClient.setConnectionLostTimeout(5);
         wClient.getEventBus().register(this);
@@ -48,7 +49,7 @@ public class AcuityWSClient {
 
     public void stop(){
         reconnect = false;
-        wClient.close();
+        if (wClient != null) wClient.close();
     }
 
     public void setReconnectDelay(long reconnectDelay) {

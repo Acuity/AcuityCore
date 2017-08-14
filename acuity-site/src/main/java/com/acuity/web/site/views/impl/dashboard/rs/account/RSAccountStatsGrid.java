@@ -28,7 +28,6 @@ public class RSAccountStatsGrid extends Grid<Map.Entry<String, Integer>> {
     public RSAccountStatsGrid(RSAccount rsAccount) {
         this.rsAccount = rsAccount;
         refreshStats();
-        Events.getDBEventBus().register(this);
         buildComponent();
     }
 
@@ -63,6 +62,12 @@ public class RSAccountStatsGrid extends Grid<Map.Entry<String, Integer>> {
             this.rsAccount = accountEvent.getRsAccount();
             refreshStats();
         }
+    }
+
+    @Override
+    public void attach() {
+        super.attach();
+        Events.getDBEventBus().register(this);
     }
 
     @Override
