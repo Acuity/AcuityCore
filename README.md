@@ -8,4 +8,3 @@ Acuity is an all-in-one solution for Oldschool-Runescape botting. This entails a
 
 ## Requirements
 * Java 8 JDK
-* Tomcat 9.0 (Only for Acuity-site)
