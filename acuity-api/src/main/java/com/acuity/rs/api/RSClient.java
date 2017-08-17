@@ -134,6 +134,8 @@ public interface RSClient extends RSGameEngine {
 
 	long getLastClickTime();
 
+	int getLatestSelectedItemIndex();
+
 	int getLatestSelectedItemIndexpacketIDlatestSelectedItemIndex();
 
 	java.lang.String getLatestSelectedItemName();
@@ -224,8 +226,6 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getRealSkillLevels();
 
-	int getRedrawMode();
-
 	int getRunEnergy();
 
 	com.acuity.rs.api.RSScene getSceneGraph();
@@ -266,9 +266,9 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeAbsoluteToViewport(int var0, int var1, int var2);
 
-	void invokeAddAxisAlignedBoundingBox(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3);
+	void invokeAddAxisAlignedBoundingBox(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3, int var4);
 
-	void invokeAddLegacy2DBoundingBox(int var0, int var1, int var2, int var3, int var4, int var5, int var6);
+	void invokeAddLegacy2DBoundingBox(int var0, int var1, int var2, int var3, int var4);
 
 	int[] invokeBoundingBoxToViewport(int var0, int var1, int var2);
 
@@ -313,6 +313,8 @@ public interface RSClient extends RSGameEngine {
 	boolean isDrawingAABB();
 
 	boolean isDynamicRegion();
+
+	boolean isLoginWorldSelectorOpen();
 
 	boolean isLowMemory();
 
@@ -464,6 +466,8 @@ public interface RSClient extends RSGameEngine {
 
 	void setLastClickTime(long var0);
 
+	void setLatestSelectedItemIndex(int var0);
+
 	void setLatestSelectedItemIndexpacketIDlatestSelectedItemIndex(int var0);
 
 	void setLatestSelectedItemName(java.lang.String var0);
@@ -477,6 +481,8 @@ public interface RSClient extends RSGameEngine {
 	void setLoginResponse3(java.lang.String var0);
 
 	void setLoginState(int var0);
+
+	void setLoginWorldSelectorOpen(boolean var0);
 
 	void setLowMemory(boolean var0);
 
@@ -561,8 +567,6 @@ public interface RSClient extends RSGameEngine {
 	void setPublicChatMode(int var0);
 
 	void setRealSkillLevels(int[] var0);
-
-	void setRedrawMode(int var0);
 
 	void setResizableMode(boolean var0);
 

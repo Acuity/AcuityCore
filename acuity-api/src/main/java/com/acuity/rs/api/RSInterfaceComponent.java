@@ -96,15 +96,13 @@ public interface RSInterfaceComponent extends RSNode {
 
 	java.lang.Object[] getSkillListenerArgs();
 
-	int[] getSkillTriggers();
-
 	int getSpriteID();
 
 	java.lang.String[] getTableActions();
 
 	java.lang.Object[] getTableListenerArgs();
 
-	int[] getTableTriggers();
+	int[] getTableTriggersskillTriggers();
 
 	java.lang.String getText();
 
@@ -238,15 +236,13 @@ public interface RSInterfaceComponent extends RSNode {
 
 	void setSkillListenerArgs(java.lang.Object[] var0);
 
-	void setSkillTriggers(int[] var0);
-
 	void setSpriteID(int var0);
 
 	void setTableActions(java.lang.String[] var0);
 
 	void setTableListenerArgs(java.lang.Object[] var0);
 
-	void setTableTriggers(int[] var0);
+	void setTableTriggersskillTriggers(int[] var0);
 
 	void setText(java.lang.String var0);
 

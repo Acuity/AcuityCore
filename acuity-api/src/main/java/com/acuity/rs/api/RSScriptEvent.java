@@ -8,5 +8,9 @@ public interface RSScriptEvent extends RSNode {
 
 	java.lang.Object[] getArgs();
 
+	com.acuity.rs.api.RSInterfaceComponent getSource();
+
 	void setArgs(java.lang.Object[] var0);
+
+	void setSource(com.acuity.rs.api.RSInterfaceComponent var0);
 }
