@@ -26,6 +26,8 @@ public interface RSSceneElementType extends RSCacheableNode {
 
 	int getMapIconID();
 
+	int getMapSceneId();
+
 	java.lang.String getName();
 
 	short[] getNewColors();
@@ -93,6 +95,8 @@ public interface RSSceneElementType extends RSCacheableNode {
 	void setItemSupport(int var0);
 
 	void setMapIconID(int var0);
+
+	void setMapSceneId(int var0);
 
 	void setName(java.lang.String var0);
 
