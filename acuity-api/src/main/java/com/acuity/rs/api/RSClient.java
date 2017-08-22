@@ -226,8 +226,6 @@ public interface RSClient extends RSGameEngine {
 
 	int[] getRealSkillLevels();
 
-	int getRedrawMode();
-
 	int getRunEnergy();
 
 	com.acuity.rs.api.RSScene getSceneGraph();
@@ -569,8 +567,6 @@ public interface RSClient extends RSGameEngine {
 	void setPublicChatMode(int var0);
 
 	void setRealSkillLevels(int[] var0);
-
-	void setRedrawMode(int var0);
 
 	void setResizableMode(boolean var0);
 
