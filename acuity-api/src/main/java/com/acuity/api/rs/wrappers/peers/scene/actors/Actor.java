@@ -114,7 +114,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
 
 
 
-    public double getHealthPercent(){
+    public Optional<Double> getHealthPercent(){
 
         RSNodeLinkedList healthBars1 = rsActor.getHealthBars();
 
@@ -136,9 +136,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
             }
         }
 
-
-        if (width == -1) return -1;
-        return Math.max(Math.min(width * 1000D / 255D, 100), 0);
+        if (width == -1) return Optional.empty();
+        return Optional.of(Math.max(Math.min(width * 1000D / 255D, 100), 0));
     }
 
     public SceneLocation getSceneLocation(){

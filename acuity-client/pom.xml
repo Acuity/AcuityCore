@@ -8,6 +8,7 @@
         <version>1.0.00-SNAPSHOT</version>
     </parent>
 
+    <packaging>jar</packaging>
     <artifactId>acuity-client</artifactId>
     <name>Acuity Client</name>
 
@@ -37,17 +38,34 @@
             <artifactId>acuity-api</artifactId>
             <version>1.0.00-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.acuity</groupId>
+            <artifactId>db-common</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/acuity-common-1.0-SNAPSHOT-jar-with-dependencies.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
