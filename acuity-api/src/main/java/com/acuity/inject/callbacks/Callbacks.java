@@ -56,7 +56,7 @@ public class Callbacks {
 						break;
 					}
 
-					if (actor instanceof Player) {
+					if (actor instanceof RSPlayer) {
 						Events.getRsEventBus().post(new PlayerAnimationChangeEvent((Player) wrapper, wrapper.getAnimation()));
 					} else {
 						Events.getRsEventBus().post(new NpcAnimationChangeEvent((Npc) wrapper, wrapper.getAnimation()));

@@ -49,7 +49,7 @@ public class AppletManager {
         rsClassLoader = new RSClassLoader(new File(getClass().getClassLoader().getResource("Injected Gamepack.jar").getFile()));
         Class<?> client = rsClassLoader.loadClass("client");
         clientEnvironment = new ClientEnvironment(((RSClient) client.newInstance()).getWrapper());
-        //TODO clientEnvironment.getGameEngine().getRsClient().setRedrawMode(2);
+        clientEnvironment.getGameEngine().getRsClient().setRedrawMode(2);
         clientStub = new ClientStub(clientConfig);
     }
 
