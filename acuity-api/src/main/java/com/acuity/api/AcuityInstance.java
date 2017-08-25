@@ -9,6 +9,8 @@ import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+
 /**
  * Created by Zachary Herridge on 6/9/2017.
  */
@@ -37,9 +39,9 @@ public class AcuityInstance {
         appletManager = new AppletManager();
     }
 
-    public static void init() throws Exception {
+    public static void init(File gamepack) throws Exception {
         instance = new AcuityInstance();
-        getAppletManager().load();
+        getAppletManager().load(gamepack);
     }
 
     public static void boot(){

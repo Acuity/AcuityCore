@@ -1,7 +1,7 @@
 package com.acuity.client.gui;
 
 import com.acuity.api.rs.utils.Projection;
-import com.acuity.ui.AcuityFrame;
+import com.acuity.common.ui.AcuityFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

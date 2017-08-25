@@ -9,10 +9,12 @@ import com.acuity.api.rs.query.SceneElements;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.client.gui.AcuityBotFrame;
+import com.acuity.common.util.AcuityDir;
 import com.google.common.eventbus.Subscribe;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -55,7 +57,7 @@ public class ClientBootstrap {
     public ClientBootstrap() {
         EventQueue.invokeLater(() -> {
             try {
-                AcuityInstance.init();
+                AcuityInstance.init(new File(AcuityDir.getHome(), "InjectedGamepack.jar"));
                 final AcuityBotFrame botFrame = new AcuityBotFrame(AcuityInstance.getAppletManager().getClient().getApplet());
                 botFrame.setVisible(true);
                 AcuityInstance.boot();

@@ -43,10 +43,10 @@ public class AppletManager {
     }
 
     @SuppressWarnings("unchecked")
-    public void load() throws MalformedURLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public void load(File gamepack) throws MalformedURLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         logger.info("RSClient loading started.");
         clientConfig = new ClientConfig(initalWorld);
-        rsClassLoader = new RSClassLoader(new File(getClass().getClassLoader().getResource("Injected Gamepack.jar").getFile()));
+        rsClassLoader = new RSClassLoader(gamepack);
         Class<?> client = rsClassLoader.loadClass("client");
         clientEnvironment = new ClientEnvironment(((RSClient) client.newInstance()).getWrapper());
         clientEnvironment.getGameEngine().getRsClient().setRedrawMode(2);
