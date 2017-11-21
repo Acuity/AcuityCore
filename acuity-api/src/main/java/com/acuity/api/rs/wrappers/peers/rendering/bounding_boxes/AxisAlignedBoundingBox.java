@@ -1,7 +1,7 @@
 package com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes;
 
 import com.acuity.api.annotations.ClientInvoked;
-import com.acuity.api.rs.interfaces.Clickable;
+import com.acuity.api.rs.interfaces.Projectable;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.rs.api.RSAxisAlignedBoundingBox;
@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 /**
  * Created by Zachary Herridge on 7/10/2017.
  */
-public class AxisAlignedBoundingBox extends BoundingBox implements Clickable{
+public class AxisAlignedBoundingBox extends BoundingBox implements Projectable {
 
     private RSAxisAlignedBoundingBox rsAxisAlignedBoundingBox;
 
@@ -49,7 +49,7 @@ public class AxisAlignedBoundingBox extends BoundingBox implements Clickable{
     }
 
     @Override
-    public Supplier<ScreenLocationShape> getScreenTargetSupplier() {
+    public Supplier<ScreenLocationShape> getProjectionSupplier() {
         return null; // TODO: 11/20/2017  
     }
 }

@@ -42,17 +42,17 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
                 });
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
     default List<String> getActions(){
-        return getComposite().map(SceneElementType::getActions).map(Arrays::asList).orElse(Collections.EMPTY_LIST);
+        return getComposite().map(SceneElementType::getActions).map(Arrays::asList).orElse(Collections.emptyList());
     }
 
     @Override
-    default Supplier<ScreenLocationShape> getScreenTargetSupplier(){
+    default Supplier<ScreenLocationShape> getProjectionSupplier(){
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
-            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElse(null);
+            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getProjectionSupplier).map(Supplier::get).orElse(null);
         }
-        return () -> getModel().map(Model::getScreenTargetSupplier).map(Supplier::get).orElse(null);
+        return () -> getModel().map(Model::getProjectionSupplier).map(Supplier::get).orElse(null);
     }
 
     Optional<AxisAlignedBoundingBox> getBoundingBox();

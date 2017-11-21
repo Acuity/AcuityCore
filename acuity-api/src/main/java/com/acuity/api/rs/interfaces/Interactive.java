@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
  * Created by Eclipseop.
  * Date: 6/8/2017.
  */
-public interface Interactive extends Clickable{
+public interface Interactive extends Projectable {
 
-	default List getActions() {
-		return Collections.EMPTY_LIST;
+	default List<String> getActions() {
+		return Collections.emptyList();
 	}
 
 	default boolean containsAction(final String action) {
@@ -25,9 +25,7 @@ public interface Interactive extends Clickable{
 
 	default List<String> getActions(final Predicate<String> predicate) {
 		final List<String> actions = getActions();
-		if (actions == null || predicate == null) {
-			return Collections.EMPTY_LIST;
-		}
+		if (actions == null || predicate == null) return Collections.emptyList();
 		return actions.stream()
 				.filter(Objects::nonNull)
 				.filter(predicate)

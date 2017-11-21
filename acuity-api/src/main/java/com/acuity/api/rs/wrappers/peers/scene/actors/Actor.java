@@ -153,11 +153,11 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     @Override
-    public Supplier<ScreenLocationShape> getScreenTargetSupplier() {
+    public Supplier<ScreenLocationShape> getProjectionSupplier() {
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
-            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElse(null);
+            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getProjectionSupplier).map(Supplier::get).orElse(null);
         }
-        return () -> getCachedModel().map(Model::getScreenTargetSupplier).map(Supplier::get).orElse(null);
+        return () -> getCachedModel().map(Model::getProjectionSupplier).map(Supplier::get).orElse(null);
     }
 
     public  Optional<Actor> getInteractingEntity() {

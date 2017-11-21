@@ -54,7 +54,7 @@ public class Model extends Renderable{
     }
 
     @Override
-    public Supplier<ScreenLocationShape> getScreenTargetSupplier() {
+    public Supplier<ScreenLocationShape> getProjectionSupplier() {
         return () -> new ScreenLocationShape(streamPoints().collect(Collectors.toList()));
     }
 

@@ -139,10 +139,12 @@ public class Random {
     public static ScreenLocation nextLocation(ScreenLocationShape region){
         Rectangle r = region.getPolygon().getBounds();
         int x, y;
+        int attempts = 0;
         do {
             x = (int) nextDouble(r.getX(), r.getX() + r.getWidth());
             y = (int) nextDouble(r.getY(), r.getY() + r.getHeight());
-        } while(!region.contains(x, y));
+            attempts++;
+        } while(!region.contains(x, y) && attempts < 1000);
         return new ScreenLocation(x, y);
     }
 

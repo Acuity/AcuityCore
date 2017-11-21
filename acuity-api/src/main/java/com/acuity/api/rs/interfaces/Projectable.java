@@ -8,9 +8,11 @@ import java.util.function.Supplier;
 /**
  * Created by Zachary Herridge on 7/10/2017.
  */
-public interface Clickable {
+public interface Projectable {
 
-    Supplier<Optional<ScreenLocationShape>> EMPTY_SUPPLIER = Optional::empty;
+    Supplier<ScreenLocationShape> getProjectionSupplier();
 
-    Supplier<ScreenLocationShape> getScreenTargetSupplier();
+    default Optional<ScreenLocationShape> projectToScreen(){
+        return Optional.ofNullable(getProjectionSupplier().get());
+    }
 }
