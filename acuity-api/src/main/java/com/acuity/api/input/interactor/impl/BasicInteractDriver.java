@@ -31,7 +31,7 @@ public class BasicInteractDriver implements InteractionDriver {
                 ContextMenu.getScreenTarget(action).map(ScreenPolygon::randomLocation).ifPresent(menuTarget -> {
                     Mouse.move(menuTarget);
                     Delay.delay(50, 90);
-                    //Mouse.click(menuTarget, true);
+                    Mouse.click(menuTarget, true);
                 });
                 return ActionResult.SUCCESS;
             }
