@@ -18,18 +18,20 @@ public class ContextMenu {
     public static Stream<String> streamActions(){
         return Arrays.stream(AcuityInstance.getClient().getContextMenuActions(), 0, getRowCount())
                 .filter(Objects::nonNull)
-                .sorted(Collections.reverseOrder());
+                .sorted(Collections.reverseOrder())
+                .map(FormatUtil::format);
     }
 
     public static Stream<String> streamTargets(){
         return Arrays.stream(AcuityInstance.getClient().getContextMenuTargets(), 0, getRowCount())
                 .filter(Objects::nonNull)
-                .sorted(Collections.reverseOrder());
+                .sorted(Collections.reverseOrder())
+                .map(FormatUtil::format);
 
     }
 
     public static Stream<String> streamChildren(){
-        return Streams.zip(streamActions(), streamTargets(), (action, target) -> FormatUtil.format(action) + " " + FormatUtil.format(target));
+        return Streams.zip(streamActions(), streamTargets(), (action, target) -> action + " " + target);
     }
 
     public static String getCurrentHotAction(){

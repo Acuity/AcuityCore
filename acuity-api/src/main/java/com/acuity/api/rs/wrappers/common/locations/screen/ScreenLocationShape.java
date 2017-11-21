@@ -1,6 +1,9 @@
 package com.acuity.api.rs.wrappers.common.locations.screen;
 
+import com.acuity.api.rs.utils.Random;
+
 import java.awt.*;
+import java.util.Collection;
 
 /**
  * Created by Zachary Herridge on 7/10/2017.
@@ -14,8 +17,16 @@ public class ScreenLocationShape {
         this.locations = locations;
     }
 
+    public ScreenLocationShape(Collection<ScreenLocation> locations) {
+        this.locations = (ScreenLocation[]) locations.toArray();
+    }
+
     public ScreenLocation[] getLocations() {
         return locations;
+    }
+
+    public ScreenLocation randomLocation(){
+        return Random.nextLocation(this);
     }
 
     public Polygon getPolygon(){
@@ -29,6 +40,10 @@ public class ScreenLocationShape {
     }
 
     public boolean contains(ScreenLocation location){
-        return getPolygon().contains(location.toPoint());
+        return contains(location.getX(), location.getY());
+    }
+
+    public boolean contains(int x, int y) {
+        return getPolygon().contains(x, y);
     }
 }

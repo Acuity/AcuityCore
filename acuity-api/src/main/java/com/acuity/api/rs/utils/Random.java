@@ -1,8 +1,12 @@
 package com.acuity.api.rs.utils;
 
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+
 import java.awt.*;
-import java.util.*;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class Random {
 
@@ -132,10 +136,14 @@ public class Random {
         return (max - Math.sqrt(r * r - s * s));
     }
 
-    public static Point nextPoint(Rectangle r) {
-        int rx = r.x + nextInt(0, r.width);
-        int ry = r.y + nextInt(0, r.height);
-        return new Point(rx, ry);
+    public static ScreenLocation nextLocation(ScreenLocationShape region){
+        Rectangle r = region.getPolygon().getBounds();
+        int x, y;
+        do {
+            x = (int) nextDouble(r.getX(), r.getX() + r.getWidth());
+            y = (int) nextDouble(r.getY(), r.getY() + r.getHeight());
+        } while(!region.contains(x, y));
+        return new ScreenLocation(x, y);
     }
 
     public static <T extends java.util.List> T shuffle(T t){
@@ -153,12 +161,7 @@ public class Random {
         return new Point(rx, ry);
     }
 
-    private static int idProgress = 0;
     public synchronized static String nextProgressiveID(){
-        if (idProgress > 99999){
-            idProgress = 0;
-        }
-        return System.currentTimeMillis() + "." + Random.nextInt(100, 999) + "." + idProgress++;
+        return UUID.randomUUID().toString();
     }
-
 }
