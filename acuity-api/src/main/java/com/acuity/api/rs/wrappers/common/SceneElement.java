@@ -7,7 +7,7 @@ import com.acuity.api.rs.interfaces.Nameable;
 import com.acuity.api.rs.utils.UIDs;
 import com.acuity.api.rs.utils.Varps;
 import com.acuity.api.rs.wrappers.common.locations.FineLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
 import com.acuity.api.rs.wrappers.peers.engine.Varpbit;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
@@ -48,7 +48,7 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
     }
 
     @Override
-    default Supplier<ScreenLocationShape> getProjectionSupplier(){
+    default Supplier<ScreenPolygon> getProjectionSupplier(){
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
             return () -> getBoundingBox().map(AxisAlignedBoundingBox::getProjectionSupplier).map(Supplier::get).orElse(null);
         }

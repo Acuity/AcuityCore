@@ -1,7 +1,7 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
 
 import java.awt.*;
 import java.util.Collections;
@@ -136,7 +136,7 @@ public class Random {
         return (max - Math.sqrt(r * r - s * s));
     }
 
-    public static ScreenLocation nextLocation(ScreenLocationShape region){
+    public static ScreenLocation nextLocation(ScreenPolygon region){
         Rectangle r = region.getPolygon().getBounds();
         int x, y;
         int attempts = 0;

@@ -3,7 +3,7 @@ package com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Projectable;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
 import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 
 import java.util.function.Supplier;
@@ -49,7 +49,7 @@ public class AxisAlignedBoundingBox extends BoundingBox implements Projectable {
     }
 
     @Override
-    public Supplier<ScreenLocationShape> getProjectionSupplier() {
+    public Supplier<ScreenPolygon> getProjectionSupplier() {
         return null; // TODO: 11/20/2017  
     }
 }

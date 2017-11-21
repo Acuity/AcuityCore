@@ -8,17 +8,17 @@ import java.util.Collection;
 /**
  * Created by Zachary Herridge on 7/10/2017.
  */
-public class ScreenLocationShape {
+public class ScreenPolygon {
 
     private ScreenLocation[] locations;
     private Polygon polygon;
 
-    public ScreenLocationShape(ScreenLocation... locations) {
+    public ScreenPolygon(ScreenLocation... locations) {
         this.locations = locations;
     }
 
-    public ScreenLocationShape(Collection<ScreenLocation> locations) {
-        this.locations = (ScreenLocation[]) locations.toArray();
+    public ScreenPolygon(Collection<ScreenLocation> locations) {
+        this.locations = locations.toArray(new ScreenLocation[locations.size()]);
     }
 
     public ScreenLocation[] getLocations() {

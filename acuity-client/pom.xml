@@ -38,7 +38,6 @@
             <artifactId>acuity-api</artifactId>
             <version>1.0.00-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>com.acuity</groupId>
             <artifactId>db-common</artifactId>

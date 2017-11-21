@@ -2,6 +2,7 @@ package com.acuity.api.applet.input.impl;
 
 import com.acuity.api.Events;
 import com.acuity.api.applet.input.InputMiddleMan;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,17 +20,18 @@ public class MouseMiddleMan implements InputMiddleMan {
 
     private Component component;
     private boolean acceptingUserInput = true;
+
     private MMouseListener output = new MMouseListener();
 
     private Point mousePosition;
 
-    public void dispatchClick(int x, int y, boolean left) {
-        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis()+ 10, 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
-        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 20, 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
+    public void dispatchClick(ScreenLocation screenLocation, boolean left) {
+        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis()+ 10, 0, screenLocation.getX(), screenLocation.getY(), 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
+        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 20, 0, screenLocation.getX(), screenLocation.getY(), 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
     }
 
-    public void dispatchClick(Point point, boolean left) {
-        dispatchClick(point.x, point.y, left);
+    public void dispatchMove(ScreenLocation screenLocation){
+        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_MOVED, System.currentTimeMillis()+ 10, 0, screenLocation.getX(), screenLocation.getY(), 0, false));
     }
 
     @Override

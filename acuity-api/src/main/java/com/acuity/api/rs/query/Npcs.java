@@ -43,7 +43,7 @@ public class Npcs {
 	}
 
 	public static Optional<Npc> getNearest(final Predicate<? super Npc> predicate) {
-        logger.debug("Returning nearest Ncp matching predicate.");
+        logger.trace("Returning nearest Ncp matching predicate.");
 		return streamLoaded()
                 .filter(predicate)
                 .sorted(Comparator.comparingInt(Locatable::distance))
@@ -51,12 +51,12 @@ public class Npcs {
 	}
 
 	public static Optional<Npc> getNearest(final String name) {
-	    logger.debug("Returning nearest Ncp with name '{}'", name);
+	    logger.trace("Returning nearest Ncp with name '{}'", name);
 		return getNearest(p -> p.getNullSafeName().trim().equalsIgnoreCase(name));
 	}
 
 	public static Optional<Npc> getNearest(final int id) {
-        logger.debug("Returning nearest Ncp with id '{}'", id);
+        logger.trace("Returning nearest Ncp with id '{}'", id);
 		return getNearest(p -> p.getID() == id);
 	}
 }

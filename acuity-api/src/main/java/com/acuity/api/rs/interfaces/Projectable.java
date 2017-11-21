@@ -1,6 +1,6 @@
 package com.acuity.api.rs.interfaces;
 
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -10,9 +10,9 @@ import java.util.function.Supplier;
  */
 public interface Projectable {
 
-    Supplier<ScreenLocationShape> getProjectionSupplier();
+    Supplier<ScreenPolygon> getProjectionSupplier();
 
-    default Optional<ScreenLocationShape> projectToScreen(){
+    default Optional<ScreenPolygon> projectToScreen(){
         return Optional.ofNullable(getProjectionSupplier().get());
     }
 }

@@ -5,7 +5,7 @@ import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.utils.Camera;
 import com.acuity.api.rs.utils.Projection;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
 import com.acuity.rs.api.RSModel;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
@@ -54,8 +54,8 @@ public class Model extends Renderable{
     }
 
     @Override
-    public Supplier<ScreenLocationShape> getProjectionSupplier() {
-        return () -> new ScreenLocationShape(streamPoints(true).collect(Collectors.toList()));
+    public Supplier<ScreenPolygon> getProjectionSupplier() {
+        return () -> new ScreenPolygon(streamPoints(false).collect(Collectors.toList()));
     }
 
     public int getFineXCached() {
@@ -169,10 +169,10 @@ public class Model extends Renderable{
         return points.build();
     }
 
-    /*public Stream<ScreenLocationShape> streamScreenShapes() {
+    /*public Stream<ScreenPolygon> streamScreenShapes() {
         if (!isValid()) throw new IllegalStateException("Cannot stream model as polygons when model was not cached.");
 
-        final Stream.Builder<ScreenLocationShape<ScreenLocation3D>> locationShapeBuilder = Stream.builder();
+        final Stream.Builder<ScreenPolygon<ScreenLocation3D>> locationShapeBuilder = Stream.builder();
         for (int i = 0; i < xTriangles.length; i++) {
             if (xTriangles[i] >= xVertices.length || yTriangles[i] >= xVertices.length || zTriangles[i] >= xVertices.length) {
                 break;
@@ -199,7 +199,7 @@ public class Model extends Renderable{
                 y.increment(0, 4);
                 x.increment(0, 4);
 
-                locationShapeBuilder.add(new ScreenLocationShape<>(
+                locationShapeBuilder.add(new ScreenPolygon<>(
                         new ScreenLocation3D(x.getX(), y.getX(), z.getX()),
                         new ScreenLocation3D(x.getY(), y.getY(), z.getY())
                 ));

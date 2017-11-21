@@ -6,7 +6,8 @@ import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenRectangle;
 import com.acuity.api.rs.wrappers.peers.engine.Client;
 import com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes.AxisAlignedBoundingBox;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ import java.util.Optional;
 public class Projection {
 
     private static final Logger logger = LoggerFactory.getLogger(Projection.class);
-    public static final ScreenLocationShape GAME_SCREEN = new ScreenLocationShape(new ScreenLocation(4, 4), new ScreenLocation(512, 334));
+    public static final ScreenPolygon GAME_SCREEN = new ScreenRectangle(new ScreenLocation(4, 4), new ScreenLocation(512, 334));
     public static final Dimension APPLET_SIZE = new Dimension(765, 503);
 
     public static final int TILE_PIXEL_SIZE = 128;

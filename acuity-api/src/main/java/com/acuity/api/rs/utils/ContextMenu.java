@@ -3,10 +3,12 @@ package com.acuity.api.rs.utils;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.mouse.Mouse;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenRectangle;
 import com.google.common.collect.Streams;
 
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,30 +17,23 @@ import java.util.stream.Stream;
  */
 public class ContextMenu {
 
-    public static Stream<String> streamActions(){
-        return Arrays.stream(AcuityInstance.getClient().getContextMenuActions(), 0, getRowCount())
-                .filter(Objects::nonNull)
-                .sorted(Collections.reverseOrder())
-                .map(FormatUtil::format);
-    }
+    public static List<String> getItems(){
+        int rowCount = getRowCount();
+        String[] contextMenuActions = AcuityInstance.getClient().getContextMenuActions();
+        String[] contextMenuTargets = AcuityInstance.getClient().getContextMenuTargets();
 
-    public static Stream<String> streamTargets(){
-        return Arrays.stream(AcuityInstance.getClient().getContextMenuTargets(), 0, getRowCount())
-                .filter(Objects::nonNull)
-                .sorted(Collections.reverseOrder())
-                .map(FormatUtil::format);
-
-    }
-
-    public static Stream<String> streamChildren(){
-        return Streams.zip(streamActions(), streamTargets(), (action, target) -> action + " " + target);
+        List<String> items = new ArrayList<>();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            items.add(FormatUtil.format(contextMenuActions[i] + " " + FormatUtil.format(contextMenuTargets[i])));
+        }
+        return items;
     }
 
     public static String getCurrentHotAction(){
         if (isOpen()){
             ScreenLocation position = Mouse.getPosition();
             if (position != null) {
-                List<String> collect = streamChildren().collect(Collectors.toList());
+                List<String> collect = getItems();
                 for (int i = 0; i < collect.size(); i++) {
                     Boolean contains = getBounds(i).map(screenLocationShape -> screenLocationShape.contains(position)).orElse(false);
                     if (contains) return collect.get(i);
@@ -46,7 +41,7 @@ public class ContextMenu {
             }
         }
         else {
-            return streamChildren().findFirst().orElse("Cancel");
+            return getItems().stream().findFirst().orElse("Cancel");
         }
 
         return "Cancel";
@@ -73,19 +68,19 @@ public class ContextMenu {
         return AcuityInstance.getClient().getContextMenuHeight();
     }
 
-    public static Optional<ScreenLocationShape> getBounds(String action) {
-        List<String> collect = streamChildren().collect(Collectors.toList());
+    public static Optional<ScreenPolygon> getBounds(int index) {
+        return getLocation().map(screenLocation -> new ScreenRectangle(screenLocation.transform(0, (19 + (index * 15))), getWidth(), 14));
+    }
+
+    public static Optional<ScreenPolygon> getScreenTarget(String action) {
+        List<String> collect = getItems();
         for (int i = 0; i < collect.size(); i++) {
-            if (action.equalsIgnoreCase(collect.get(i))) return getBounds(i);
+            if (collect.get(i).toLowerCase().startsWith(action.toLowerCase())) return getScreenTarget(i);
         }
         return Optional.empty();
     }
 
-    public static Optional<ScreenLocationShape> getBounds(int index) {
-        return getLocation().map(screenLocation -> {
-            ScreenLocation low = screenLocation.transform(0, 18 + index * 15 + 1);
-            ScreenLocation high = screenLocation.transform(getWidth(), 15);
-            return new ScreenLocationShape(low, high);
-        });
+    public static Optional<ScreenPolygon> getScreenTarget(int index) {
+        return getLocation().map(screenLocation -> new ScreenRectangle(screenLocation.transform(5, (19 + (index * 15)) + 5), getWidth() - 10, 14 - 10));
     }
 }
