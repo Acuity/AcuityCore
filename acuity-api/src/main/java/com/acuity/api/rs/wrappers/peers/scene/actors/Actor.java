@@ -48,8 +48,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     public Optional<Model> getCachedModel() {
         FineLocation fineLocation = getFineLocation();
         return super.getCachedModel()
-                .map(model -> model.place(fineLocation.getFineX(), fineLocation.getFineY()))
-                .map(model -> model.rotateTo(getOrientation()));
+                .map(model -> model.rotateTo(getOrientation()))
+                .map(model -> model.place(fineLocation.getFineX(), fineLocation.getFineY()));
     }
 
     public int getOrientation() {
@@ -59,7 +59,6 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     public int getTargetIndex() {
         return rsActor.getTargetIndex();
     }
-
 
     public int getAnimation() {
         return rsActor.getAnimation();

@@ -10,6 +10,7 @@ import com.acuity.api.rs.utils.Camera;
 import com.acuity.api.rs.utils.ContextMenu;
 import com.acuity.api.rs.utils.LocalPlayer;
 import com.acuity.api.rs.utils.Projection;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.client.gui.AcuityBotFrame;
 import com.acuity.common.util.AcuityDir;
@@ -28,33 +29,15 @@ import java.util.stream.Stream;
  */
 public class ClientBootstrap {
 
+    private static boolean mesh = false;
+
     @Subscribe
     public void testDraw(InGameDrawEvent event){
-
-
-        Npcs.streamLoaded().forEach(npc -> {
-
-            npc.getCachedModel().map(Model::streamPoints).map(Stream::findFirst).flatMap(Function.identity()).ifPresent(screenLocation -> {
-                event.getGraphics().drawString(npc.getOrientation() + "", screenLocation.getX(), screenLocation.getY());
-            });
-
-        });
-
-
         if (ContextMenu.isOpen()){
             for (int i = 0; i < ContextMenu.getRowCount(); i++) {
                 ContextMenu.getBounds(i).ifPresent(screenLocationShape -> event.getGraphics().drawPolygon(screenLocationShape.getPolygon()));
             }
         }
-
-        Npcs.getNearest("Man").ifPresent(npc -> {
-            npc.getCachedModel().ifPresent(model -> {
-                model.projectToScreen().ifPresent(screenLocationShape -> {
-                    event.getGraphics().drawPolygon(screenLocationShape.getPolygon());
-                });
-            });
-        });
-
 
         event.getGraphics().drawString(ContextMenu.getCurrentHotAction(), 300, 300);
 
@@ -63,13 +46,10 @@ public class ClientBootstrap {
             event.getGraphics().drawString(collect.get(i), 300, 350 + (15 * i));
         }
 
-
         AcuityInstance.getAppletManager().getMouseMiddleMan().getMousePosition().ifPresent(point -> {
             event.getGraphics().setColor(Color.RED);
             event.getGraphics().fillOval(point.x - 3, point.y - 3, 6, 6);
         });
-
-
     }
 
     @Subscribe
@@ -78,6 +58,7 @@ public class ClientBootstrap {
             SmartActions.INSTANCE.clear();
         }
         else if (e.getKeyChar() == 'a' && e.getID() == KeyEvent.KEY_TYPED){
+            mesh = !mesh;
         }
         else if (e.getKeyChar() == 'n' && e.getID() == KeyEvent.KEY_TYPED){
             Npcs.getNearest("Man").ifPresent(npc -> {
