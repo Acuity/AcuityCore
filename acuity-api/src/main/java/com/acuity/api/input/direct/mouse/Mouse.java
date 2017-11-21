@@ -36,4 +36,8 @@ public class Mouse {
                 .map(ScreenLocation::fromPoint)
                 .orElse(null);
     }
+
+    public static void move(ScreenLocation screenLocation) {
+        getDriver().move(screenLocation);
+    }
 }

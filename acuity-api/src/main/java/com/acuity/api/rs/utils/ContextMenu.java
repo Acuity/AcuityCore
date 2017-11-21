@@ -73,6 +73,14 @@ public class ContextMenu {
         return AcuityInstance.getClient().getContextMenuHeight();
     }
 
+    public static Optional<ScreenLocationShape> getBounds(String action) {
+        List<String> collect = streamChildren().collect(Collectors.toList());
+        for (int i = 0; i < collect.size(); i++) {
+            if (action.equalsIgnoreCase(collect.get(i))) return getBounds(i);
+        }
+        return Optional.empty();
+    }
+
     public static Optional<ScreenLocationShape> getBounds(int index) {
         return getLocation().map(screenLocation -> {
             ScreenLocation low = screenLocation.transform(0, 18 + index * 15 + 1);

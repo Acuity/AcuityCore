@@ -4,6 +4,8 @@ import com.acuity.api.input.direct.mouse.Mouse;
 import com.acuity.api.input.interactor.InteractionDriver;
 import com.acuity.api.rs.interfaces.Interactive;
 import com.acuity.api.rs.utils.ActionResult;
+import com.acuity.api.rs.utils.ContextMenu;
+import com.acuity.api.rs.utils.Delay;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import org.slf4j.Logger;
@@ -22,7 +24,15 @@ public class BasicInteractDriver implements InteractionDriver {
         if (screenLocationShape != null){
             ScreenLocation screenLocation = screenLocationShape.randomLocation();
             if (screenLocation != null){
-                Mouse.click(screenLocation);
+                Mouse.move(screenLocation);
+                Delay.delay(50, 90);
+                Mouse.click(screenLocation, false);
+                Delay.delayUntil(ContextMenu::isOpen, 600);
+                ContextMenu.getBounds(action).map(ScreenLocationShape::randomLocation).ifPresent(menuTarget -> {
+                    Mouse.move(menuTarget);
+                    Delay.delay(50, 90);
+                    Mouse.click(menuTarget, true);
+                });
                 return ActionResult.SUCCESS;
             }
         }
