@@ -55,7 +55,7 @@ public class Model extends Renderable{
 
     @Override
     public Supplier<ScreenLocationShape> getProjectionSupplier() {
-        return () -> new ScreenLocationShape(streamPoints().collect(Collectors.toList()));
+        return () -> new ScreenLocationShape(streamPoints(true).collect(Collectors.toList()));
     }
 
     public int getFineXCached() {
