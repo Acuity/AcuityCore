@@ -9,7 +9,6 @@ import com.acuity.api.rs.wrappers.peers.scene.actors.impl.Player;
 import com.acuity.api.rs.wrappers.peers.structures.HashTable;
 import com.acuity.rs.api.*;
 import com.google.common.base.Preconditions;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -168,15 +167,15 @@ public class Client extends GameEngine {
         return rsClient.getLoginResponse3();
     }
 
-    public String[] getContenxtMenuActions(){
+    public String[] getContextMenuActions(){
         return rsClient.getMenuActions();
     }
 
-    public String[] getContenxtMenuTargets(){
+    public String[] getContextMenuTargets(){
         return rsClient.getMenuTargets();
     }
 
-    public int getContextMenurRowCount(){
+    public int getContextMenuRowCount(){
         return rsClient.getMenuRowCount();
     }
 
@@ -204,9 +203,8 @@ public class Client extends GameEngine {
         return rsClient.getSkillExperiences();
     }
 
-    public boolean isWorldSelectOpen() {
-        // TODO: 8/3/2017  return rsClient.isWorldSelectShown();
-        return false;
+    public boolean isLoginWorldSelectorOpen() {
+       return rsClient.isLoginWorldSelectorOpen();
 	}
 
 	public int[] getHoveredUIDs(){
@@ -217,8 +215,27 @@ public class Client extends GameEngine {
 	    return rsClient.getOnCursorCount();
     }
 
+    public int getContextMenuX(){
+        return rsClient.getMenuX();
+    }
+
+    public int getContextMenuY(){
+        return rsClient.getMenuY();
+    }
+
+    public int getContextMenuWidth(){
+        return rsClient.getMenuWidth();
+    }
+
+    public int getContextMenuHeight(){
+        return rsClient.getMenuHeight();
+    }
 
     public RSClient getRsClient(){
         return rsClient;
+    }
+
+    public boolean isMenuOpen() {
+        return rsClient.isMenuOpen();
     }
 }

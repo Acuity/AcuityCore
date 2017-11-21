@@ -33,9 +33,9 @@ public class LoginTask extends Task {
 
 	@Override
 	public int loop() {
-		if (AcuityInstance.getClient().isWorldSelectOpen()) {
+		if (AcuityInstance.getClient().isLoginWorldSelectorOpen()) {
 			Mouse.click(new ScreenLocation(741, 11));
-			Delay.delayUntil(() -> !AcuityInstance.getClient().isWorldSelectOpen(), 750);
+			Delay.delayUntil(() -> !AcuityInstance.getClient().isLoginWorldSelectorOpen(), 750);
 		}
 
 		final Account account = AcuityInstance.getRsAccount();

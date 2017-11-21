@@ -30,4 +30,10 @@ public class Mouse {
     public static int getHoveredCount(){
         return AcuityInstance.getClient().getHoveredCount();
     }
+
+    public static ScreenLocation getPosition(){
+        return AcuityInstance.getAppletManager().getMouseMiddleMan().getMousePosition()
+                .map(ScreenLocation::fromPoint)
+                .orElse(null);
+    }
 }

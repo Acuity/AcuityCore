@@ -48,7 +48,7 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
     }
 
     @Override
-    default Supplier<ScreenLocationShape<?>> getScreenTargetSupplier(){
+    default Supplier<ScreenLocationShape> getScreenTargetSupplier(){
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
             return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElse(null);
         }

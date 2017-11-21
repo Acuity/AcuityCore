@@ -14,6 +14,10 @@ public class ScreenLocation {
         this.y = y;
     }
 
+    public static ScreenLocation fromPoint(Point point){
+        return new ScreenLocation(point.x, point.y);
+    }
+
     public int getX() {
         return x;
     }
@@ -27,9 +31,14 @@ public class ScreenLocation {
         this.y = y;
     }
 
-    public void increment(int xAmount, int yAmount){
-        this.x += xAmount;
-        this.y += yAmount;
+    public ScreenLocation increment(int xOff, int yOff){
+        this.x += xOff;
+        this.y += yOff;
+        return this;
+    }
+
+    public ScreenLocation transform(int xOff, int yOff){
+        return new ScreenLocation(x + xOff, y + yOff);
     }
 
     public Point toPoint(){

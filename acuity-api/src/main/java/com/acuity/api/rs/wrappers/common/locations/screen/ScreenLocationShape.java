@@ -3,15 +3,19 @@ package com.acuity.api.rs.wrappers.common.locations.screen;
 /**
  * Created by Zachary Herridge on 7/10/2017.
  */
-public class ScreenLocationShape<T extends ScreenLocation> {
+public class ScreenLocationShape {
 
-    private T[] points;
+    private ScreenLocation[] locations;
 
-    public ScreenLocationShape(T... points) {
-        this.points = points;
+    public ScreenLocationShape(ScreenLocation... locations) {
+        this.locations = locations;
     }
 
-    public T[] getPoints() {
-        return points;
+    public ScreenLocation[] getLocations() {
+        return locations;
+    }
+
+    public boolean contains(ScreenLocation location){
+        return false;
     }
 }

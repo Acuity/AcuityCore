@@ -22,7 +22,7 @@ public class BasicInteractDriver implements InteractionDriver {
     public ActionResult interact(Interactive interactive, String action) {
         Optional<ScreenLocationShape> screenLocationShape = Optional.ofNullable(interactive.getScreenTargetSupplier().get());
         if (screenLocationShape.isPresent()){
-            ScreenLocation[] points = screenLocationShape.get().getPoints();
+            ScreenLocation[] points = screenLocationShape.get().getLocations();
             if (points == null || points.length == 0) return ActionResult.FAILURE;
             Mouse.click(points[0]);
             return ActionResult.SUCCESS;

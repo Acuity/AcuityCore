@@ -6,7 +6,6 @@ import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
@@ -50,7 +49,7 @@ public class AxisAlignedBoundingBox extends BoundingBox implements Clickable{
     }
 
     @Override
-    public Supplier<ScreenLocationShape<?>> getScreenTargetSupplier() {
+    public Supplier<ScreenLocationShape> getScreenTargetSupplier() {
         return null; // TODO: 11/20/2017  
     }
 }

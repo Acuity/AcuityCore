@@ -2,20 +2,15 @@ package com.acuity.api.rs.wrappers.peers.rendering;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
-import com.acuity.api.rs.interfaces.Clickable;
 import com.acuity.api.rs.utils.Projection;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
 import com.acuity.rs.api.RSModel;
 import com.google.common.base.Preconditions;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -57,8 +52,8 @@ public class Model extends Renderable{
     }
 
     @Override
-    public Supplier<ScreenLocationShape<?>> getScreenTargetSupplier() {
-        return () -> streamPoints().findAny().map((Function<ScreenLocation, ScreenLocationShape>) ScreenLocationShape::new).orElse(null);
+    public Supplier<ScreenLocationShape> getScreenTargetSupplier() {
+        return () -> streamPoints().findAny().map(ScreenLocationShape::new).orElse(null);
     }
 
     public int getFineXCached() {
@@ -167,8 +162,8 @@ public class Model extends Renderable{
         return points.build();
     }
 
-    public Stream<ScreenLocationShape<ScreenLocation3D>> streamScreenShapes() {
-        if (!isValid()) throw new IllegalStateException("Cannot stream model as polygons when model was not cached.");
+    public Stream<ScreenLocationShape> streamScreenShapes() {
+      /*  if (!isValid()) throw new IllegalStateException("Cannot stream model as polygons when model was not cached.");
 
         final Stream.Builder<ScreenLocationShape<ScreenLocation3D>> locationShapeBuilder = Stream.builder();
         for (int i = 0; i < xTriangles.length; i++) {
@@ -204,7 +199,9 @@ public class Model extends Renderable{
             }
         }
 
-        return locationShapeBuilder.build();
+        return locationShapeBuilder.build();*/
+        // TODO: 11/21/2017  
+      return null;
     }
 
 
