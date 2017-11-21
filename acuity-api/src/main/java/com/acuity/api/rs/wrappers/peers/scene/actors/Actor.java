@@ -73,20 +73,8 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return rsActor.getIdlePoseAnimation();
     }
 
-    //null when no overhead text
-
-    public String getOverhead() {
-        //// TODO: 7/12/2017  return rsActor.getOverhead();
-        return null;
-    }
-
     public int getPoseAnimation() {
         return rsActor.getPoseAnimation();
-    }
-
-    public int getSpellAnimationID() {
-        // TODO: 7/12/2017  return rsActor.getSpellAnimationID();
-        return -1;
     }
 
     public int[] getHitsplatCycles() {
@@ -164,6 +152,7 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         try {
             int index = getTargetIndex();
             if (index == -1) return Optional.empty();
+
             //npc.
             final Client client = AcuityInstance.getClient();
             if (index < 32768) {

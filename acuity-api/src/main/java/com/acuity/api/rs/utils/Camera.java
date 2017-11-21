@@ -29,6 +29,6 @@ public class Camera {
     }
 
     public static boolean isVisible(ScreenLocation screenLocation){
-        return Projection.GAMESCREEN.contains(screenLocation);
+        return Projection.GAME_SCREEN.contains(screenLocation);
     }
 }

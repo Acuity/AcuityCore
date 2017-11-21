@@ -21,7 +21,7 @@ import java.util.Optional;
 public class Projection {
 
     private static final Logger logger = LoggerFactory.getLogger(Projection.class);
-    public static final ScreenLocationShape GAMESCREEN = new ScreenLocationShape(new ScreenLocation(4, 4), new ScreenLocation(512, 334));
+    public static final ScreenLocationShape GAME_SCREEN = new ScreenLocationShape(new ScreenLocation(4, 4), new ScreenLocation(512, 334));
     public static final Dimension APPLET_SIZE = new Dimension(765, 503);
 
     public static final int TILE_PIXEL_SIZE = 128;
