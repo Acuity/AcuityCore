@@ -2,6 +2,7 @@ package com.acuity.api.rs.wrappers.peers.rendering;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.utils.Camera;
 import com.acuity.api.rs.utils.Projection;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocationShape;
@@ -126,6 +127,10 @@ public class Model extends Renderable{
     }
 
     public Stream<ScreenLocation> streamPoints() {
+        return streamPoints(false);
+    }
+
+    public Stream<ScreenLocation> streamPoints(boolean confineToGameWindow) {
         if (!isValid()) throw new IllegalStateException("Cannot stream model as points when model was not cached.");
 
         final Stream.Builder<ScreenLocation> points = Stream.builder();
@@ -152,19 +157,20 @@ public class Model extends Renderable{
                     && x.getX() > 0 && x.getY() > 0
                     && y.getX() > 0 && y.getY() > 0
                     && z.getX() > 0 && z.getY() > 0) {
+
                 y.increment(0, 4);
                 x.increment(0, 4);
 
-                points.add(x);
-                points.add(y);
-                points.add(z);
+                if (!confineToGameWindow || Camera.isVisible(x)) points.add(x);
+                if (!confineToGameWindow || Camera.isVisible(x)) points.add(y);
+                if (!confineToGameWindow || Camera.isVisible(x)) points.add(z);
             }
         }
         return points.build();
     }
 
-    public Stream<ScreenLocationShape> streamScreenShapes() {
-      /*  if (!isValid()) throw new IllegalStateException("Cannot stream model as polygons when model was not cached.");
+    /*public Stream<ScreenLocationShape> streamScreenShapes() {
+        if (!isValid()) throw new IllegalStateException("Cannot stream model as polygons when model was not cached.");
 
         final Stream.Builder<ScreenLocationShape<ScreenLocation3D>> locationShapeBuilder = Stream.builder();
         for (int i = 0; i < xTriangles.length; i++) {
@@ -200,12 +206,8 @@ public class Model extends Renderable{
             }
         }
 
-        return locationShapeBuilder.build();*/
-        // TODO: 11/21/2017  
-      return null;
-    }
-
-
+        return locationShapeBuilder.build();
+    }*/
 
     public RSModel getRsModel() {
         return rsModel;

@@ -8,7 +8,6 @@ public class AcuitySettings {
     private boolean modelCachingEnabled = true;
     private boolean modelInteractionsEnabled = true;
 
-
     public boolean isModelCachingEnabled() {
         return modelCachingEnabled;
     }

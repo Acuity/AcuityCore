@@ -41,6 +41,10 @@ public class ScreenLocation {
         return new ScreenLocation(x + xOff, y + yOff);
     }
 
+    public int[] toArray() {
+        return new int[]{x, y};
+    }
+
     public Point toPoint(){
         return new Point(x, y);
     }

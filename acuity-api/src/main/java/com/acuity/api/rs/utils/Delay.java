@@ -8,6 +8,8 @@ import java.util.function.BooleanSupplier;
  */
 public class Delay {
 
+	private static int delayUntilSleepMS = 290;
+
 	public static boolean delay(int durationMills) {
 		if (durationMills <= 0) {
 			return true;
@@ -30,8 +32,12 @@ public class Delay {
 			if (condition.getAsBoolean()){
 				return true;
 			}
-			delay(290);
+			delay(delayUntilSleepMS);
 		}
 		return false;
+	}
+
+	public static void setDelayUntilSleepMS(int delayUntilSleepMS) {
+		Delay.delayUntilSleepMS = delayUntilSleepMS;
 	}
 }

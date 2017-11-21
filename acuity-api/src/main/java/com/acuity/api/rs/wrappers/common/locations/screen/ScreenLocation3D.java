@@ -16,6 +16,7 @@ public class ScreenLocation3D extends ScreenLocation {
         return z;
     }
 
+    @Override
     public int[] toArray() {
         return new int[]{x, y, z};
     }
