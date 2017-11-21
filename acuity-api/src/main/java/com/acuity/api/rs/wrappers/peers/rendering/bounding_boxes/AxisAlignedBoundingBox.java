@@ -50,7 +50,7 @@ public class AxisAlignedBoundingBox extends BoundingBox implements Clickable{
     }
 
     @Override
-    public Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier() {
-        return Optional::empty;
+    public Supplier<ScreenLocationShape<?>> getScreenTargetSupplier() {
+        return null; // TODO: 11/20/2017  
     }
 }

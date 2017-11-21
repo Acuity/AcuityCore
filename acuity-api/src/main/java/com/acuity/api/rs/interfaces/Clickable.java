@@ -12,5 +12,5 @@ public interface Clickable {
 
     Supplier<Optional<ScreenLocationShape>> EMPTY_SUPPLIER = Optional::empty;
 
-    Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier();
+    Supplier<ScreenLocationShape<?>> getScreenTargetSupplier();
 }

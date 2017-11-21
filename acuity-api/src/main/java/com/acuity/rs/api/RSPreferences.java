@@ -12,11 +12,15 @@ public interface RSPreferences {
 
 	boolean isLoginScreenAudioDisabled();
 
+	boolean isRememberMe();
+
 	boolean isRoofsHidden();
 
 	void setLoginScreenAudioDisabled(boolean var0);
 
 	void setPreferences(java.util.LinkedHashMap var0);
+
+	void setRememberMe(boolean var0);
 
 	void setResizable(int var0);
 

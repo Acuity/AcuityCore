@@ -11,8 +11,6 @@ public class BasicMouseDriver implements MouseDriver {
 
     @Override
     public void click(ScreenLocation screenLocation, boolean leftClick) {
-
-
         AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(screenLocation.getX(), screenLocation.getY(), leftClick);
     }
 

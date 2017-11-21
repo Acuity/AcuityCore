@@ -112,8 +112,6 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
         return false;
     }
 
-
-
     public Optional<Double> getHealthPercent(){
 
         RSNodeLinkedList healthBars1 = rsActor.getHealthBars();
@@ -155,18 +153,17 @@ public abstract class Actor extends Renderable implements Locatable, Nameable {
     }
 
     @Override
-    public Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier() {
+    public Supplier<ScreenLocationShape<?>> getScreenTargetSupplier() {
         if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
-            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
+            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getScreenTargetSupplier).map(Supplier::get).orElse(null);
         }
-        return () -> getCachedModel().map(Model::getScreenTargetSupplier).map(Supplier::get).orElseGet(Optional::empty);
+        return () -> getCachedModel().map(Model::getScreenTargetSupplier).map(Supplier::get).orElse(null);
     }
 
     public  Optional<Actor> getInteractingEntity() {
         try {
             int index = getTargetIndex();
-            if (index == -1)
-                Optional.empty();
+            if (index == -1) return Optional.empty();
             //npc.
             final Client client = AcuityInstance.getClient();
             if (index < 32768) {

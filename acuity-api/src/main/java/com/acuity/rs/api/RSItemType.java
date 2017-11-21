@@ -28,7 +28,7 @@ public interface RSItemType extends RSCacheableNode {
 
 	int getMaleHeadModel2();
 
-	int getMaleModel1();
+	int getMaleModel1resizeXfemaleModel1();
 
 	int getMaleModel2();
 
@@ -41,8 +41,6 @@ public interface RSItemType extends RSCacheableNode {
 	int getNoteTemplateId();
 
 	com.acuity.rs.api.RS3CopiedNodeTable getProperties();
-
-	int getResizeXfemaleModel1();
 
 	int getResizeY();
 
@@ -102,7 +100,7 @@ public interface RSItemType extends RSCacheableNode {
 
 	void setMaleHeadModel2(int var0);
 
-	void setMaleModel1(int var0);
+	void setMaleModel1resizeXfemaleModel1(int var0);
 
 	void setMaleModel2(int var0);
 
@@ -117,8 +115,6 @@ public interface RSItemType extends RSCacheableNode {
 	void setNoteTemplateId(int var0);
 
 	void setProperties(com.acuity.rs.api.RS3CopiedNodeTable var0);
-
-	void setResizeXfemaleModel1(int var0);
 
 	void setResizeY(int var0);
 

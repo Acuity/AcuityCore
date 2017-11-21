@@ -41,11 +41,13 @@ public class HashTable {
     }
 
     public int getSize(){
-        return rsHashTable.getSize();
+       // return rsHashTable.getSize();
+        return 0;
     }
 
     public int getIndex(){
-        return rsHashTable.getIndex();
+        //return rsHashTable.getIndex();
+        return 0;
     }
 
 

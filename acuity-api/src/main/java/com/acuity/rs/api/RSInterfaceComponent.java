@@ -96,6 +96,8 @@ public interface RSInterfaceComponent extends RSNode {
 
 	java.lang.Object[] getSkillListenerArgs();
 
+	int[] getSkillTriggers();
+
 	int getSpriteID();
 
 	java.lang.String[] getTableActions();
@@ -235,6 +237,8 @@ public interface RSInterfaceComponent extends RSNode {
 	void setShadowColor(int var0);
 
 	void setSkillListenerArgs(java.lang.Object[] var0);
+
+	void setSkillTriggers(int[] var0);
 
 	void setSpriteID(int var0);
 

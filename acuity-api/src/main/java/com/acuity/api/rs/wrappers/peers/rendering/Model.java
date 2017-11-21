@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -56,8 +57,8 @@ public class Model extends Renderable{
     }
 
     @Override
-    public Supplier<Optional<ScreenLocationShape>> getScreenTargetSupplier() {
-        return Clickable.EMPTY_SUPPLIER; // TODO: 7/10/2017 Impl
+    public Supplier<ScreenLocationShape<?>> getScreenTargetSupplier() {
+        return () -> streamPoints().findAny().map((Function<ScreenLocation, ScreenLocationShape>) ScreenLocationShape::new).orElse(null);
     }
 
     public int getFineXCached() {

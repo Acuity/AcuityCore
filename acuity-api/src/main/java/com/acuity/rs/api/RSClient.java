@@ -6,8 +6,6 @@ package com.acuity.rs.api;
 //Extends com/acuity/rs/api/RSGameEngine
 public interface RSClient extends RSGameEngine {
 
-	int getAudioEffectCount();
-
 	com.acuity.rs.api.RSAudioEffect[] getAudioEffects();
 
 	int getBaseScenceX();
@@ -194,8 +192,6 @@ public interface RSClient extends RSGameEngine {
 
 	int getOnCursorCount();
 
-	com.acuity.rs.api.RSPacketBuffer getPacket();
-
 	java.lang.String getPassword();
 
 	int getPendingClickX();
@@ -282,9 +278,9 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSTypeProperty invokeGetTypeProperty(int var0);
 
-	int invokeGetVarpbit(int var0);
+	com.acuity.rs.api.RSVarpbit invokeGetVarpbit(int var0);
 
-	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
+	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5, boolean var6);
 
 	com.acuity.rs.api.RSAudioTrack invokeLoadAudioTrack(com.acuity.rs.api.RSReferenceTable var0, int var1, int var2);
 
@@ -302,7 +298,7 @@ public interface RSClient extends RSGameEngine {
 
 	boolean invokeLoadWorlds();
 
-	void invokeOnSceneXTEAKeyChange(boolean var0);
+	void invokeOnSceneXTEAKeyChange(boolean var0, com.acuity.rs.api.RSPacketBuffer var1);
 
 	void invokeProcessAction(int var0, int var1, int var2, int var3, java.lang.String var4, java.lang.String var5, int var6, int var7);
 
@@ -333,8 +329,6 @@ public interface RSClient extends RSGameEngine {
 	boolean isUseAABBBoundingBoxes();
 
 	boolean isViewportWalking();
-
-	void setAudioEffectCount(int var0);
 
 	void setAudioEffects(com.acuity.rs.api.RSAudioEffect[] var0);
 
@@ -535,8 +529,6 @@ public interface RSClient extends RSGameEngine {
 	void setNpcs(com.acuity.rs.api.RSNpc[] var0);
 
 	void setOnCursorCount(int var0);
-
-	void setPacket(com.acuity.rs.api.RSPacketBuffer var0);
 
 	void setPassword(java.lang.String var0);
 

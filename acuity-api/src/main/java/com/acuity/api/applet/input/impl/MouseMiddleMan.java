@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * Created by Zach on 6/14/2017.
@@ -19,6 +20,8 @@ public class MouseMiddleMan implements InputMiddleMan {
     private Component component;
     private boolean acceptingUserInput = true;
     private MMouseListener output = new MMouseListener();
+
+    private Point mousePosition;
 
     public void dispatchClick(int x, int y, boolean left) {
         output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis()+ 10, 0, x, y, 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
@@ -75,6 +78,10 @@ public class MouseMiddleMan implements InputMiddleMan {
         this.acceptingUserInput = acceptingUserInput;
     }
 
+    public Optional<Point> getMousePosition() {
+        return Optional.ofNullable(mousePosition);
+    }
+
     public MMouseListener getOutput() {
         return output;
     }
@@ -97,6 +104,7 @@ public class MouseMiddleMan implements InputMiddleMan {
 
         public void dispatch(MouseEvent e){
             if (e.isConsumed()) return;
+            mousePosition = e.getPoint();
             switch (e.getID()){
                 case MouseEvent.MOUSE_CLICKED:
                     for (MouseListener mouseListener : mouseListeners) mouseListener.mouseClicked(e);
@@ -126,48 +134,56 @@ public class MouseMiddleMan implements InputMiddleMan {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            mousePosition = e.getPoint();
             Events.getAcuityEventBus().post(e);
             if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
+            mousePosition = e.getPoint();
             Events.getAcuityEventBus().post(e);
             if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
+            mousePosition = e.getPoint();
             Events.getAcuityEventBus().post(e);
             if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
+            mousePosition = e.getPoint();
             Events.getAcuityEventBus().post(e);
             if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
+            mousePosition = e.getPoint();
             Events.getAcuityEventBus().post(e);
             if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseDragged(MouseEvent e) {
+            mousePosition = e.getPoint();
             Events.getAcuityEventBus().post(e);
             if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
+            mousePosition = e.getPoint();
             Events.getAcuityEventBus().post(e);
             if (isAcceptingUserInput()) dispatch(e);
         }
 
         @Override
         public void mouseWheelMoved(MouseWheelEvent e) {
+            mousePosition = e.getPoint();
             Events.getAcuityEventBus().post(e);
             if (isAcceptingUserInput()) dispatch(e);
         }

@@ -41,11 +41,11 @@ public class Npc extends Actor implements Identifiable {
 	    return getType().map(NpcType::getName).orElse(null);
 	}
 
-	@Override
+	/*@Override
 	public FineLocation getFineLocation(){
 		Integer scale = getType().map(NpcType::getScale).orElse(0);
 		return new FineLocation(getRsNpc().getFineX() - scale * 64, getRsNpc().getFineY() - scale * 64, Scene.getPlane());
-	}
+	}*/
 
 
 	@Override

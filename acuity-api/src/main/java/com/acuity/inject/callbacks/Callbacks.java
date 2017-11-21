@@ -14,7 +14,9 @@ import com.acuity.rs.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.applet.Applet;
 import java.awt.*;
+import java.lang.reflect.Field;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.
@@ -83,7 +85,7 @@ public class Callbacks {
     }
 
     @ClientInvoked
-    public static void insertMenuItemCallback(String action, String target, int opcode, int arg0, int arg1, int arg2) {
+    public static void insertMenuItemCallback(String action, String target, int opcode, int arg0, int arg1, int arg2, boolean junk) {
         try {
             Events.getRsEventBus().post(new MenuInsertEvent(opcode, arg0, arg1, arg2, action, target));
         } catch (Throwable e) {
