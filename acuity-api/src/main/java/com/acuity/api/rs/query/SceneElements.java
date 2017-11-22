@@ -44,7 +44,7 @@ public class SceneElements {
     }
 
     public static Optional<SceneElement> getNearest(final Predicate<? super SceneElement> predicate) {
-        logger.debug("Returning nearest SceneElement matching predicate.");
+        logger.trace("Returning nearest SceneElement matching predicate.");
         return streamLoaded()
                 .filter(predicate)
                 .sorted(Comparator.comparingInt(Locatable::distance))
@@ -52,12 +52,12 @@ public class SceneElements {
     }
 
     public static Optional<SceneElement> getNearest(final String name) {
-        logger.debug("Returning nearest SceneElement with name '{}'", name);
+        logger.trace("Returning nearest SceneElement with name '{}'", name);
         return getNearest(p -> p.getNullSafeName().trim().equalsIgnoreCase(name));
     }
 
     public static Optional<SceneElement> getNearest(final int id) {
-        logger.debug("Returning nearest SceneElement with id '{}'", id);
+        logger.trace("Returning nearest SceneElement with id '{}'", id);
         return getNearest(p -> p.getID() == id);
     }
 

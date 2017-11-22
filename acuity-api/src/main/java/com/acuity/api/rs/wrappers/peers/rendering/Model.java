@@ -45,9 +45,6 @@ public class Model extends Renderable {
         this.rsModel = Preconditions.checkNotNull(peer);
 
         if (AcuityInstance.getSettings().isModelCachingEnabled() && peer.getXTriangles() != null && peer.getXVertices() != null) {
-            int[] xTriangles = peer.getXTriangles();
-            int[] yTriangles = peer.getYTriangles();
-            int[] zTriangles = peer.getZTriangles();
             int[] xVertices = peer.getXVertices();
             int[] yVertices = peer.getYVertices();
             int[] zVertices = peer.getZVertices();
@@ -57,13 +54,13 @@ public class Model extends Renderable {
                 vertices.add(new ScreenLocation3D(xVertices[i], yVertices[i], zVertices[i]));
             }
 
+            int[] xTriangles = peer.getXTriangles();
+            int[] yTriangles = peer.getYTriangles();
+            int[] zTriangles = peer.getZTriangles();
+
             triangles = new ArrayList<>(xTriangles.length);
             for (int i = 0; i < xTriangles.length; ++i) {
-                int triangleX = xTriangles[i];
-                int triangleY = yTriangles[i];
-                int triangleZ = zTriangles[i];
-                ScreenTriangle triangle = new ScreenTriangle(vertices.get(triangleX), vertices.get(triangleY), vertices.get(triangleZ));
-                triangles.add(triangle);
+                triangles.add(new ScreenTriangle(vertices.get(xTriangles[i]), vertices.get(yTriangles[i]), vertices.get(zTriangles[i])));
             }
 
             modelCached = true;
@@ -72,6 +69,10 @@ public class Model extends Renderable {
 
     public List<ScreenLocation3D> getVertices() {
         return vertices;
+    }
+
+    public List<ScreenTriangle> getTriangles() {
+        return triangles;
     }
 
     @Override
@@ -100,11 +101,10 @@ public class Model extends Renderable {
     private List<ScreenTriangle> rotate(List<ScreenTriangle> triangles, int orientation) {
         List<ScreenTriangle> rotatedTriangles = new ArrayList<>();
         for (ScreenTriangle triangle : triangles) {
-            ScreenLocation3D a = (ScreenLocation3D) triangle.getP1();
-            ScreenLocation3D b = (ScreenLocation3D) triangle.getP2();
-            ScreenLocation3D c = (ScreenLocation3D) triangle.getP3();
-
-            ScreenTriangle rotatedTriangle = new ScreenTriangle(a.rotate(orientation), b.rotate(orientation), c.rotate(orientation));
+            ScreenTriangle rotatedTriangle = new ScreenTriangle(
+                    ((ScreenLocation3D) triangle.getP1()).rotate(orientation),
+                    ((ScreenLocation3D) triangle.getP2()).rotate(orientation),
+                    ((ScreenLocation3D) triangle.getP3()).rotate(orientation));
             rotatedTriangles.add(rotatedTriangle);
         }
         return rotatedTriangles;
@@ -115,28 +115,23 @@ public class Model extends Renderable {
     }
 
     public Model rotateTo(int orientation) {
-        orientation = (orientation + 1024) % 2048;
-        if (orientation != 0) {
-            triangles = rotate(triangles, orientation);
-        }
-
+        orientationCached = (orientation + 1024) % 2048;
+        if (isValid() && orientationCached != 0) triangles = rotate(triangles, orientationCached);
         return this;
     }
 
     public List<ScreenPolygon> getPolygons() {
-        int localX = fineXCached;
-        int localY = fineYCached;
-
-
         List<ScreenPolygon> polygons = new ArrayList<>();
-        for (ScreenTriangle triangle : triangles) {
-            ScreenLocation3D vx = (ScreenLocation3D) triangle.getP1();
-            ScreenLocation3D vy = (ScreenLocation3D) triangle.getP2();
-            ScreenLocation3D vz = (ScreenLocation3D) triangle.getP3();
+        if (!isValid()) return polygons;
 
-            ScreenLocation x = Projection.fineToScreen(localX - vx.getX(), localY - vx.getZ(), -vx.getY()).orElse(null);
-            ScreenLocation y = Projection.fineToScreen(localX - vy.getX(), localY - vy.getZ(), -vy.getY()).orElse(null);
-            ScreenLocation z = Projection.fineToScreen(localX - vz.getX(), localY - vz.getZ(), -vz.getY()).orElse(null);
+        for (ScreenTriangle triangle : triangles) {
+            ScreenLocation3D xVertex = (ScreenLocation3D) triangle.getP1();
+            ScreenLocation3D yVertex = (ScreenLocation3D) triangle.getP2();
+            ScreenLocation3D zVertex = (ScreenLocation3D) triangle.getP3();
+
+            ScreenLocation x = Projection.fineToScreen(fineXCached - xVertex.getX(), fineYCached - xVertex.getZ(), -xVertex.getY()).orElse(null);
+            ScreenLocation y = Projection.fineToScreen(fineXCached - yVertex.getX(), fineYCached - yVertex.getZ(), -yVertex.getY()).orElse(null);
+            ScreenLocation z = Projection.fineToScreen(fineXCached - zVertex.getX(), fineYCached - zVertex.getZ(), -zVertex.getY()).orElse(null);
 
             polygons.add(new ScreenPolygon(x, y, z));
         }
