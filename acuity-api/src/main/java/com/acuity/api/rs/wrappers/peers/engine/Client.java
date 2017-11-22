@@ -65,9 +65,10 @@ public class Client extends GameEngine {
     public InterfaceComponent[][] getInterfaces() {
         logger.trace("Wrapping RSInterfaceComponent[][] from RSClient.");
         return Arrays.stream(rsClient.getInterfaces())
-                .map(rsInterfaceComponents -> Arrays.stream(rsInterfaceComponents)
-                        .map(peer -> peer != null ? peer.getWrapper() : null)
-                        .toArray(InterfaceComponent[]::new)
+                .map(rsInterfaceComponents ->
+                        Arrays.stream(rsInterfaceComponents)
+                                .map(peer -> peer != null ? peer.getWrapper() : null)
+                                .toArray(InterfaceComponent[]::new)
                 ).toArray(InterfaceComponent[][]::new);
     }
 
@@ -237,5 +238,13 @@ public class Client extends GameEngine {
 
     public boolean isMenuOpen() {
         return rsClient.isMenuOpen();
+    }
+
+    public int[] getInterfacePositionY() {
+        return rsClient.getInterfacePositionY();
+    }
+
+    public int[] getInterfacePositionX() {
+        return rsClient.getInterfacePositionX();
     }
 }

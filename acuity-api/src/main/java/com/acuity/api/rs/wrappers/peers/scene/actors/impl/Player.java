@@ -24,69 +24,65 @@ public class Player extends Actor {
 
     private static final Logger logger = LoggerFactory.getLogger(Player.class);
 
-	private RSPlayer rsPlayer;
+    private RSPlayer rsPlayer;
 
-	@ClientInvoked
-	public Player(final RSPlayer peer) {
-		super(peer);
-		this.rsPlayer = Preconditions.checkNotNull(peer);
-	}
-
-	public boolean isSkulled() {
-		return getSkullIcon() == 0;
-	}
-
-	public Optional<PlayerType> getAppearance() {
-		return Optional.ofNullable(rsPlayer.getAppearance()).map(RSPlayerType::getWrapper);
-	}
-
-	public int getCombatLevel() {
-		return rsPlayer.getCombatLevel();
-	}
-
-	public Optional<Prayers.Prayer> getPrayerByOverhead() {
-		return Prayers.getPrayerByOverheadID(rsPlayer.getPrayerIcon());
-	}
-
-	//default value = -1
-	public int getSkullIcon() {
-		return rsPlayer.getSkullIcon();
-	}
-
-	//default value = 0
-	public int getTeam() {
-		return rsPlayer.getTeam();
-	}
-
-	public int getTotalLevel() {
-		return rsPlayer.getTotalLevel();
-	}
-
-	public boolean isHidden(){
-	    return rsPlayer.isHidden();
+    @ClientInvoked
+    public Player(final RSPlayer peer) {
+        super(peer);
+        this.rsPlayer = Preconditions.checkNotNull(peer);
     }
 
-	@Override
-	public List<String> getActions() {
-		return Arrays.asList(rsPlayer.getActions());
-	}
+    public boolean isSkulled() {
+        return getSkullIcon() == 0;
+    }
 
+    public Optional<PlayerType> getAppearance() {
+        return Optional.ofNullable(rsPlayer.getAppearance()).map(RSPlayerType::getWrapper);
+    }
 
-	@Override
-	public String getName() {
-		return rsPlayer.getName();
-	}
+    public int getCombatLevel() {
+        return rsPlayer.getCombatLevel();
+    }
 
+    public Optional<Prayers.Prayer> getPrayerByOverhead() {
+        return Prayers.getPrayerByOverheadID(rsPlayer.getPrayerIcon());
+    }
+
+    //default value = -1
+    public int getSkullIcon() {
+        return rsPlayer.getSkullIcon();
+    }
+
+    //default value = 0
+    public int getTeam() {
+        return rsPlayer.getTeam();
+    }
+
+    public int getTotalLevel() {
+        return rsPlayer.getTotalLevel();
+    }
+
+    public boolean isHidden() {
+        return rsPlayer.isHidden();
+    }
+
+    @Override
+    public List<String> getActions() {
+        return Arrays.asList(rsPlayer.getActions());
+    }
+
+    @Override
+    public String getName() {
+        return rsPlayer.getName();
+    }
 
     public RSPlayer getRsPlayer() {
         return rsPlayer;
     }
 
-    public Optional<Player> getInteractingPlayer()
-	{
-		return getInteractingEntity()
-				.filter(s -> s instanceof Player)
-				.map(s -> (Player) s);
-	}
-
+    public Optional<Player> getInteractingPlayer() {
+        return getInteractingEntity()
+                .filter(entity -> entity instanceof Player)
+                .map(entity -> (Player) entity);
+    }
 }

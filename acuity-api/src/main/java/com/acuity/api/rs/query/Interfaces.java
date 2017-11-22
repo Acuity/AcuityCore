@@ -2,6 +2,7 @@ package com.acuity.api.rs.query;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.rs.wrappers.peers.interfaces.InterfaceComponent;
+import com.acuity.rs.api.RSInterfaceComponent;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,13 +42,13 @@ public class Interfaces {
         Preconditions.checkNotNull(childPath, "Make sure you are passing a least one child index.");
         Preconditions.checkArgument(childPath.length >= 1, "Make sure you are passing a least one child index.");
 
-        InterfaceComponent[][] interfaces = AcuityInstance.getClient().getInterfaces();
+        RSInterfaceComponent[][] interfaces = AcuityInstance.getClient().getRsClient().getInterfaces();
         if (interfaces == null || rootIndex < 0 || rootIndex > interfaces.length - 1){
             return Optional.empty();
         }
 
-        InterfaceComponent result = null;
-        InterfaceComponent[] interfaceComponents = interfaces[rootIndex];
+        RSInterfaceComponent result = null;
+        RSInterfaceComponent[] interfaceComponents = interfaces[rootIndex];
         for (int childIndex : childPath) {
             if (interfaceComponents == null || childIndex < 0 || childIndex > interfaceComponents.length - 1){
                 return Optional.empty();
@@ -57,7 +58,7 @@ public class Interfaces {
             interfaceComponents = result.getComponents();
         }
 
-        return Optional.ofNullable(result);
+        return Optional.of(result).map(RSInterfaceComponent::getWrapper);
     }
 
     public static List<InterfaceComponent> getLoaded(final Predicate<InterfaceComponent> predicate) {

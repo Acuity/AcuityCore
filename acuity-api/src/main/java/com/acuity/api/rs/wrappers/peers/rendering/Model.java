@@ -133,7 +133,7 @@ public class Model extends Renderable {
             ScreenLocation y = Projection.fineToScreen(fineXCached - yVertex.getX(), fineYCached - yVertex.getZ(), -yVertex.getY()).orElse(null);
             ScreenLocation z = Projection.fineToScreen(fineXCached - zVertex.getX(), fineYCached - zVertex.getZ(), -zVertex.getY()).orElse(null);
 
-            polygons.add(new ScreenPolygon(x, y, z));
+            polygons.add(new ScreenTriangle(x, y, z));
         }
 
         return polygons;

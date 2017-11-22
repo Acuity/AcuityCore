@@ -1,6 +1,10 @@
 package com.acuity.api.rs.wrappers.peers.interfaces;
 
+import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
+import com.acuity.api.rs.interfaces.Interactive;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenRectangle;
 import com.acuity.api.rs.wrappers.peers.structures.Node;
 import com.acuity.rs.api.RSInterfaceComponent;
 
@@ -8,12 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * Created by MadDev, June 10, 2017
  */
-public class InterfaceComponent extends Node {
+public class InterfaceComponent extends Node implements Interactive {
 
     private static final Logger logger = LoggerFactory.getLogger(InterfaceComponent.class);
 
@@ -33,8 +39,49 @@ public class InterfaceComponent extends Node {
                 .toArray(InterfaceComponent[]::new);
     }
 
-    public String[] getActions() {
-        return rsInterfaceComponent.getActions();
+    @Override
+    public List<String> getActions() {
+        return Arrays.asList(rsInterfaceComponent.getActions());
+    }
+
+    @Override
+    public Supplier<ScreenPolygon> getProjectionSupplier() {
+        return () -> {
+            int x = 0;
+            int y = 0;
+
+            InterfaceComponent currentInterface;
+            for (currentInterface = this; currentInterface.getParent().isPresent(); currentInterface = currentInterface.getParent().get()) {
+                x += currentInterface.getRelativeX();
+                y += currentInterface.getRelativeY();
+                x -= currentInterface.getScrollX();
+                y -= currentInterface.getInsetY();
+            }
+
+            int[] interfacePositionX = AcuityInstance.getClient().getInterfacePositionX();
+            int[] interfacePositionY = AcuityInstance.getClient().getInterfacePositionY();
+
+            int boundsIndex = currentInterface.getBoundsIndex();
+            if (boundsIndex != -1) {
+                x += interfacePositionX[boundsIndex];
+                y += interfacePositionY[boundsIndex];
+
+                if (currentInterface.getType() > 0) {
+                    x += currentInterface.getRelativeX();
+                    y += currentInterface.getRelativeY();
+                }
+            }
+            else {
+                x += currentInterface.getRelativeX();
+                y += currentInterface.getRelativeY();
+            }
+
+            return new ScreenRectangle(x, y, getWidth(), getHeight());
+        };
+    }
+
+    public Optional<InterfaceComponent> getParent() {
+        return Optional.ofNullable(rsInterfaceComponent.getParent()).map(RSInterfaceComponent::getWrapper);
     }
 
     public int getBorderThickness() {

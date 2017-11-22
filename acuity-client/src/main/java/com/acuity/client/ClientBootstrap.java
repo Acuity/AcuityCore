@@ -4,12 +4,10 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
 import com.acuity.api.input.SmartActions;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
+import com.acuity.api.rs.query.Interfaces;
 import com.acuity.api.rs.query.Npcs;
 import com.acuity.api.rs.query.SceneElements;
-import com.acuity.api.rs.utils.Camera;
-import com.acuity.api.rs.utils.ContextMenu;
-import com.acuity.api.rs.utils.LocalPlayer;
-import com.acuity.api.rs.utils.Projection;
+import com.acuity.api.rs.utils.*;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.client.gui.AcuityBotFrame;
@@ -30,26 +28,27 @@ import java.util.stream.Stream;
 public class ClientBootstrap {
 
     private static boolean mesh = false;
+    private static int index = 28;
 
     @Subscribe
     public void testDraw(InGameDrawEvent event){
-        if (ContextMenu.isOpen()){
-            for (int i = 0; i < ContextMenu.getRowCount(); i++) {
-                ContextMenu.getBounds(i).ifPresent(screenLocationShape -> event.getGraphics().drawPolygon(screenLocationShape.getPolygon()));
-            }
-        }
 
+        Interfaces.getLoaded(548, index).ifPresent(interfaceComponent -> {
+
+            interfaceComponent.projectToScreen().ifPresent(screenPolygon -> {
+
+                event.getGraphics().drawPolygon(screenPolygon.getPolygon());
+
+            });
+
+        });
         event.getGraphics().drawString(ContextMenu.getCurrentHotAction(), 300, 300);
-
         List<String> collect = ContextMenu.getItems();
         for (int i = 0; i < ContextMenu.getRowCount(); i++) {
             event.getGraphics().drawString(collect.get(i), 300, 350 + (15 * i));
         }
 
-        AcuityInstance.getAppletManager().getMouseMiddleMan().getMousePosition().ifPresent(point -> {
-            event.getGraphics().setColor(Color.RED);
-            event.getGraphics().fillOval(point.x - 3, point.y - 3, 6, 6);
-        });
+        AcuityInstance.getAppletManager().getMouseMiddleMan().getMousePosition().ifPresent(point -> event.getGraphics().fillOval(point.x - 3, point.y - 3, 6, 6));
     }
 
     @Subscribe
@@ -60,10 +59,14 @@ public class ClientBootstrap {
         else if (e.getKeyChar() == 'a' && e.getID() == KeyEvent.KEY_TYPED){
             mesh = !mesh;
         }
+        else if (e.getKeyChar() == 't' && e.getID() == KeyEvent.KEY_TYPED){
+            index++;
+        }
+        else if (e.getKeyChar() == 'g' && e.getID() == KeyEvent.KEY_TYPED){
+            index--;
+        }
         else if (e.getKeyChar() == 'n' && e.getID() == KeyEvent.KEY_TYPED){
-            Npcs.getNearest("Man").ifPresent(npc -> {
-                npc.interact("Talk-to");
-            });
+            Npcs.getNearest("Man").ifPresent(npc -> npc.interact("Talk-to"));
         }
     }
 
