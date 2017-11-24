@@ -129,10 +129,27 @@ public class Projection {
         return Optional.empty();
     }
 
+
+    public static ScreenPolygon getTilePoly(FineLocation localLocation) {
+        int plane = Scene.getPlane();
+        int halfTile = Projection.TILE_PIXEL_SIZE / 2;
+
+        ScreenLocation p1 = Projection.fineToScreen(localLocation.getFineX() - halfTile, localLocation.getFineY() - halfTile, plane).orElse(null);
+        ScreenLocation p2 = Projection.fineToScreen(localLocation.getFineX() - halfTile, localLocation.getFineY() + halfTile, plane).orElse(null);
+        ScreenLocation p3 = Projection.fineToScreen(localLocation.getFineX() + halfTile, localLocation.getFineY() + halfTile, plane).orElse(null);
+        ScreenLocation p4 = Projection.fineToScreen(localLocation.getFineX() + halfTile, localLocation.getFineY() - halfTile, plane).orElse(null);
+
+        if (p1 == null || p2 == null || p3 == null || p4 == null) {
+            return null;
+        }
+
+        return new ScreenPolygon(p1, p2, p3, p4);
+    }
+
     /**
      * @author Dogerina
      */
-    public static int[][][] boundingBoxToScreen(AxisAlignedBoundingBox boundingBox){
+    public static int[][][] boundingBoxToScreen(AxisAlignedBoundingBox boundingBox) {
         ScreenLocation3D[] vertices = boundingBox.getVertices();
         int[][][] model = new int[AABB_SIDES.length * AABB_TRIANGLES.length][3][3];
         for (int[] side : AABB_SIDES) {

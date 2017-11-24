@@ -1,24 +1,31 @@
 package com.acuity.api.rs.utils;
 
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenHull;
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
-
 public class HullUtil {
 
-    public static ScreenPolygon convexHull(Collection<ScreenLocation> screenLocations, boolean confineToGameScreen) {
+    public static ScreenHull convexHull(Collection<ScreenLocation> screenLocations, boolean confineToGameScreen) {
         if (screenLocations.size() < 3) {
             return null;
         }
 
         List<ScreenLocation> hull = new ArrayList<>();
+        int filtered = 0;
         ScreenLocation left = findLeftMost(screenLocations);
         ScreenLocation current = left;
         do {
-            if (!confineToGameScreen || Camera.isVisible(current)) hull.add(current);
+            if (!confineToGameScreen || Camera.isVisible(current)) {
+                hull.add(current);
+            }
+            else {
+                filtered++;
+            }
+
             ScreenLocation next = null;
 
             for (ScreenLocation screenLocation : screenLocations) {
@@ -39,7 +46,8 @@ public class HullUtil {
         }
         while (current != left);
 
-        return new ScreenPolygon(hull);
+        int size = hull.size();
+        return new ScreenHull(hull).setCoverage((double) size / ((double) size + (double) filtered));
     }
 
     private static ScreenLocation findLeftMost(Collection<ScreenLocation> screenLocations) {

@@ -6,21 +6,14 @@ import com.acuity.api.input.SmartActions;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.Interfaces;
 import com.acuity.api.rs.query.Npcs;
-import com.acuity.api.rs.query.SceneElements;
-import com.acuity.api.rs.utils.*;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
-import com.acuity.api.rs.wrappers.peers.rendering.Model;
+import com.acuity.api.rs.utils.ContextMenu;
 import com.acuity.client.gui.AcuityBotFrame;
-import com.acuity.common.util.AcuityDir;
 import com.google.common.eventbus.Subscribe;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by Zach on 5/31/2017.
@@ -32,11 +25,9 @@ public class ClientBootstrap {
 
     @Subscribe
     public void testDraw(InGameDrawEvent event){
-
         Interfaces.getLoaded(548, index).ifPresent(interfaceComponent -> {
             interfaceComponent.projectToScreen().ifPresent(screenPolygon -> {
                 event.getGraphics().drawPolygon(screenPolygon.getPolygon());
-
             });
         });
         event.getGraphics().drawString(ContextMenu.getCurrentHotAction(), 300, 300);

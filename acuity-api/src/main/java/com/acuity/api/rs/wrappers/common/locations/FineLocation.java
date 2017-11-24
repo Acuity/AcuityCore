@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * Created by Zach on 7/1/2017.
  */
-public class FineLocation implements Locatable{
+public class FineLocation implements Locatable {
 
     private int fineX, fineY, plane;
     private int baseX, baseY;
@@ -52,6 +52,4 @@ public class FineLocation implements Locatable{
     public Optional<ScreenLocation> getScreenLocation() {
         return Projection.fineToScreen(this);
     }
-
-
 }
