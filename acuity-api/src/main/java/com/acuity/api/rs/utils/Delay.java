@@ -37,6 +37,10 @@ public class Delay {
 		return false;
 	}
 
+	public static int getDelayUntilSleepMS() {
+		return delayUntilSleepMS;
+	}
+
 	public static void setDelayUntilSleepMS(int delayUntilSleepMS) {
 		Delay.delayUntilSleepMS = delayUntilSleepMS;
 	}
