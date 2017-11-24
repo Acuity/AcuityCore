@@ -3,8 +3,8 @@ package com.acuity.api.rs.wrappers.peers.interfaces;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Interactive;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenRectangle;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenRectangle;
 import com.acuity.api.rs.wrappers.peers.structures.Node;
 import com.acuity.rs.api.RSInterfaceComponent;
 

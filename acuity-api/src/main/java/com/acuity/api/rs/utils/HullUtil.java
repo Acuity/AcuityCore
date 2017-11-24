@@ -1,6 +1,6 @@
 package com.acuity.api.rs.utils;
 
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenHull;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenHull;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 
 import java.util.ArrayList;

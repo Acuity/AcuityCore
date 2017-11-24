@@ -3,14 +3,11 @@ package com.acuity.api.rs.utils;
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.mouse.Mouse;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenRectangle;
-import com.google.common.collect.Streams;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenRectangle;
 
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by Zachary Herridge on 7/11/2017.

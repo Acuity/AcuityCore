@@ -7,7 +7,7 @@ import com.acuity.api.rs.utils.ActionResult;
 import com.acuity.api.rs.utils.ContextMenu;
 import com.acuity.api.rs.utils.Delay;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
 import com.google.common.base.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

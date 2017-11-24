@@ -3,7 +3,7 @@ package com.acuity.api.rs.wrappers.peers.rendering.bounding_boxes;
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Projectable;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
 import com.acuity.rs.api.RSAxisAlignedBoundingBox;
 
 import java.util.function.Supplier;

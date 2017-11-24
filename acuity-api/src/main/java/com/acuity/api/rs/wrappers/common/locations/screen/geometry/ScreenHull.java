@@ -1,10 +1,12 @@
-package com.acuity.api.rs.wrappers.common.locations.screen;
+package com.acuity.api.rs.wrappers.common.locations.screen.geometry;
+
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 
 import java.util.Collection;
 
 public class ScreenHull extends ScreenPolygon{
 
-    private double coverage = 0;
+    private double coverage = 1;
 
     public ScreenHull(ScreenLocation... locations) {
         super(locations);

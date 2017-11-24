@@ -1,7 +1,7 @@
 package com.acuity.api.rs.utils;
 
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
 
 import java.awt.*;
 import java.util.Collections;

@@ -1,4 +1,6 @@
-package com.acuity.api.rs.wrappers.common.locations.screen;
+package com.acuity.api.rs.wrappers.common.locations.screen.geometry;
+
+import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 
 public class ScreenRectangle extends ScreenPolygon {
 

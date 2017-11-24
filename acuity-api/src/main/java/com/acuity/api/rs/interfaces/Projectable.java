@@ -1,6 +1,6 @@
 package com.acuity.api.rs.interfaces;
 
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
 
 import java.util.Optional;
 import java.util.function.Supplier;

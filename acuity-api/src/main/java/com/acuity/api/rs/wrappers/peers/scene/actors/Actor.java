@@ -8,7 +8,7 @@ import com.acuity.api.rs.utils.Scene;
 import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
 import com.acuity.api.rs.wrappers.peers.engine.Client;
 import com.acuity.api.rs.wrappers.peers.rendering.Model;
 import com.acuity.api.rs.wrappers.peers.rendering.Renderable;
