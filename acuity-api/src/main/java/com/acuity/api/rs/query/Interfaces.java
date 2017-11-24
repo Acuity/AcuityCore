@@ -20,14 +20,16 @@ public class Interfaces {
     private static Logger logger = LoggerFactory.getLogger(Interfaces.class);
 
     public static Stream<InterfaceComponent> streamLoaded(){
-        return Arrays.stream(AcuityInstance.getClient().getInterfaces())
+        return Arrays.stream(AcuityInstance.getClient().getRsClient().getInterfaces())
                 .flatMap(Arrays::stream)
-                .filter(Objects::nonNull);
+                .filter(Objects::nonNull)
+                .map(RSInterfaceComponent::getWrapper);
     }
 
     public static Stream<InterfaceComponent> streamLoaded(int rootIndex){
-        return Arrays.stream(AcuityInstance.getClient().getInterfaces()[rootIndex])
-                .filter(Objects::nonNull);
+        return Arrays.stream(AcuityInstance.getClient().getRsClient().getInterfaces()[rootIndex])
+                .filter(Objects::nonNull)
+                .map(RSInterfaceComponent::getWrapper);
     }
 
     /**
@@ -43,17 +45,12 @@ public class Interfaces {
         Preconditions.checkArgument(childPath.length >= 1, "Make sure you are passing a least one child index.");
 
         RSInterfaceComponent[][] interfaces = AcuityInstance.getClient().getRsClient().getInterfaces();
-        if (interfaces == null || rootIndex < 0 || rootIndex > interfaces.length - 1){
-            return Optional.empty();
-        }
+        if (interfaces == null || rootIndex < 0 || rootIndex > interfaces.length - 1) return Optional.empty();
 
         RSInterfaceComponent result = null;
         RSInterfaceComponent[] interfaceComponents = interfaces[rootIndex];
         for (int childIndex : childPath) {
-            if (interfaceComponents == null || childIndex < 0 || childIndex > interfaceComponents.length - 1){
-                return Optional.empty();
-            }
-
+            if (interfaceComponents == null || childIndex < 0 || childIndex > interfaceComponents.length - 1) return Optional.empty();
             result = interfaceComponents[childIndex];
             interfaceComponents = result.getComponents();
         }

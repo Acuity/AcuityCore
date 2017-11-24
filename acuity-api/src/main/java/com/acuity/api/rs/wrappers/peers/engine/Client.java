@@ -62,16 +62,6 @@ public class Client extends GameEngine {
         return Optional.ofNullable(rsClient.getLocalPlayer()).map(RSPlayer::getWrapper);
     }
 
-    public InterfaceComponent[][] getInterfaces() {
-        logger.trace("Wrapping RSInterfaceComponent[][] from RSClient.");
-        return Arrays.stream(rsClient.getInterfaces())
-                .map(rsInterfaceComponents ->
-                        Arrays.stream(rsInterfaceComponents)
-                                .map(peer -> peer != null ? peer.getWrapper() : null)
-                                .toArray(InterfaceComponent[]::new)
-                ).toArray(InterfaceComponent[][]::new);
-    }
-
     public Optional<HashTable> getInterfaceNodeTable() {
         return Optional.ofNullable(rsClient.getInterfaceNodes()).map(RSHashTable::getWrapper);
     }

@@ -48,4 +48,8 @@ public class ScreenLocation {
     public Point toPoint(){
         return new Point(x, y);
     }
+
+    public double distanceTo(ScreenLocation p) {
+        return toPoint().distance(p.toPoint());
+    }
 }

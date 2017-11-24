@@ -34,13 +34,10 @@ public class ClientBootstrap {
     public void testDraw(InGameDrawEvent event){
 
         Interfaces.getLoaded(548, index).ifPresent(interfaceComponent -> {
-
             interfaceComponent.projectToScreen().ifPresent(screenPolygon -> {
-
                 event.getGraphics().drawPolygon(screenPolygon.getPolygon());
 
             });
-
         });
         event.getGraphics().drawString(ContextMenu.getCurrentHotAction(), 300, 300);
         List<String> collect = ContextMenu.getItems();
@@ -58,6 +55,9 @@ public class ClientBootstrap {
         }
         else if (e.getKeyChar() == 'a' && e.getID() == KeyEvent.KEY_TYPED){
             mesh = !mesh;
+        }
+        else if (e.getKeyChar() == 'r' && e.getID() == KeyEvent.KEY_TYPED){
+            Interfaces.getLoaded(548, index).ifPresent(interfaceComponent -> interfaceComponent.interact(""));
         }
         else if (e.getKeyChar() == 't' && e.getID() == KeyEvent.KEY_TYPED){
             index++;

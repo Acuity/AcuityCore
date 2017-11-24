@@ -49,9 +49,7 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
 
     @Override
     default Supplier<ScreenPolygon> getProjectionSupplier(){
-        if (!AcuityInstance.getSettings().isModelInteractionsEnabled()){
-            return () -> getBoundingBox().map(AxisAlignedBoundingBox::getProjectionSupplier).map(Supplier::get).orElse(null);
-        }
+        if (!AcuityInstance.getSettings().isModelInteractionsEnabled()) return () -> getBoundingBox().map(AxisAlignedBoundingBox::getProjectionSupplier).map(Supplier::get).orElse(null);
         return () -> getModel().map(Model::getProjectionSupplier).map(Supplier::get).orElse(null);
     }
 

@@ -50,7 +50,6 @@ public class AxisAlignedBoundingBox extends BoundingBox implements Projectable {
 
     @Override
     public Supplier<ScreenPolygon> getProjectionSupplier() {
-
         return null; // TODO: 11/20/2017  
     }
 }

@@ -2,9 +2,8 @@ package com.acuity.api.rs.wrappers.peers.rendering;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.annotations.ClientInvoked;
-import com.acuity.api.rs.utils.Camera;
+import com.acuity.api.rs.utils.HullUtil;
 import com.acuity.api.rs.utils.Projection;
-import com.acuity.api.rs.utils.Random;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
@@ -14,13 +13,13 @@ import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by Zachary Herridge on 6/12/2017.
@@ -77,7 +76,12 @@ public class Model extends Renderable {
 
     @Override
     public Supplier<ScreenPolygon> getProjectionSupplier() {
-        return () -> Random.nextElement(getPolygons());
+        List<ScreenLocation> collect = getPolygons().stream()
+                .map(screenPolygon -> Arrays.stream(screenPolygon.getLocations()))
+                .flatMap(Function.identity())
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        return () -> HullUtil.convexHull(collect, true);
     }
 
     public int getFineXCached() {
@@ -122,6 +126,7 @@ public class Model extends Renderable {
 
     public List<ScreenPolygon> getPolygons() {
         List<ScreenPolygon> polygons = new ArrayList<>();
+
         if (!isValid()) return polygons;
 
         for (ScreenTriangle triangle : triangles) {

@@ -45,7 +45,7 @@ public class Camera {
         WorldLocation other = Optional.ofNullable(target).map(Locatable::getWorldLocation).orElse(null);
 
         if (local == null) throw new NullPointerException("Failed to load LocalPlayer.");
-        if (other == null) throw new NullPointerException("Failed to load target location..");
+        if (other == null) throw new NullPointerException("Failed to load target location.");
 
         int angle = 90 - ((int) Math.toDegrees(Math.atan2(other.getWorldY() - local.getWorldY(), other.getWorldX() - local.getWorldX())));
         if (angle < 0) angle += 360;

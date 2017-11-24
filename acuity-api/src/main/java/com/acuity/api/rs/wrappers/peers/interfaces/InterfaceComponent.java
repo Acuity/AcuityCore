@@ -232,7 +232,6 @@ public class InterfaceComponent extends Node implements Interactive {
         return !rsInterfaceComponent.isHidden();
     }
 
-
     public RSInterfaceComponent getRsComponent() {
         return rsInterfaceComponent;
     }

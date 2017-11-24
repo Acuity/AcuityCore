@@ -8,6 +8,7 @@ import com.acuity.api.rs.utils.ContextMenu;
 import com.acuity.api.rs.utils.Delay;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenPolygon;
+import com.google.common.base.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,13 +27,21 @@ public class BasicInteractDriver implements InteractionDriver {
             if (screenLocation != null){
                 Mouse.move(screenLocation);
                 Delay.delay(50, 90);
-                Mouse.click(screenLocation, false);
-                Delay.delayUntil(ContextMenu::isOpen, 600);
-                ContextMenu.getScreenTarget(action).map(ScreenPolygon::randomLocation).ifPresent(menuTarget -> {
-                    Mouse.move(menuTarget);
-                    Delay.delay(50, 90);
-                    Mouse.click(menuTarget, true);
-                });
+                if (action.equalsIgnoreCase("")){
+                    Mouse.click(screenLocation,  true);
+                }
+                else {
+                    Mouse.click(screenLocation, false);
+                    Delay.delayUntil(ContextMenu::isOpen, 600);
+                    ContextMenu.getScreenTarget(action).map(ScreenPolygon::randomLocation).ifPresent(menuTarget -> {
+                        Mouse.move(menuTarget);
+                        Delay.delay(50, 90);
+                        if (Strings.nullToEmpty(ContextMenu.getCurrentHotAction()).toLowerCase().startsWith(action.toLowerCase())){
+                            Mouse.click(menuTarget, true);
+                        }
+                    });
+                }
+
                 return ActionResult.SUCCESS;
             }
         }
