@@ -6,11 +6,9 @@ package com.acuity.rs.api;
 //Extends com/acuity/rs/api/RSCacheableNode
 public interface RSSpotAnimationType extends RSCacheableNode {
 
-	int getAmbience();
+	int getAmbiencecontrast();
 
 	int getAnimation();
-
-	int getContrast();
 
 	int getModelID();
 
@@ -20,11 +18,9 @@ public interface RSSpotAnimationType extends RSCacheableNode {
 
 	int getScaleZ();
 
-	void setAmbience(int var0);
+	void setAmbiencecontrast(int var0);
 
 	void setAnimation(int var0);
-
-	void setContrast(int var0);
 
 	void setModelID(int var0);
 

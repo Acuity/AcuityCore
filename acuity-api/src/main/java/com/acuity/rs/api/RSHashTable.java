@@ -10,6 +10,10 @@ public interface RSHashTable {
 
 	com.acuity.rs.api.RSNode getHead();
 
+	int getIndex();
+
+	int getSize();
+
 	com.acuity.rs.api.RSNode getTail();
 
 	com.acuity.api.rs.wrappers.peers.structures.HashTable getWrapper();
@@ -19,6 +23,10 @@ public interface RSHashTable {
 	void setBuckets(com.acuity.rs.api.RSNode[] var0);
 
 	void setHead(com.acuity.rs.api.RSNode var0);
+
+	void setIndex(int var0);
+
+	void setSize(int var0);
 
 	void setTail(com.acuity.rs.api.RSNode var0);
 

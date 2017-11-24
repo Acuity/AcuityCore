@@ -266,8 +266,6 @@ public interface RSClient extends RSGameEngine {
 
 	void invokeAddAxisAlignedBoundingBox(com.acuity.rs.api.RSModel var0, int var1, int var2, int var3, int var4);
 
-	void invokeAddLegacy2DBoundingBox(int var0, int var1, int var2, int var3, int var4);
-
 	int[] invokeBoundingBoxToViewport(int var0, int var1, int var2);
 
 	com.acuity.rs.api.RSAnimationSequence invokeGetAnimationSequence(int var0);
@@ -280,7 +278,7 @@ public interface RSClient extends RSGameEngine {
 
 	com.acuity.rs.api.RSVarpbit invokeGetVarpbit(int var0);
 
-	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5, boolean var6);
+	void invokeInsertMenuItem(java.lang.String var0, java.lang.String var1, int var2, int var3, int var4, int var5);
 
 	com.acuity.rs.api.RSAudioTrack invokeLoadAudioTrack(com.acuity.rs.api.RSReferenceTable var0, int var1, int var2);
 

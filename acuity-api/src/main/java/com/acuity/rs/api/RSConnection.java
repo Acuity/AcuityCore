@@ -7,9 +7,13 @@ package com.acuity.rs.api;
 //Implements java/lang/Runnable
 public interface RSConnection extends java.lang.Runnable {
 
+	java.net.Socket getSocket();
+
 	void invokeQueueForWrite(byte[] var0, int var1, int var2);
 
 	int invokeReadByte();
 
 	void invokeReadInto(byte[] var0, int var1, int var2);
+
+	void setSocket(java.net.Socket var0);
 }

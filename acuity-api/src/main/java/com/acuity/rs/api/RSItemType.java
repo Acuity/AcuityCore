@@ -28,6 +28,8 @@ public interface RSItemType extends RSCacheableNode {
 
 	int getMaleHeadModel2();
 
+	int getMaleModel1();
+
 	int getMaleModel1resizeXfemaleModel1();
 
 	int getMaleModel2();
@@ -99,6 +101,8 @@ public interface RSItemType extends RSCacheableNode {
 	void setMaleHeadModel(int var0);
 
 	void setMaleHeadModel2(int var0);
+
+	void setMaleModel1(int var0);
 
 	void setMaleModel1resizeXfemaleModel1(int var0);
 

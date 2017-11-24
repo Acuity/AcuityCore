@@ -28,6 +28,8 @@ public interface RSAnimationSequence extends RSCacheableNode {
 
 	int getRightHandItem();
 
+	boolean isStretches();
+
 	void setForcedPriority(int var0);
 
 	void setFrameIDs(int[] var0);
@@ -49,4 +51,6 @@ public interface RSAnimationSequence extends RSCacheableNode {
 	void setReplyMode(int var0);
 
 	void setRightHandItem(int var0);
+
+	void setStretches(boolean var0);
 }
