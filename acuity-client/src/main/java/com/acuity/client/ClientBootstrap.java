@@ -2,7 +2,6 @@ package com.acuity.client;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.Events;
-import com.acuity.api.input.SmartActions;
 import com.acuity.api.rs.events.impl.drawing.InGameDrawEvent;
 import com.acuity.api.rs.query.Interfaces;
 import com.acuity.api.rs.query.Npcs;
@@ -25,13 +24,21 @@ public class ClientBootstrap {
 
     @Subscribe
     public void testDraw(InGameDrawEvent event){
+
+
+        Npcs.getNearest(npc -> true).ifPresent(npc -> {
+            npc.projectToScreen().ifPresent(screenPolygon -> {
+                event.getGraphics().drawPolygon(screenPolygon.toPolygon());
+            });
+        });
+
         Interfaces.getLoaded(548, index).ifPresent(interfaceComponent -> {
             interfaceComponent.projectToScreen().ifPresent(screenPolygon -> {
-                event.getGraphics().drawPolygon(screenPolygon.getPolygon());
+                event.getGraphics().drawPolygon(screenPolygon.toPolygon());
             });
         });
         event.getGraphics().drawString(ContextMenu.getCurrentHotAction(), 300, 300);
-        List<String> collect = ContextMenu.getItems();
+        List<String> collect = ContextMenu.getRows();
         for (int i = 0; i < ContextMenu.getRowCount(); i++) {
             event.getGraphics().drawString(collect.get(i), 300, 350 + (15 * i));
         }
@@ -41,8 +48,10 @@ public class ClientBootstrap {
 
     @Subscribe
     public void testKeyEvent(KeyEvent e){
-        if (e.getKeyChar() == 'c' && e.isControlDown()){
-            SmartActions.INSTANCE.clear();
+        if (e.getKeyChar() == 'c' && e.getID() == KeyEvent.KEY_TYPED){
+            Npcs.getNearest("Man").ifPresent(npc -> {
+                npc.interact("Talk-to");
+            });
         }
         else if (e.getKeyChar() == 'a' && e.getID() == KeyEvent.KEY_TYPED){
             mesh = !mesh;

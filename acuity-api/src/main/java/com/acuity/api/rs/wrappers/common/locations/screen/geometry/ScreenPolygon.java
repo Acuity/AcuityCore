@@ -30,7 +30,7 @@ public class ScreenPolygon {
         return Random.nextLocation(this);
     }
 
-    public Polygon getPolygon(){
+    public Polygon toPolygon(){
         if (polygon == null){
             polygon = new Polygon();
             for (ScreenLocation location : locations) {
@@ -45,6 +45,6 @@ public class ScreenPolygon {
     }
 
     public boolean contains(int x, int y) {
-        return getPolygon().contains(x, y);
+        return toPolygon().contains(x, y);
     }
 }

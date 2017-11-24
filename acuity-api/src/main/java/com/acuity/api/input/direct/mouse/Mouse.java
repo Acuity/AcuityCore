@@ -4,6 +4,8 @@ import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.mouse.impl.BasicMouseDriver;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 
+import java.awt.event.MouseEvent;
+
 /**
  * Created by Zachary Herridge on 6/26/2017.
  */
@@ -11,16 +13,22 @@ public class Mouse {
 
     private static MouseDriver mouseDriver = new BasicMouseDriver();
 
+    public static int LEFT = MouseEvent.BUTTON1;
+    public static int MIDDLE = MouseEvent.BUTTON2;
+    public static int RIGHT = MouseEvent.BUTTON3;
+
     public static MouseDriver getDriver(){
         return mouseDriver;
     }
 
-    public static void click(ScreenLocation screenLocation){
-        click(screenLocation, true);
+    public static MouseFuture click(ScreenLocation screenLocation){
+        return click(screenLocation, true);
     }
 
-    public static void click(ScreenLocation screenLocation, boolean leftClick){
-        getDriver().click(screenLocation, leftClick);
+    public static MouseFuture click(ScreenLocation screenLocation, boolean leftClick){
+        return getDriver().queue(new MouseFuture()
+                .setScreenLocation(screenLocation)
+                .setClick(leftClick ? LEFT : RIGHT));
     }
 
     public static int[] getHoveredUIDs(){
@@ -37,7 +45,8 @@ public class Mouse {
                 .orElse(null);
     }
 
-    public static void move(ScreenLocation screenLocation) {
-        getDriver().move(screenLocation);
+    public static MouseFuture move(ScreenLocation screenLocation) {
+        return getDriver()
+                .queue(new MouseFuture().setScreenLocation(screenLocation));
     }
 }

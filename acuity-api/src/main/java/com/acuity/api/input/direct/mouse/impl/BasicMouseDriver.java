@@ -2,20 +2,31 @@ package com.acuity.api.input.direct.mouse.impl;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.mouse.MouseDriver;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
+import com.acuity.api.input.direct.mouse.MouseFuture;
+
+import java.util.concurrent.*;
 
 /**
  * Created by Zachary Herridge on 7/11/2017.
  */
 public class BasicMouseDriver implements MouseDriver {
 
-    @Override
-    public void click(ScreenLocation screenLocation, boolean leftClick) {
-        AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(screenLocation, leftClick);
+    private LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
+    private Executor executor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, queue);
+
+    private Runnable convert(MouseFuture mouseFuture){
+        return () -> {
+            if (mouseFuture.isCanceled()) return;
+            AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchMove(mouseFuture.getScreenLocation());
+            if (mouseFuture.isCanceled()) return;
+            if (mouseFuture.getClick() != -1) AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(mouseFuture.getScreenLocation(), mouseFuture.getClick());
+            mouseFuture.setComplete(true);
+        };
     }
 
     @Override
-    public void move(ScreenLocation screenLocation) {
-        AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchMove(screenLocation);
+    public MouseFuture queue(MouseFuture mouseFuture) {
+        executor.execute(convert(mouseFuture));
+        return mouseFuture;
     }
 }

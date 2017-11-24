@@ -25,9 +25,9 @@ public class MouseMiddleMan implements InputMiddleMan {
 
     private Point mousePosition;
 
-    public void dispatchClick(ScreenLocation screenLocation, boolean left) {
-        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis()+ 10, 0, screenLocation.getX(), screenLocation.getY(), 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
-        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 20, 0, screenLocation.getX(), screenLocation.getY(), 1, false, left ? MouseEvent.BUTTON1 : MouseEvent.BUTTON3));
+    public void dispatchClick(ScreenLocation screenLocation, int mouseButton) {
+        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis()+ 10, 0, screenLocation.getX(), screenLocation.getY(), 1, false, mouseButton));
+        output.dispatch(new MouseEvent(component, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis() + 20, 0, screenLocation.getX(), screenLocation.getY(), 1, false, mouseButton));
     }
 
     public void dispatchMove(ScreenLocation screenLocation){

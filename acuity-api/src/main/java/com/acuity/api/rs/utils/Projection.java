@@ -5,7 +5,7 @@ import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.SceneLocation;
 import com.acuity.api.rs.wrappers.common.locations.WorldLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation3D;
+import com.acuity.api.rs.wrappers.common.locations.screen.Screen3DLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
 import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenRectangle;
 import com.acuity.api.rs.wrappers.peers.engine.Client;
@@ -150,7 +150,7 @@ public class Projection {
      * @author Dogerina
      */
     public static int[][][] boundingBoxToScreen(AxisAlignedBoundingBox boundingBox) {
-        ScreenLocation3D[] vertices = boundingBox.getVertices();
+        Screen3DLocation[] vertices = boundingBox.getVertices();
         int[][][] model = new int[AABB_SIDES.length * AABB_TRIANGLES.length][3][3];
         for (int[] side : AABB_SIDES) {
             for (int face = 0; face < AABB_TRIANGLES.length; face++) {

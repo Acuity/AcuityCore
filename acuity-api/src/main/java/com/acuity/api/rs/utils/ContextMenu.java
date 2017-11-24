@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ContextMenu {
 
-    public static List<String> getItems(){
+    public static List<String> getRows(){
         int rowCount = getRowCount();
         String[] contextMenuActions = AcuityInstance.getClient().getContextMenuActions();
         String[] contextMenuTargets = AcuityInstance.getClient().getContextMenuTargets();
@@ -30,15 +30,15 @@ public class ContextMenu {
         if (isOpen()){
             ScreenLocation position = Mouse.getPosition();
             if (position != null) {
-                List<String> collect = getItems();
+                List<String> collect = getRows();
                 for (int i = 0; i < collect.size(); i++) {
-                    Boolean contains = getBounds(i).map(screenLocationShape -> screenLocationShape.contains(position)).orElse(false);
+                    Boolean contains = getRowBounds(i).map(screenLocationShape -> screenLocationShape.contains(position)).orElse(false);
                     if (contains) return collect.get(i);
                 }
             }
         }
         else {
-            return getItems().stream().findFirst().orElse("Cancel");
+            return getRows().stream().findFirst().orElse("Cancel");
         }
 
         return "Cancel";
@@ -65,12 +65,28 @@ public class ContextMenu {
         return AcuityInstance.getClient().getContextMenuHeight();
     }
 
-    public static Optional<ScreenPolygon> getBounds(int index) {
+    public static Optional<ScreenPolygon> getRowBounds(int index) {
         return getLocation().map(screenLocation -> new ScreenRectangle(screenLocation.transform(0, (19 + (index * 15))), getWidth(), 14));
     }
 
+    public static Optional<ScreenRectangle> getBounds(){
+        return getLocation().map(screenLocation -> new ScreenRectangle(screenLocation, getWidth(), getHeight()));
+    }
+
+    public static void close(){
+        getBounds().ifPresent(screenRectangle -> {
+            ScreenLocation screenLocation;
+            while (screenRectangle.contains((screenLocation = Random.nextLocation(Projection.GAME_SCREEN)))){
+            }
+            Mouse.move(screenLocation);
+        });
+
+
+
+    }
+
     public static Optional<ScreenPolygon> getScreenTarget(String action) {
-        List<String> collect = getItems();
+        List<String> collect = getRows();
         for (int i = 0; i < collect.size(); i++) {
             if (collect.get(i).toLowerCase().startsWith(action.toLowerCase())) return getScreenTarget(i);
         }
