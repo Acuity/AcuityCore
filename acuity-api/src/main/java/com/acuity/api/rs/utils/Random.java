@@ -137,6 +137,8 @@ public class Random {
     }
 
     public static ScreenLocation nextLocation(ScreenPolygon region){
+        if (region.getLocations().length <= 2) return nextElement(region.getLocations());
+
         Rectangle r = region.toPolygon().getBounds();
         int x, y;
         int attempts = 0;

@@ -27,16 +27,16 @@ public class BasicInteractDriver implements InteractionDriver {
             ScreenLocation screenLocation = screenPolygon.randomLocation();
             if (screenLocation != null){
                 if (action.equalsIgnoreCase("")){
-                    Mouse.click(screenLocation,  true).sleep();
+                    Mouse.click(screenLocation, Mouse.LEFT).sleep();
                 }
                 else {
-                    Mouse.click(screenLocation, false).sleep();
+                    Mouse.click(screenLocation, Mouse.RIGHT).sleep();
                     Delay.delayUntil(ContextMenu::isOpen, 600);
-                    ContextMenu.getScreenTarget(action).map(ScreenPolygon::randomLocation).ifPresent(menuTarget -> {
+                    ContextMenu.getScreenTarget(action).ifPresent(menuTarget -> {
                         Mouse.move(menuTarget).sleep();
                         Delay.delay(50, 90);
                         if (Strings.nullToEmpty(ContextMenu.getCurrentHotAction()).toLowerCase().startsWith(action.toLowerCase())){
-                            Mouse.click(menuTarget, true).sleep();
+                            Mouse.click(menuTarget, Mouse.LEFT).sleep();
                         }
                     });
                 }

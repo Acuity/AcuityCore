@@ -34,7 +34,7 @@ public class LoginTask extends Task {
 	@Override
 	public int loop() {
 		if (AcuityInstance.getClient().isLoginWorldSelectorOpen()) {
-			Mouse.click(new ScreenLocation(741, 11));
+			Mouse.click(new ScreenLocation(741, 11), Mouse.LEFT);
 			Delay.delayUntil(() -> !AcuityInstance.getClient().isLoginWorldSelectorOpen(), 750);
 		}
 
@@ -56,7 +56,7 @@ public class LoginTask extends Task {
 					} else {
 						Login.setLoginInfo(account);
 						ScreenLocation screenLocation = new ScreenLocation((int) (235 + (Math.random() * (370 - 235))), (int) (305 + (Math.random() * (335 - 305))));
-						Mouse.click(screenLocation);
+						Mouse.click(screenLocation, Mouse.LEFT);
 					}
 					break;
 				case INVALID_CREDENTIALS:

@@ -41,4 +41,10 @@ public class ScreenRectangle extends ScreenPolygon {
     public int getHeight() {
         return height;
     }
+
+    @Override
+    public double size() {
+        return width * height;
+    }
 }
+

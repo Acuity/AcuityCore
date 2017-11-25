@@ -5,5 +5,5 @@ package com.acuity.api.input.direct.mouse;
  */
 public interface MouseDriver {
 
-    MouseFuture queue(MouseFuture mouseFuture);
+    MouseFuture execute(MouseFuture mouseFuture);
 }

@@ -40,11 +40,23 @@ public class ScreenPolygon {
         return polygon;
     }
 
+    public ScreenRectangle getBounds(){
+        Rectangle bounds = toPolygon().getBounds();
+        return new ScreenRectangle(bounds.x, bounds.y, bounds.width, bounds.height);
+    }
+
     public boolean contains(ScreenLocation location){
         return contains(location.getX(), location.getY());
     }
 
     public boolean contains(int x, int y) {
         return toPolygon().contains(x, y);
+    }
+
+    public double size() {
+        if (locations.length <= 2) return 0;
+
+        // TODO: 11/25/2017 Make better
+        return getBounds().size();
     }
 }

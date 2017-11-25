@@ -1,22 +1,22 @@
 package com.acuity.api.input.direct.mouse;
 
 import com.acuity.api.rs.utils.Delay;
-import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
+import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
 
 public class MouseFuture {
 
-    private ScreenLocation screenLocation;
+    private ScreenPolygon screenTaget;
     private int mouseButton = -1;
 
     private boolean complete = false;
     private boolean canceled = false;
 
-    public ScreenLocation getScreenLocation() {
-        return screenLocation;
+    public ScreenPolygon getScreenTaget() {
+        return screenTaget;
     }
 
-    public MouseFuture setScreenLocation(ScreenLocation screenLocation) {
-        this.screenLocation = screenLocation;
+    public MouseFuture setScreenTaget(ScreenPolygon screenTaget) {
+        this.screenTaget = screenTaget;
         return this;
     }
 
