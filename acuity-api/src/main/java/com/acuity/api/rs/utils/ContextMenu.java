@@ -2,6 +2,7 @@ package com.acuity.api.rs.utils;
 
 import com.acuity.api.AcuityInstance;
 import com.acuity.api.input.direct.mouse.Mouse;
+import com.acuity.api.input.direct.mouse.MouseFuture;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
 import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenRectangle;
@@ -76,13 +77,19 @@ public class ContextMenu {
     public static void close(){
         getBounds().ifPresent(screenRectangle -> {
             ScreenLocation screenLocation;
-            while (screenRectangle.contains((screenLocation = Random.nextLocation(Projection.GAME_SCREEN)))){
+            do {
+                screenLocation = Random.nextLocation(Projection.GAME_SCREEN);
             }
-            Mouse.move(screenLocation);
+            while (screenRectangle.contains(screenLocation));
+            MouseFuture move = Mouse.move(screenLocation);
+            Delay.delayUntil(() -> {
+                if (!isOpen()){
+                    move.setCanceled(true);
+                    return true;
+                }
+                return false;
+            }, 5000);
         });
-
-
-
     }
 
     public static Optional<ScreenPolygon> getScreenTarget(String action) {
