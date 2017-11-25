@@ -48,7 +48,7 @@ public class MouseFuture {
     }
 
     public MouseFuture sleep(){
-        while (!complete && !canceled) Delay.delay(Delay.getDelayUntilSleepMS());
+        while (!isComplete() && !isCanceled()) Delay.delay(Delay.getDelayUntilSleepMS());
         return this;
     }
 }

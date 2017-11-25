@@ -6,5 +6,5 @@ package com.acuity.api.rs.interfaces;
  */
 public interface Identifiable {
 
-	Integer getID();
+	int getID();
 }

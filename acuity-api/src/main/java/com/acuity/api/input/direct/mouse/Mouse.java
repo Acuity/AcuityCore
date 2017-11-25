@@ -40,7 +40,9 @@ public class Mouse {
     }
 
     public static ScreenLocation getPosition(){
-        return AcuityInstance.getAppletManager().getMouseMiddleMan().getMousePosition()
+        return AcuityInstance.getAppletManager()
+                .getMouseMiddleMan()
+                .getMousePosition()
                 .map(ScreenLocation::fromPoint)
                 .orElse(null);
     }

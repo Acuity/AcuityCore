@@ -58,11 +58,6 @@ public class SceneBoundaryDecor implements Locatable, Interactive, SceneElement 
     }
 
     @Override
-    public int getID() {
-        return getUID().getEntityID();
-    }
-
-    @Override
     public int getFlag() {
         return 0;
     }

@@ -72,10 +72,6 @@ public class SceneElement implements Locatable, Interactive, com.acuity.api.rs.w
         return getSceneLocation().getWorldLocation();
     }
 
-    public int getID() {
-        return getUID().getEntityID();
-    }
-
     public UIDs.UID getUID() {
         return new UIDs.UID(rsSceneElement.getUID());
     }

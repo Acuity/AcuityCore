@@ -1,10 +1,7 @@
 package com.acuity.api.rs.wrappers.common;
 
 import com.acuity.api.AcuityInstance;
-import com.acuity.api.rs.interfaces.Interactive;
-import com.acuity.api.rs.interfaces.Locatable;
-import com.acuity.api.rs.interfaces.Nameable;
-import com.acuity.api.rs.utils.UIDs;
+import com.acuity.api.rs.interfaces.*;
 import com.acuity.api.rs.utils.Varps;
 import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.common.locations.screen.geometry.ScreenPolygon;
@@ -25,7 +22,7 @@ import java.util.function.Supplier;
 /**
  * Created by Zach on 6/24/2017.
  */
-public interface SceneElement extends Locatable, Nameable, Interactive {
+public interface SceneElement extends Locatable, Nameable, Interactive, UniqueIdentifiable {
 
     static Optional<Model> getModel(RSRenderable rsRenderable, FineLocation location, Integer orientation) {
         if (rsRenderable == null) return Optional.empty();
@@ -59,11 +56,7 @@ public interface SceneElement extends Locatable, Nameable, Interactive {
 
     int getOrientation();
 
-    int getID();
-
     int getFlag();
-
-    UIDs.UID getUID();
 
     default String getName(){
         return getComposite().map(SceneElementType::getName).orElse(null);

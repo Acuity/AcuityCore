@@ -41,15 +41,12 @@ public class SceneTileDecor implements SceneElement {
         return getSceneLocation().getWorldLocation();
     }
 
-    public int getID(){
-        return getUID().getEntityID();
-    }
-
     @Override
     public int getFlag() {
         return 0;
     }
 
+    @Override
     public UIDs.UID getUID() {
         return new UIDs.UID(rsSceneTileDecor.getUid());
     }

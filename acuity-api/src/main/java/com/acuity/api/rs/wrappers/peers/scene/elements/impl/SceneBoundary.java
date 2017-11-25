@@ -60,10 +60,6 @@ public class SceneBoundary implements com.acuity.api.rs.wrappers.common.SceneEle
         return new UIDs.UID(rsSceneBoundary.getUid());
     }
 
-    public int getID(){
-        return getUID().getEntityID();
-    }
-
     @Override
     public int getFlag() {
         return 0;

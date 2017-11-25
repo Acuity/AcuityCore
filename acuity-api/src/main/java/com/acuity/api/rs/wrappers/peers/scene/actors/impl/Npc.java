@@ -2,15 +2,11 @@ package com.acuity.api.rs.wrappers.peers.scene.actors.impl;
 
 import com.acuity.api.annotations.ClientInvoked;
 import com.acuity.api.rs.interfaces.Identifiable;
-import com.acuity.api.rs.utils.Scene;
-import com.acuity.api.rs.wrappers.common.locations.FineLocation;
 import com.acuity.api.rs.wrappers.peers.scene.actors.Actor;
 import com.acuity.api.rs.wrappers.peers.types.NpcType;
 import com.acuity.rs.api.RSNPCType;
 import com.acuity.rs.api.RSNpc;
 import com.google.common.base.Preconditions;
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,8 +45,8 @@ public class Npc extends Actor implements Identifiable {
 
 
 	@Override
-	public Integer getID() {
-        return getType().map(NpcType::getID).orElse(null);
+	public int getID() {
+        return getType().map(NpcType::getID).orElse(-1);
 	}
 
 	@Override
