@@ -28,7 +28,7 @@ public class Mouse {
     public static MouseFuture click(ScreenLocation screenLocation, boolean leftClick){
         return getDriver().queue(new MouseFuture()
                 .setScreenLocation(screenLocation)
-                .setClick(leftClick ? LEFT : RIGHT));
+                .setMouseButton(leftClick ? LEFT : RIGHT));
     }
 
     public static int[] getHoveredUIDs(){

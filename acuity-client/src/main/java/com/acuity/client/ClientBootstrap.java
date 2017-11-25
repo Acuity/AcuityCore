@@ -24,8 +24,6 @@ public class ClientBootstrap {
 
     @Subscribe
     public void testDraw(InGameDrawEvent event){
-
-
         Npcs.getNearest(npc -> true).ifPresent(npc -> {
             npc.projectToScreen().ifPresent(screenPolygon -> {
                 event.getGraphics().drawPolygon(screenPolygon.toPolygon());
@@ -66,7 +64,7 @@ public class ClientBootstrap {
             index--;
         }
         else if (e.getKeyChar() == 'n' && e.getID() == KeyEvent.KEY_TYPED){
-            Npcs.getNearest("Man").ifPresent(npc -> npc.interact("Talk-to"));
+            ContextMenu.close();
         }
     }
 

@@ -14,9 +14,7 @@ import com.acuity.rs.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.applet.Applet;
 import java.awt.*;
-import java.lang.reflect.Field;
 
 /**
  * Created by Zachary Herridge on 6/7/2017.
@@ -46,11 +44,12 @@ public class Callbacks {
                         break;
                     }
 					final RSActor actor = (RSActor) instance;
-					Actor wrapper;
 
+                    Actor wrapper;
 					if (actor instanceof RSPlayer) {
 						wrapper = ((RSPlayer) actor).getWrapper();
-					} else {
+					}
+					else {
 						wrapper = ((RSNpc) actor).getWrapper();
 					}
 
@@ -73,8 +72,8 @@ public class Callbacks {
                         int lastX = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseXHistory()[index];
                         int lastY = AcuityInstance.getClient().getRsClient().getMouseRecorder().getMouseYHistory()[index];
                         Events.getRsEventBus().post(new MouseRecorderUpdateEvent(System.currentTimeMillis(), lastX, lastY));
-                    } catch (Exception e) {
-
+                    } catch (Throwable e) {
+                        logger.error("Error during mouseYHistory event.");
                     }
                     break;
 
@@ -117,9 +116,7 @@ public class Callbacks {
         try {
             if (actor != null && actor instanceof RSPlayer) {
                 final RSPlayer player = (RSPlayer) actor;
-                //System.out.println("Dispatching hit update: "+ player.getName());
-                Events.getRsEventBus().post(
-                        new PlayerHealthChangeEvent(player.getWrapper(), player.getWrapper().getHealthPercent().orElse(-1d)));
+                Events.getRsEventBus().post(new PlayerHealthChangeEvent(player.getWrapper(), player.getWrapper().getHealthPercent().orElse(-1d)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,7 +133,8 @@ public class Callbacks {
         try {
             if (Game.State.IN_GAME.isCurrent()) {
                 Events.getRsEventBus().post(new InGameDrawEvent(image));
-            } else {
+            }
+            else {
                 Events.getRsEventBus().post(new GameDrawEvent(image));
             }
         } catch (Throwable e) {

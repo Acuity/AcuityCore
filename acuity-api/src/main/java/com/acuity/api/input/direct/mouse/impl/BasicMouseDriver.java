@@ -18,7 +18,8 @@ public class BasicMouseDriver implements MouseDriver {
         return () -> {
             if (mouseFuture.isCanceled()) return;
             AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchMove(mouseFuture.getScreenLocation());
-            if (!mouseFuture.isCanceled() && mouseFuture.getClick() != -1) AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(mouseFuture.getScreenLocation(), mouseFuture.getClick());
+            if (mouseFuture.isCanceled()) return;
+            if (mouseFuture.getMouseButton() != -1) AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchClick(mouseFuture.getScreenLocation(), mouseFuture.getMouseButton());
             mouseFuture.setComplete(true);
         };
     }

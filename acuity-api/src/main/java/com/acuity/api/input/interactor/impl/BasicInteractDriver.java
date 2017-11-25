@@ -21,12 +21,11 @@ public class BasicInteractDriver implements InteractionDriver {
 
     @Override
     public ActionResult interact(Interactive interactive, String action) {
+        ContextMenu.close();
         ScreenPolygon screenPolygon = interactive.projectToScreen().orElse(null);
         if (screenPolygon != null){
             ScreenLocation screenLocation = screenPolygon.randomLocation();
             if (screenLocation != null){
-                Mouse.move(screenLocation);
-                Delay.delay(50, 90);
                 if (action.equalsIgnoreCase("")){
                     Mouse.click(screenLocation,  true).sleep();
                 }

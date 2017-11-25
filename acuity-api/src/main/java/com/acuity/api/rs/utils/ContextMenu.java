@@ -74,22 +74,23 @@ public class ContextMenu {
         return getLocation().map(screenLocation -> new ScreenRectangle(screenLocation, getWidth(), getHeight()));
     }
 
-    public static void close(){
-        getBounds().ifPresent(screenRectangle -> {
-            ScreenLocation screenLocation;
+    public static boolean close(){
+        getBounds().ifPresent(bounds -> {
+            ScreenLocation targetLocation;
             do {
-                screenLocation = Random.nextLocation(Projection.GAME_SCREEN);
+                targetLocation = Random.nextLocation(Projection.GAME_SCREEN);
             }
-            while (screenRectangle.contains(screenLocation));
-            MouseFuture move = Mouse.move(screenLocation);
+            while (bounds.contains(targetLocation));
+            MouseFuture future = Mouse.move(targetLocation);
             Delay.delayUntil(() -> {
                 if (!isOpen()){
-                    move.setCanceled(true);
+                    future.setCanceled(true);
                     return true;
                 }
                 return false;
             }, 5000);
         });
+        return isOpen();
     }
 
     public static Optional<ScreenPolygon> getScreenTarget(String action) {

@@ -3,17 +3,10 @@ package com.acuity.api.input.direct.mouse;
 import com.acuity.api.rs.utils.Delay;
 import com.acuity.api.rs.wrappers.common.locations.screen.ScreenLocation;
 
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 public class MouseFuture {
 
-    private Lock lock = new ReentrantLock();
-    private Condition notFull  = lock.newCondition();
-
     private ScreenLocation screenLocation;
-    private int click = -1;
+    private int mouseButton = -1;
 
     private boolean complete = false;
     private boolean canceled = false;
@@ -27,12 +20,12 @@ public class MouseFuture {
         return this;
     }
 
-    public int getClick() {
-        return click;
+    public int getMouseButton() {
+        return mouseButton;
     }
 
-    public MouseFuture setClick(int click) {
-        this.click = click;
+    public MouseFuture setMouseButton(int mouseButton) {
+        this.mouseButton = mouseButton;
         return this;
     }
 
