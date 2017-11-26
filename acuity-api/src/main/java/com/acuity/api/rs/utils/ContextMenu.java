@@ -76,19 +76,19 @@ public class ContextMenu {
 
     public static boolean close(){
         getBounds().ifPresent(bounds -> {
-            ScreenLocation targetLocation;
-            do {
-                targetLocation = Random.nextLocation(Projection.GAME_SCREEN);
-            }
-            while (bounds.contains(targetLocation));
-            MouseFuture future = Mouse.move(targetLocation);
-            Delay.delayUntil(() -> {
-                if (!isOpen()){
-                    future.setCanceled(true);
-                    return true;
+            ScreenLocation targetLocation = new ScreenLocation(
+                    Projection.GAME_SCREEN.getRoot().getX() + Random.nextInt(0, Projection.GAME_SCREEN.getWidth()),
+                    Projection.GAME_SCREEN.getRoot().getY()
+            );
+
+            MouseFuture mouseFuture = new MouseFuture() {
+                @Override
+                public void onStep() {
+                    if (!isOpen()) setCanceled(true);
                 }
-                return false;
-            }, 5000);
+            }.setScreenTaget(new ScreenPolygon(targetLocation));
+
+            Mouse.getDriver().execute(mouseFuture);
         });
         return isOpen();
     }

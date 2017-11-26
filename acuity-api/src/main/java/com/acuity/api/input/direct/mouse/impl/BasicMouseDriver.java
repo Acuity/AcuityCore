@@ -30,6 +30,7 @@ public class BasicMouseDriver implements MouseDriver {
                 if (mouseFuture.isCanceled()) return;
                 AcuityInstance.getAppletManager().getMouseMiddleMan().dispatchMove(mousePathMovement.getMovement());
                 if (mouseFuture.isCanceled()) return;
+                mouseFuture.onStep();
                 Delay.delay(mousePathMovement.getSleepMS());
             }
 

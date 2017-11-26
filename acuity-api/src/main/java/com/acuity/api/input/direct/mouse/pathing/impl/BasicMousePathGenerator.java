@@ -33,11 +33,11 @@ public class BasicMousePathGenerator implements MousePathGenerator {
             lastLocation = lastLocation.transform(xStep, yStep);
             path.add(new MousePathMovement()
                     .setMovement(lastLocation)
-                    .setSleepMS(MS_PER_BIT + Random.nextInt(-10, 10))
+                    .setSleepMS(MS_PER_BIT + Random.nextInt(-5, 5))
             );
         }
 
-        path.add(new MousePathMovement().setMovement(end));
+        path.add(new MousePathMovement().setMovement(end).setSleepMS(MS_PER_BIT));
 
         return path;
     }

@@ -51,4 +51,8 @@ public class MouseFuture {
         while (!isComplete() && !isCanceled()) Delay.delay(Delay.getDelayUntilSleepMS());
         return this;
     }
+
+    public void onStep() {
+
+    }
 }
